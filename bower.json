@@ -1,0 +1,21 @@
+{
+  "name": "readr",
+  "version": "0.0.0",
+  "authors": [
+    "Atinderpal Singh <atindermann08@gmail.com>"
+  ],
+  "description": "book sharing app",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.3.0",
+    "bootstrap-sass": "~3.3.5"
+  }
+}

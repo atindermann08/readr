@@ -14,19 +14,19 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">My Library<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Books</a></li>
-        <li><a href="#">Browse</a></li>
+        <li class="active"><a href="#"><i class="fa fa-leanpub fa-fw"></i>My Library<span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-book fa-fw"></i>Books</a></li>
+        <li><a href="#"><i class="fa fa-th-large fa-fw"></i>Browse</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control search-bar" placeholder="Search">
+          <input type="text" class="form-control search-bar" id="top-search-bar" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default search-bar-btn">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Register</a></li>
-        <li><a href="#">Sign In</a></li>
+        <li><a href="{{route('users.login')}}"><i class="fa fa-sign-out fa-fw"></i>Sign In</a></li>
+        <li><a href="{{route('users.register')}}"><i class="fa fa-user fa-fw"></i>Register</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

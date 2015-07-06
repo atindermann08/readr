@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login',["uses"=>"UserController@login","as"=>"users.login"]);
+Route::get('/register',["uses"=>"UserController@create","as"=>"users.register"]);
