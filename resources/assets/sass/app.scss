@@ -1,0 +1,11 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//@import "../bootstrap/stylesheets/bootstrap";
+
+.search-bar{
+  width:450px;
+}
+.search-bar-btn{
+  margin-left: -10px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
