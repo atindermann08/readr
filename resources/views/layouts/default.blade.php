@@ -4,8 +4,8 @@
   <title>Readr</title>
 
   <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-  <link href="{{ URL::asset('css/app.css')}}" rel="stylesheet">
-  <link href="{{ URL::asset('vendor/css/font-awesome.min.css')}}" rel="stylesheet">
+  {!! Html::style('css/app.css') !!}
+  {!! Html::style('vendor/css/font-awesome.min.css') !!}
 
 </head>
 <body>
@@ -15,6 +15,7 @@
     @show
     @yield('content')
   </div>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  {!! Html::script('vendor/js/jquery.min.js') !!}
+  {!! Html::script('vendor/js/bootstrap.min.js') !!}
 </body>
 </html>
