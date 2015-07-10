@@ -1,10 +1,14 @@
 <?php
 
-namespace App;
+class Country extends \Eloquent {
+		protected $fillable = [];
+    protected $hidden = ['created_at','updated_at'];
 
-use Illuminate\Database\Eloquent\Model;
+		public static $rules = [
+			'name' => 'required|min:2|unique:countries'
+		];
 
-class Country extends Model
-{
-    //
+    public function states(){
+        return $this->hasMany('State');
+    }
 }

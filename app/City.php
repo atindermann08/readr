@@ -1,10 +1,18 @@
 <?php
 
-namespace App;
+class City extends \Eloquent {
+	protected $fillable = [];
+    protected $hidden = ['created_at','updated_at','state_id'];
 
-use Illuminate\Database\Eloquent\Model;
+		public static $rules = [
+			'name' => 'required|min:2|unique:cities',
+			'state_id' => 'required|integer'
+		];
+    public function areas(){
+        return $this->hasMany('Area');
+    }
 
-class City extends Model
-{
-    //
+    public function state(){
+        return $this->belongsTo('State');
+    }
 }

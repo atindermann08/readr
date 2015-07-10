@@ -1,10 +1,13 @@
 <?php
 
-namespace App;
+class Category extends \Eloquent {
+	protected $fillable = [];
 
-use Illuminate\Database\Eloquent\Model;
+	public static $rules = [
+		'name' => 'required|min:2|unique:categories'
+	];
 
-class Category extends Model
-{
-    //
+	public function books(){
+	  return $this->hasMany('Book');
+  }
 }
