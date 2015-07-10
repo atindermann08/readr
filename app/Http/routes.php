@@ -26,16 +26,16 @@ Route::controller('password', 'Auth\PasswordController');
 
 Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);
 
-Route::resource('books','BookController');
-Route::resource('books','BookClubController');
-Route::resource('books','AuthorController');
-Route::resource('books','CategoryController');
-Route::resource('books','LanguageController');
-Route::resource('books','BookStatusController');
+Route::resource('book','BookController');
+Route::resource('bookclub','BookClubController');
+Route::resource('author','AuthorController');
+Route::resource('categorie','CategoryController');
+Route::resource('language','LanguageController');
+Route::resource('bookstatuse','BookStatusController');
 
-Route::resource('books','ProfileController');
-Route::resource('books','AddressController');
-Route::resource('books','AreaController');
-Route::resource('books','CityController');
-Route::resource('books','StateController');
-Route::resource('books','CountryController');
+Route::resource('profile','ProfileController');
+Route::resource('address','AddressController');
+Route::resource('area','AreaController');
+Route::resource('city','CityController');
+Route::resource('state','StateController');
+Route::resource('country','CountryController');
