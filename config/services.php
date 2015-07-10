@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => '',
-        'secret' => '',
+        'domain' => 'mg.hungerexpert.in',
+        'secret' => 'key-745aaa333c5d3ea5dec26a564f2ae20f',
     ],
 
     'mandrill' => [

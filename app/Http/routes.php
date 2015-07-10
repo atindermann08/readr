@@ -12,8 +12,16 @@
 */
 
 Route::get('/', function () {
+	// Mail::send('welcome', [], function($m) {
+	// 	$m->to('atindermann08@gmail.com', 'Atinder')->subject('Testing!');
+	// });
+    return view('welcome');
+});
+Route::get('/home', function () {
     return view('welcome');
 });
 
-Route::get('/login',["uses"=>"UserController@login","as"=>"users.login"]);
-Route::get('/register',["uses"=>"UserController@create","as"=>"users.register"]);
+Route::controller('auth', 'Auth\AuthController');
+Route::controller('password', 'Auth\PasswordController');
+
+Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);

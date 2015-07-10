@@ -137,6 +137,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Illuminate\Html\HtmlServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -144,7 +147,24 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+
+        /* Intervention
+        */
+        Intervention\Image\ImageServiceProvider::class,
+
+
+        /*
+        * Sentinel disabled in favour of Confide/entrust
+        */
+        //Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+
+        // Zizaco\Confide\ServiceProvider::class,
+        //Zizaco\Entrust\EntrustServiceProvider::class,
+
+        /*
+        * Package for managing active class in menu
+        */
+        HieuLe\Active\ActiveServiceProvider::class,
 
     ],
 
@@ -194,9 +214,33 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
-        'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
-        'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+        'Form'      => Illuminate\Html\FormFacade::class,
+        'Html'      => Illuminate\Html\HtmlFacade::class,
+
+        'Flash'     => Laracasts\Flash\Flash::class,
+
+
+        /* Intervention
+        */
+        'Image'     => Intervention\Image\Facades\Image::class,
+
+
+        /*
+        * Sentinel disabled in favour of Confide/entrust
+        */
+        //'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
+        //'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
+        //'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+
+
+        // 'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        // 'Confide'   => Zizaco\Confide\Facade::class,
+
+        /*
+        * Package for managing active class in menu
+        */
+        'Active' => HieuLe\Active\Facades\Active::class,
+
 
     ],
 

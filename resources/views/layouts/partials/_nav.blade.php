@@ -8,13 +8,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Readr</a>
+      <a class="navbar-brand" href="{{ url('/') }}">Readr</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#"><i class="fa fa-leanpub fa-fw"></i>My Library<span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-leanpub fa-fw"></i>My Library<span class="sr-only">(current)</span></a></li>
         <li><a href="#"><i class="fa fa-book fa-fw"></i>Books</a></li>
         <li><a href="#"><i class="fa fa-th-large fa-fw"></i>Browse</a></li>
       </ul>
@@ -25,8 +25,12 @@
         <button type="submit" class="btn btn-default search-bar-btn">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{route('users.login')}}"><i class="fa fa-sign-out fa-fw"></i>Sign In</a></li>
-        <li><a href="{{route('users.register')}}"><i class="fa fa-user fa-fw"></i>Register</a></li>
+        @if(Auth::check())
+          <li><a href="{{url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a></li>
+        @else
+          <li class="{{ Active::pattern('auth/login')}}"><a href="{{url('auth/login')}}"><i class="fa fa-sign-out fa-fw"></i>Sign In</a></li>
+          <li class="{{ Active::pattern('auth/register')}}"><a href="{{url('auth/register')}}"><i class="fa fa-user fa-fw"></i>Register</a></li>
+        @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

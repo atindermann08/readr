@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
+      /* Laracast way Generators
+      */
+      if ($this->app->environment() == 'local') {
+           $this->app->register('Laracasts\Generators\GeneratorsServiceProvider');
+       }
     }
 }
