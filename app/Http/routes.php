@@ -25,3 +25,17 @@ Route::controller('auth', 'Auth\AuthController');
 Route::controller('password', 'Auth\PasswordController');
 
 Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);
+
+Route::resource('books','BookController');
+Route::resource('books','BookClubController');
+Route::resource('books','AuthorController');
+Route::resource('books','CategoryController');
+Route::resource('books','LanguageController');
+Route::resource('books','BookStatusController');
+
+Route::resource('books','ProfileController');
+Route::resource('books','AddressController');
+Route::resource('books','AreaController');
+Route::resource('books','CityController');
+Route::resource('books','StateController');
+Route::resource('books','CountryController');

@@ -16,7 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return view('books.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('books.show');
     }
 
     /**
@@ -58,7 +58,7 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('books.edit');
     }
 
     /**
