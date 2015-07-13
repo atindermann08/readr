@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;  
 
 class CountryController extends Controller
 {
@@ -16,7 +16,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $countries = \App\Country::all();
+        return view('countries.index',['countries' => $countries]);
     }
 
     /**
@@ -26,7 +27,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('countries.create');
     }
 
     /**
@@ -36,18 +37,7 @@ class CountryController extends Controller
      */
     public function store()
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -58,7 +48,8 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+          $countries = \App\Country::get($id);
+          return view('countries.index',['countries' => $countries]);
     }
 
     /**
@@ -72,14 +63,4 @@ class CountryController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

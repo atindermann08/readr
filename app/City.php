@@ -1,6 +1,8 @@
 <?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class City extends \Eloquent {
+class City extends Model {
 	protected $fillable = [];
     protected $hidden = ['created_at','updated_at','state_id'];
 

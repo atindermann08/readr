@@ -5,7 +5,11 @@
   <div class="col-md-8 col-md-offset-2">
     <h4>Books</h4>
     <hr/>
-
+    <ul>
+      @foreach($books as $book)
+        <li>{!! $book->title !!}</li>
+      @endforeach
+    </ul>
   </div>
 </div>
 @stop()

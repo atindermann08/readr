@@ -1,6 +1,8 @@
 <?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class Address extends \Eloquent {
+class Address extends Model {
 	protected $fillable = ['name', 'house_no', 'pin_code', 'area_id', 'landmark'];
 
     public static $rules = [

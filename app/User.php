@@ -40,4 +40,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function profile(){
         return $this->hasOne('Profile');
     }
+    public function books(){
+      return $this->belongsToMany('Book');
+    }
 }

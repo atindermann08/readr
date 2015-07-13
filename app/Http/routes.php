@@ -15,6 +15,16 @@ Route::get('/', function () {
 	// Mail::send('welcome', [], function($m) {
 	// 	$m->to('atindermann08@gmail.com', 'Atinder')->subject('Testing!');
 	// });
+    // $book = new \App\Book;
+    // $book->title = 'My Book';
+    // $book->description = 'My Book';
+    // $book->author = 'My Book';
+    // $book->publisher = 'My Book';
+    // $book->category = 'My Book';
+    // $book->language = 'My Book';
+    // $book->release_date = date('Y-m-d');
+    // $book->save();
+
     return view('welcome');
 });
 Route::get('/home', function () {
@@ -26,16 +36,16 @@ Route::controller('password', 'Auth\PasswordController');
 
 Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);
 
-Route::resource('book','BookController');
-Route::resource('bookclub','BookClubController');
-Route::resource('author','AuthorController');
-Route::resource('categorie','CategoryController');
-Route::resource('language','LanguageController');
-Route::resource('bookstatuse','BookStatusController');
+Route::resource('books','BookController');
+Route::resource('bookclubs','BookClubController');
+Route::resource('authors','AuthorController');
+Route::resource('categories','CategoryController');
+Route::resource('languages','LanguageController');
+Route::resource('bookstatuses','BookStatusController');
 
 Route::resource('profile','ProfileController');
-Route::resource('address','AddressController');
-Route::resource('area','AreaController');
-Route::resource('city','CityController');
-Route::resource('state','StateController');
-Route::resource('country','CountryController');
+Route::resource('addresses','AddressController');
+Route::resource('areas','AreaController');
+Route::resource('cities','CityController');
+Route::resource('states','StateController');
+Route::resource('countries','CountryController');

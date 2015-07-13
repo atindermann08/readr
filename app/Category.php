@@ -1,6 +1,8 @@
 <?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class Category extends \Eloquent {
+class Category extends Model {
 	protected $fillable = [];
 
 	public static $rules = [

@@ -5,7 +5,7 @@
   <div class="col-md-8 col-md-offset-2">
     <h4>Edit Book</h4>
     <hr/>
-
+  
   </div>
 </div>
 @stop()

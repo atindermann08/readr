@@ -16,7 +16,8 @@ class StateController extends Controller
      */
     public function index()
     {
-        //
+        $states = \App\State::all();
+        return view('states.index',['states' => $states]);
     }
 
     /**
@@ -26,7 +27,7 @@ class StateController extends Controller
      */
     public function create()
     {
-        //
+      return view('states.create');
     }
 
     /**
