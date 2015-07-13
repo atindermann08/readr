@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;  
+use App\Http\Controllers\Controller;
 
 class CountryController extends Controller
 {
@@ -37,7 +37,20 @@ class CountryController extends Controller
      */
     public function store()
     {
+        $validator = \Validator::make(\Input::all(), \App\Country::$rules);
 
+        if($validator->passes())
+        {
+          $country = new \App\Country;
+          $country->name = \Input::get('name');
+          $country->save();
+          return \Redirect::back()->with('message','Country added.');
+        }
+
+        return \Redirect::back()
+              //->with('message','There were some errors. Please try again later..')
+              ->withInput()
+              ->withErrors($validator);
     }
 
     /**
@@ -48,8 +61,13 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-          $countries = \App\Country::get($id);
-          return view('countries.index',['countries' => $countries]);
+      $country = \App\Country::find($id);
+      if($country){
+          return view('countries.edit',['country' => $country]);
+        }
+      return \Redirect::back()
+                ->with('error', 'Country does not exist.');
+
     }
 
     /**
@@ -60,7 +78,27 @@ class CountryController extends Controller
      */
     public function update($id)
     {
-        //
+        $country = \App\Country::find($id);
+        if($country){
+          $rules = \App\Country::$rules;
+      		//$rules['name'] = 'required|min:2';
+  	      $validator = \Validator::make(\Input::all(), $rules);
+
+      		if($validator->passes())
+      		{
+      			$country = \App\Country::find($id);
+      			$country->name = \Input::get('name');
+      			$country->save();
+
+      			return \Redirect::back()->with('message','Country updated.');
+  		    }
+      		return \Redirect::back()
+      		  //->with('message','There were some errors. Please try again later..')
+      		  ->withInput()
+      		  ->withErrors($validator);
+          }
+        return \Redirect::back()
+                  ->with('error', 'Country does not exist.');
     }
 
 }

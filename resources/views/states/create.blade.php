@@ -3,15 +3,20 @@
 @section('content')
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h4>Library</h4>
+    <h4>Add State</h4>
     <hr/>
-    {!! Form::open() !!}
+    @include('layouts.partials._errors')
+    {!! Form::open(['route' => 'states.store']) !!}
       <div class="form-group">
         {!! Form::label('name', 'Name') !!}
         {!! Form::text('name', null, ['class' => 'form-control']) !!}
       </div>
       <div class="form-group">
-        {!! Form::submit('Create', ['class' => 'form-control btn btn-primary']) !!}
+        {!! Form::label('country', 'Country') !!}
+        {!! Form::select('country', $countries,null, ['class' => 'form-control dropdown']) !!}
+      </div>
+      <div class="form-group">
+        {!! Form::submit('Submit', ['class' => 'form-control btn btn-primary']) !!}
       </div>
     {!! Form::close() !!}
   </div>

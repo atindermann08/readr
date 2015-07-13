@@ -9,14 +9,14 @@ class State extends Model {
 
 		public static $rules = [
 			'name' => 'required|min:2|unique:states',
-			'country_id' => 'required|integer'
+			'country' => 'required|integer'
 		];
 
     public function cities(){
-        return $this->hasMany('City');
+        return $this->hasMany('\App\City');
     }
 
     public function country(){
-        return $this->belongsTo('Country');
+        return $this->belongsTo('\App\Country');
     }
 }

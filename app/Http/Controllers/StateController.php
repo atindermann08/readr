@@ -16,8 +16,9 @@ class StateController extends Controller
      */
     public function index()
     {
-        $states = \App\State::all();
-        return view('states.index',['states' => $states]);
+        $countries = \App\Country::all()->lists('name','id');
+        $states = \App\State::with('country')->get();
+        return view('states.index',['states' => $states, 'countries' => $countries]);
     }
 
     /**
@@ -27,7 +28,8 @@ class StateController extends Controller
      */
     public function create()
     {
-      return view('states.create');
+      $countries = \App\Country::all()->lists('name','id');
+      return view('states.create', ['countries' => $countries]);
     }
 
     /**
@@ -37,7 +39,21 @@ class StateController extends Controller
      */
     public function store()
     {
-        //
+      $validator = \Validator::make(\Input::all(), \App\State::$rules);
+
+      if($validator->passes())
+      {
+        $state = new \App\State;
+        $state->name = \Input::get('name');
+        $state->country_id = \Input::get('country');
+        $state->save();
+        return \Redirect::back()->with('message','State added.');
+      }
+
+      return \Redirect::back()
+            //->with('message','There were some errors. Please try again later..')
+            ->withInput()
+            ->withErrors($validator);
     }
 
     /**

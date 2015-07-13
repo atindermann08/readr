@@ -37,20 +37,6 @@ class LanguageController extends Controller
      */
     public function store()
     {
-      $validator = \Validator::make(\Input::all(), \Country::$rules);
-
-      if($validator->passes())
-      {
-        $country = new \App\Country;
-        $country->name = \Input::get('name');
-        $country->save();
-        return \Redirect::back()->with('message','Country added.');
-      }
-
-      return \Redirect::back()
-            ->with('message','There were some errors. Please try again later..')
-            ->withInput()
-            ->withErrors($validator);
     }
 
     /**

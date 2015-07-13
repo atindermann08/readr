@@ -15,8 +15,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class=""><a href="#"><i class="fa fa-leanpub fa-fw"></i>My Library<span class="sr-only">(current)</span></a></li>
-        <li><a href="#"><i class="fa fa-book fa-fw"></i>Books</a></li>
-        <li><a href="#"><i class="fa fa-th-large fa-fw"></i>Browse</a></li>
+        <li><a href="{{route('countries.edit',4)}}"><i class="fa fa-book fa-fw"></i>Books</a></li>
+        <li><a href="{{route('countries.edit',1)}}"><i class="fa fa-th-large fa-fw"></i>Browse</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
