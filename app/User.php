@@ -35,12 +35,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     public function bookclubs(){
-        return $this->belongsToMany('BookClub');
+        return $this->belongsToMany('\App\BookClub');
     }
     public function profile(){
-        return $this->hasOne('Profile');
+        return $this->hasOne('\App\Profile');
     }
     public function books(){
-      return $this->belongsToMany('Book');
+      return $this->belongsToMany('\App\Book');
     }
 }

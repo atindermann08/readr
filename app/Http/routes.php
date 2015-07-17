@@ -19,6 +19,7 @@ Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);
 Route::resource('books','BookController');
 Route::resource('bookclubs','BookClubController');
 Route::resource('authors','AuthorController');
+Route::resource('publishers','PublisherController');
 Route::resource('categories','CategoryController');
 Route::resource('languages','LanguageController');
 Route::resource('bookstatuses','BookStatusController');

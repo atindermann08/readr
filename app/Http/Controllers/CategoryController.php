@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = \App\Category::all();
+        return view('categories.index', ['categories' => $categories]);
     }
 
     /**
@@ -26,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+          return view('categories.create');
     }
 
     /**
@@ -34,52 +35,69 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function store()
-    {
-        //
-    }
+     public function store()
+     {
+         $validator = \Validator::make(\Input::all(), \App\Category::$rules);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
+         if($validator->passes())
+         {
+           $category = new \App\Category;
+           $category->name = \Input::get('name');
+           $category->save();
+           return \Redirect::back()->with('message','category added.');
+         }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+         return \Redirect::back()
+               //->with('message','There were some errors. Please try again later..')
+               ->withInput()
+               ->withErrors($validator);
+     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
+     /**
+      * Show the form for editing the specified resource.
+      *
+      * @param  int  $id
+      * @return Response
+      */
+     public function edit($id)
+     {
+       $category = \App\Category::find($id);
+       if($category){
+           return view('categories.edit',['category' => $category]);
+         }
+       return \Redirect::back()
+                 ->with('error', 'category does not exist.');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+     }
+
+     /**
+      * Update the specified resource in storage.
+      *
+      * @param  int  $id
+      * @return Response
+      */
+     public function update($id)
+     {
+         $category = \App\Category::find($id);
+         if($category){
+           $rules = \App\Category::$rules;
+           //$rules['name'] = 'required|min:2';
+           $validator = \Validator::make(\Input::all(), $rules);
+
+           if($validator->passes())
+           {
+             $category = \App\Category::find($id);
+             $category->name = \Input::get('name');
+             $category->save();
+
+             return \Redirect::back()->with('message','category updated.');
+           }
+           return \Redirect::back()
+             //->with('message','There were some errors. Please try again later..')
+             ->withInput()
+             ->withErrors($validator);
+           }
+         return \Redirect::back()
+                   ->with('error', 'category does not exist.');
+     }
 }

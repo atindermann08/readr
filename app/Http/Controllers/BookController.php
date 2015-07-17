@@ -16,8 +16,18 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = \App\Book::all();
-        return view('books.index',['books' => $books]);
+      $books = \App\Book::with('authors','language','category','publisher')->get();
+      // $authors = \App\Author::all();
+      // $publishers = \App\Publisher::all();
+      // $categories = \App\Category::all();
+      // $languages = \App\Language::all();
+      // return response()->json($books);
+      return view('books.index')
+        ->with('books' , $books);
+        // ->with('authors' , $authors)
+        // ->with('publishers' , $publishers)
+        // ->with('categories' , $categories)
+        // ->with('languages' , $languages);
     }
 
     /**
@@ -27,7 +37,18 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+      //$books = \App\Book::all();
+      $authors = \App\Author::all()->lists('name','id');
+      $publishers = \App\Publisher::all()->lists('name','id');
+      $categories = \App\Category::all()->lists('name','id');
+      $languages = \App\Language::all()->lists('name','id');
+
+      return view('books.create')
+        //->with('books' , 'books')
+        ->with('authors' , $authors)
+        ->with('publishers' , $publishers)
+        ->with('categories' , $categories)
+        ->with('languages' , $languages);
     }
 
     /**
@@ -35,9 +56,37 @@ class BookController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+      $validator = \Validator::make(\Input::all(), \App\Book::$rules);
+
+      if($validator->passes())
+      {
+        $book = new \App\Book;
+        $book->title = \Input::get('title');
+        $book->description = \Input::get('description');
+        $book->author_id = App\Author::firstOrCreate(['name' => ucfirst(\Input::get('author'))])->id;
+        $book->publisher_id = App\Publisher::firstOrCreate(['name' => ucfirst(\Input::get('publisher'))])->id;
+        $book->category_id = App\Category::firstOrCreate(['name' => ucfirst(\Input::get('category'))])->id;
+        $book->language_id = App\Language::firstOrCreate(['name' => ucfirst(\Input::get('language'))])->id;
+        $book->release_date = \Input::get('release_date');
+        $book->save();
+        // if ($request->hasFile('image')) {
+        //   $image = $request->file('image');
+        //   \Image::make($image->getRealPath())
+				// 	->resize(460,460)
+				// 	->save('../public/assets/images/books/'.$book->id.'.jpg');
+        //   $book->imgage = 'assets/images/books/'.$book->id.'.jpg';
+        //   $book->save();
+        // }
+
+        return \Redirect::back()->with('message','Book added.');
+      }
+
+      return \Redirect::back()
+            //->with('message','There were some errors. Please try again later..')
+            ->withInput()
+            ->withErrors($validator);
     }
 
     /**
@@ -48,7 +97,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        return view('books.show');
+        $book = Book::with('authors','publisher','category', 'language')->get();
+        return view('books.show')
+        ->with('book',$book);
     }
 
     /**
@@ -59,8 +110,12 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::get($id);
-        return view('books.edit', ['book' => $book]);
+      $authors = \App\Author::all()->lists('name','id');
+      $publishers = \App\Publisher::all()->lists('name','id');
+      $categories = \App\Category::all()->lists('name','id');
+      $languages = \App\Language::all()->lists('name','id');
+      $book = Book::with('author','publisher','category', 'language')->find($id);
+      return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -71,23 +126,39 @@ class BookController extends Controller
      */
     public function update($id)
     {
-        //
+        $book = \App\Book::find($id);
+        if($book){
+          $rules = \App\Book::$rules;
+          //$rules['name'] = 'required|min:2';
+          $validator = \Validator::make(\Input::all(), $rules);
+
+          if($validator->passes())
+          {
+            $book = \App\State::find($id);
+            $book->title = \Input::get('title');
+            $book->description = \Input::get('description');
+            $book->author_id = \Input::get('author');
+            $book->publisher_id = \Input::get('publisher');
+            $book->category_id = \Input::get('category');
+            $book->language_id = \Input::get('language');
+            $book->release_date = \Input::get('release_date');
+            $book->save();
+
+            return \Redirect::back()->with('message','Book updated.');
+          }
+          return \Redirect::back()
+            //->with('message','There were some errors. Please try again later..')
+            ->withInput()
+            ->withErrors($validator);
+          }
+        return \Redirect::back()
+                  ->with('error', 'Book does not exist.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function library()
     {
-      $books = \App\Book::all();
+      $book = Book::with('author','publisher','category', 'language')->get();
       return view('library',['books' => $books]);
     }
 }

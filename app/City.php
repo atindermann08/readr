@@ -11,10 +11,10 @@ class City extends Model {
 			'state_id' => 'required|integer'
 		];
     public function areas(){
-        return $this->hasMany('Area');
+        return $this->hasMany('\App\Area');
     }
 
     public function state(){
-        return $this->belongsTo('State');
+        return $this->belongsTo('\App\State');
     }
 }

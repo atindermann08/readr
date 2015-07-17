@@ -57,17 +57,6 @@ class StateController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -75,7 +64,14 @@ class StateController extends Controller
      */
     public function edit($id)
     {
-        //
+      $countries = \App\Country::all()->lists('name','id');
+      $state = \App\State::find($id);
+      if($state){
+          return view('states.edit',['state' => $state,'countries'=>$countries]);
+        }
+      return \Redirect::back()
+                ->with('error', 'State does not exist.');
+
     }
 
     /**
@@ -86,17 +82,28 @@ class StateController extends Controller
      */
     public function update($id)
     {
-        //
+      $state = \App\State::find($id);
+      if($state){
+        $rules = \App\State::$rules;
+        //$rules['name'] = 'required|min:2';
+        $validator = \Validator::make(\Input::all(), $rules);
+
+        if($validator->passes())
+        {
+          $state = \App\State::find($id);
+          $state->name = \Input::get('name');
+          $state->country_id = \Input::get('country');
+          $state->save();
+
+          return \Redirect::back()->with('message','State updated.');
+        }
+        return \Redirect::back()
+          //->with('message','There were some errors. Please try again later..')
+          ->withInput()
+          ->withErrors($validator);
+        }
+      return \Redirect::back()
+                ->with('error', 'State does not exist.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

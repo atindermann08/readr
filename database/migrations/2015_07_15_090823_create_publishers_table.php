@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuthorsTable extends Migration
+class CreatePublishersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,9 @@ class CreateAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('authors', function (Blueprint $table) {
-            $table->engine = "InnoDB";
+        Schema::create('publishers', function (Blueprint $table) {
             $table->increments('id');
-			      $table->string('name');
-            $table->text('bio',120)->nullable();
-            $table->string('image')->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('authors');
+        Schema::drop('publishers');
     }
 }

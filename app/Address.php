@@ -13,10 +13,10 @@ class Address extends Model {
     ];
 
     public function user(){
-        return $this->belongsTo('User');
+        return $this->belongsTo('\App\User');
     }
 
     public function area(){
-        return $this->belongsTo('Area');
+        return $this->belongsTo('\App\Area');
     }
 }

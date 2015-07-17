@@ -3,45 +3,92 @@
 @section('content')
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h4>Create Book</h4>
+    <h4>Add Book</h4>
     <hr/>
-      {!! Form::open() !!}
+      @include('layouts.partials._errors')
+      {!! Form::open(['route' => 'books.store']) !!}
         <div class="form-group">
           {!! Form::label('title', 'Title') !!}
           {!! Form::text('title', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('description', 'Description') !!}
-          {!! Form::text('description', null, ['class' => 'form-control']) !!}
+          {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('author', 'Author') !!}
-          {!! Form::text('author', null, ['class' => 'form-control']) !!}
+          {!! Form::text('author' ,null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('publisher', 'Publisher') !!}
-          {!! Form::text('publisher', null, ['class' => 'form-control']) !!}
+          {!! Form::text('publisher' ,null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('category', 'Category') !!}
-          {!! Form::text('category', null, ['class' => 'form-control']) !!}
+          {!! Form::text('category' ,null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('language', 'Language') !!}
-          {!! Form::text('language', null, ['class' => 'form-control']) !!}
+          {!! Form::text('language' ,null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('release_date', 'Release Date') !!}
-          {!! Form::text('release_date', null, ['class' => 'form-control']) !!}
+          {!! Form::input('date', 'release_date', null, ['class' => 'form-control','placeholder'=>'MM-DD-YYYY']) !!}
         </div>
+        {{--
         <div class="form-group">
-          {!! Form::label('photo', 'Photo') !!}
-          {!! Form::file('photo', ['class' => '']) !!}
+          {!! Form::label('image', 'Photo') !!}
+          {!! Form::file('image', ['class' => '']) !!}
         </div>
+        --}}
         <div class="form-group">
-          {!! Form::submit('Create', ['class' => 'form-control btn btn-primary']) !!}
+          {!! Form::submit('Add', ['class' => 'form-control btn btn-primary']) !!}
         </div>
       {!! Form::close() !!}
   </div>
 </div>
 @stop()
+
+
+{{--
+  //Add book using bby selecting from already available attributes or by adding new
+
+  {!! Form::open(['route' => 'books.store']) !!}
+    <div class="form-group">
+      {!! Form::label('title', 'Title') !!}
+      {!! Form::text('title', null, ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label('description', 'Description') !!}
+      {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label('author', 'Author') !!}
+      {!! Form::select('author', $authors ,null, ['class' => 'form-control dropdown']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label('publisher', 'Publisher') !!}
+      {!! Form::select('publisher', $publishers ,null, ['class' => 'form-control dropdown']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label('category', 'Category') !!}
+      {!! Form::select('category', $categories ,null, ['class' => 'form-control dropdown']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label('language', 'Language') !!}
+      {!! Form::select('language', $languages ,null, ['class' => 'form-control dropdown']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label('release_date', 'Release Date') !!}
+      {!! Form::input('date', 'release_date', null, ['class' => 'form-control','placeholder'=>'MM-DD-YYYY']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label('photo', 'Photo') !!}
+      {!! Form::file('photo', ['class' => '']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::submit('Add', ['class' => 'form-control btn btn-primary']) !!}
+    </div>
+  {!! Form::close() !!}
+
+--}}

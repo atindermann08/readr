@@ -3,10 +3,10 @@
 @section('content')
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h4>Add Category</h4>
+    <h4>Add Publisher</h4>
     <hr/>
         @include('layouts.partials._errors')
-    {!! Form::open(['route' => 'categories.store']) !!}
+    {!! Form::open(['route' => 'publishers.store']) !!}
       <div class="form-group">
         {!! Form::label('name', 'Name') !!}
         {!! Form::text('name', null, ['class' => 'form-control']) !!}

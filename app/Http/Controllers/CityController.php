@@ -16,7 +16,11 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+          //$countries = \App\Country::all()->lists('name','id');
+          //$states = \App\State::all()->lists('name','id');
+          $cities = \App\City::with('state')->get();
+          return response()->json($cities);
+          return view('states.index',['cities' => $cities]);
     }
 
     /**
