@@ -4,7 +4,7 @@
 //@import "../bootstrap/stylesheets/bootstrap";
 
 #top-search-bar{
-  width:400px;
+  width:380px;
 }
 .search-bar-btn{
   margin-left: -10px;
@@ -13,12 +13,32 @@
 }
 
 body{
-  padding: 70px;
+  padding: 80px;
 }
+.img-round{
+  border-radius: 900px;
+  // color:cadetblue;
+  // background-color: aliceblue;
+
+}
+.book-default-pic{
+  background-color: #efefef;
+  color:#ddd;
+  padding-top: 17px;
+  height:110px;
+  width:110px;
+  padding-left: 23px;
+}
+// .alert{
+//   margin-left: 160px;
+//   width: 800px;
+//   position: absolute;
+//   margin-top: -80px;
+//   z-index: 2000;}
 
 
 
-
+//signin form temporary
 .form-signin
 {
   max-width: 330px;

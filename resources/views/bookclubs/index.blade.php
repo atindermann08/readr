@@ -1,15 +1,21 @@
 @extends('layouts.default')
 
 @section('content')
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h4>Book Clubs</h4>
+    <h3>Book Clubs</h3>
     <hr/>
-    <ul>
-      @foreach($bookclubs as $bookclub)
-        <li>{!! $bookclub->name !!}</li>
-      @endforeach
-    </ul>
-  </div>
-</div>
+    @foreach($bookclubs as $bookclub)
+      <div class="media">
+        <div class="media-left">
+          <a href="{{route('bookclubs.show',$bookclub->id)}}">
+              <i class='fa fa-leanpub fa-4x book-default-pic'></i>
+          </a>
+        </div>
+        <div class="media-body">
+          <h3 class="media-heading">{!! link_to_route('bookclubs.show',$bookclub->name,$bookclub->id) !!}</h3>
+          <p>Description: {{$bookclub->description}}</p>
+          <small>{{count($bookclub->members)}} Members,</small>
+          <small>{{count($bookclub->books)}} Books</small>
+        </div>
+      </div>
+    @endforeach
 @stop()

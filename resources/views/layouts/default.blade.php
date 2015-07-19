@@ -13,7 +13,12 @@
     @section('nav')
       @include('layouts.partials._nav')
     @show
-    @yield('content')
+    <div class="row">
+      <div class="col-md-12">
+        @include('flash::message')  
+        @yield('content')
+      </div>
+    </div>
   </div>
   {!! Html::script('vendor/js/jquery.min.js') !!}
   {!! Html::script('vendor/js/bootstrap.min.js') !!}

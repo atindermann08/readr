@@ -13,7 +13,6 @@ class CreateBookBookClubTable extends Migration
     public function up()
     {
         Schema::create('book_book_club', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('book_id')->unsigned();
             $table->integer('book_club_id')->unsigned();
             $table->timestamps();

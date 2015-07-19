@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BookClub extends Model
 {
-  protected $fillable = ['name','description','rules'];
+  protected $fillable = ['name','description','rules','user_id'];
 
 	public static $rules = [
 		'name' => 'required|min:3|unique:book_clubs',
@@ -17,6 +17,9 @@ class BookClub extends Model
       return $this->belongsToMany('\App\User');
   }
   public function books(){
-      return $this->belongsToMany('\App\Book');
+    return $this->morphToMany('App\Book', 'bookable')->withPivot('status_id');
+  }
+  public function admin(){
+      return $this->belongsTo('\App\User');
   }
 }

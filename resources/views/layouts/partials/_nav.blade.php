@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
+  <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -8,15 +8,35 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ url('/') }}">Readr</a>
+      <a class="navbar-brand" href="{{ url('/') }}">Livrogo</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class=""><a href="#"><i class="fa fa-leanpub fa-fw"></i>My Library<span class="sr-only">(current)</span></a></li>
-        <li><a href="{{route('countries.edit',4)}}"><i class="fa fa-book fa-fw"></i>Books</a></li>
-        <li><a href="{{route('countries.edit',1)}}"><i class="fa fa-th-large fa-fw"></i>Browse</a></li>
+        <li class="dropdown">
+         <a href="{{route('books.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+           <i class=' fa fa-book fa-fw'></i>Books
+           <span class="caret"></span>
+        </a>
+         <ul class="dropdown-menu">
+           <li><a href="{{route('books.create')}} ">Add Book</a></li>
+           <li role="separator" class="divider"></li>
+           <li><a href="{{route('books.index')}}">List</a></li>
+         </ul>
+       </li>
+       <li class="dropdown">
+         <a href="{{route('bookclubs.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+           <i class=' fa fa-group fa-fw'></i>Book Clubs
+           <span class="caret"></span>
+        </a>
+         <ul class="dropdown-menu">
+           <li><a href="{{route('bookclubs.create')}} ">Create New Book Club</a></li>
+           <li role="separator" class="divider"></li>
+           <li><a href="{{route('bookclubs.index')}}">List</a></li>
+         </ul>
+       </li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -26,6 +46,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
+          <li><a>Welcome, {{ucfirst(\Auth::user()->name)}}</a></li>
           <li><a href="{{url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a></li>
         @else
           <li class="{{ Active::pattern('auth/login')}}"><a href="{{url('auth/login')}}"><i class="fa fa-sign-out fa-fw"></i>Sign In</a></li>

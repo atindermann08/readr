@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\BookClubRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class BookClubController extends Controller
 {
+
+    public function __construct(){
+      $this->middleware('auth', ['except' => ['index' , 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class BookClubController extends Controller
     public function index()
     {
       $bookclubs = \App\BookClub::with('books','members')->get();
-      // return response()->json($books);
+      // return response()->json($bookclubs);
       return view('bookclubs.index')
         ->with('bookclubs' , $bookclubs);
     }
@@ -29,7 +34,8 @@ class BookClubController extends Controller
      */
     public function create()
     {
-      return view('bookclubs.create');
+      $books = \Auth::user()->books()->lists('title','id');
+      return view('bookclubs.create',compact('books'));
     }
 
     /**
@@ -37,26 +43,34 @@ class BookClubController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(BookClubRequest $request)
     {
-      $validator = \Validator::make(\Input::all(), \App\BookClub::$rules);
+      $request['user_id'] = \Auth::user()->id;
+      $bookclub = \Auth::user()->bookclubs()->create($request->all());
 
-      if($validator->passes())
-      {
-        $bookclub = new \App\BookClub;
-        $bookclub->name = \Input::get('name');
-        $bookclub->description = \Input::get('description');
-        $bookclub->rules = \Input::get('rules');
-        $bookclub->user_id = 1;//Auth::user()->id;
-        $bookclub->save();
-
-        return \Redirect::back()->with('message','Book Club Created.');
-      }
+      $bookclub->books()->attach($request->input('books'));
 
       return \Redirect::back()
-            //->with('message','There were some errors. Please try again later..')
-            ->withInput()
-            ->withErrors($validator);
+                        ->with('message','Book Club Created using request.');
+
+      // $validator = \Validator::make(\Input::all(), \App\BookClub::$rules);
+      //
+      // if($validator->passes())
+      // {
+      //   // \App\BookClub;
+      //   $bookclub->name = \Input::get('name');
+      //   $bookclub->description = \Input::get('description');
+      //   $bookclub->rules = \Input::get('rules');
+      //   $bookclub->user_id = 1;//Auth::user()->id;
+      //   $bookclub->save();
+      //   // $bookclub->
+      //   return \Redirect::back()->with('message','Book Club Created.');
+      // }
+      //
+      // return \Redirect::back()
+      //       //->with('message','There were some errors. Please try again later..')
+      //       ->withInput()
+      //       ->withErrors($validator);
     }
 
     /**
@@ -70,7 +84,7 @@ class BookClubController extends Controller
       $bookclub = \App\BookClub::find($id);
       if($bookclub){
 
-        return view('bookclubs.edit')
+        return view('bookclubs.show')
         ->with(compact('bookclub'));
       }
       return \Redirect::back()
@@ -100,13 +114,17 @@ class BookClubController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *
      *
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function joinclub($bookClubId)
     {
-        //
+        auth()->user()->bookclubs()->attach($bookClubId);
+
+        flash('Book Club Joined.');
+
+        return \Redirect::back();
     }
 }

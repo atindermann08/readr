@@ -1,9 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h4>Create Book Club</h4>
+    <h3>Create Book Club</h3>
     <hr/>
       @include('layouts.partials._errors')
       {!! Form::open(['route' => 'bookclubs.store']) !!}
@@ -19,6 +17,10 @@
           {!! Form::label('rules', 'Rules') !!}
           {!! Form::textarea('rules' ,null, ['class' => 'form-control','rows' => '5']) !!}
         </div>
+        <div class="form-group">
+          {!! Form::label('books', 'Add Your Books to Book Club(Ctrl+click to select multiple)') !!}
+          {!! Form::select('books[]', $books ,null, ['class' => 'form-control dropdown' , 'multiple']) !!}
+        </div>
         {{--
         <div class="form-group">
           {!! Form::label('image', 'Photo') !!}
@@ -29,6 +31,4 @@
           {!! Form::submit('Create', ['class' => 'form-control btn btn-primary']) !!}
         </div>
       {!! Form::close() !!}
-  </div>
-</div>
 @stop()

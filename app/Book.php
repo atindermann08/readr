@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
 
-	protected $fillable = ['name','description','author_id','publisher_id','category_id','language_id','realease_date','image'];
+	protected $fillable = ['title','description','author_id','publisher_id','category_id','language_id','release_date','image'];
 
 	public static $rules = [
 		'title' => 'required|min:3|unique:books',
@@ -33,6 +33,10 @@ class Book extends Model
 	public function publisher(){
       return $this->belongsTo('\App\Publisher');
   }
+
+  public function author(){
+      return $this->belongsTo('\App\Author');
+  }
   public function authors(){
       return $this->belongsToMany('\App\Author');
   }
@@ -45,11 +49,23 @@ class Book extends Model
   public function bookrating(){
       return $this->belongsTo('\App\BookRating');
   }
-
   public function users(){
       return $this->belongsToMany('\App\User');
   }
-  public function bookclubs(){
-      return $this->belongsToMany('\App\BookClub');
+  // public function bookstatuses(){
+  //     return $this->hasManyThrough('\App\BookStatus','\App\Bookable','book_id','bookable_id');
+  // }
+	public function bookstatuses(){
+			$statuses = [];
+			
+	    return $statuses;
+	}
+
+  public function owners(){
+      return $this->morphedByMany('\App\User','bookable')->withPivot('status_id');
   }
+	public function bookclubs(){
+      return $this->morphedByMany('\App\BookClub','bookable')->withPivot('status_id');
+  }
+
 }

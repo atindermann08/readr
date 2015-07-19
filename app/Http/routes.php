@@ -14,19 +14,23 @@ Route::get('/home', function () {
 Route::controller('auth', 'Auth\AuthController');
 Route::controller('password', 'Auth\PasswordController');
 
-Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);
+// Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);
 
-Route::resource('books','BookController');
-Route::resource('bookclubs','BookClubController');
-Route::resource('authors','AuthorController');
-Route::resource('publishers','PublisherController');
-Route::resource('categories','CategoryController');
-Route::resource('languages','LanguageController');
-Route::resource('bookstatuses','BookStatusController');
+Route::resource('books','BookController',['except'=>'destroy']);
+Route::get('books/addtolibrary/{bookId}',['as' => 'books.addtolibrary', 'uses' => 'BookController@addtolibrary']);
 
-Route::resource('profile','ProfileController');
-Route::resource('addresses','AddressController');
-Route::resource('areas','AreaController');
-Route::resource('cities','CityController');
-Route::resource('states','StateController');
-Route::resource('countries','CountryController');
+Route::resource('bookclubs','BookClubController',['except'=>'destroy']);
+Route::get('bookclubs/join/{bookClubId}',['as' => 'bookclubs.join', 'uses' => 'BookClubController@joinclub']);
+
+Route::resource('authors','AuthorController',['except'=>'destroy']);
+Route::resource('publishers','PublisherController',['except'=>'destroy']);
+Route::resource('categories','CategoryController',['except'=>'destroy']);
+Route::resource('languages','LanguageController',['except'=>'destroy']);
+Route::resource('bookstatuses','BookStatusController',['except'=>'destroy']);
+
+// Route::resource('profile','ProfileController',['except'=>'destroy']);
+// Route::resource('addresses','AddressController',['except'=>'destroy']);
+// Route::resource('areas','AreaController',['except'=>'destroy']);
+// Route::resource('cities','CityController',['except'=>'destroy']);
+// Route::resource('states','StateController',['except'=>'destroy']);
+// Route::resource('countries','CountryController',['except'=>'destroy']);
