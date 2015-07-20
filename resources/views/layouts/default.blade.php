@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Readr</title>
+  <title>Livrogo</title>
 
   <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
   {!! Html::style('css/app.css') !!}
@@ -15,7 +15,7 @@
     @show
     <div class="row">
       <div class="col-md-12">
-        @include('flash::message')  
+        @include('flash::message')
         @yield('content')
       </div>
     </div>

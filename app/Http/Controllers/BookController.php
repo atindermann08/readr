@@ -18,11 +18,12 @@ class BookController extends Controller
     public function index()
     {
       $books = \App\Book::with('authors','language','category','publisher','owners')->get();
+
       // $authors = \App\Author::all();
       // $publishers = \App\Publisher::all();
       // $categories = \App\Category::all();
       // $languages = \App\Language::all();
-      // return response()->json($books);
+      // return response()->json(\App\Book::first()->clubstatus());
       return view('books.index')
         ->with('books' , $books);
         // ->with('authors' , $authors)

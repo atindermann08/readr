@@ -21,5 +21,9 @@ elixir(function(mix) {
       .copy("bower_components/font-awesome/fonts/fontawesome-webfont.woff2", "public/vendor/fonts/fontawesome-webfont.woff2")
       .copy("bower_components/font-awesome/fonts/FontAwesome.otf", "public/vendor/fonts/FontAwesome.otf")
       .copy("bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js", "public/vendor/js/bootstrap.min.js")
-      .copy("bower_components/jquery/dist/jquery.min.js", "public/vendor/js/jquery.min.js");
+      .copy("bower_components/jquery/dist/jquery.min.js", "public/vendor/js/jquery.min.js")
+      .copy(
+          'public/*',
+          '../public_html/'
+        );
 });

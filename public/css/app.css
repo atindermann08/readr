@@ -6003,9 +6003,7 @@ body {
   padding: 80px; }
 
 .img-round {
-  border-radius: 900px;
-  color: cadetblue;
-  background-color: aliceblue; }
+  border-radius: 900px; }
 
 .book-default-pic {
   background-color: #efefef;
@@ -6013,7 +6011,8 @@ body {
   padding-top: 17px;
   height: 110px;
   width: 110px;
-  padding-left: 23px; }
+  padding-left: 23px;
+  margin-bottom: 30px; }
 
 .form-signin {
   max-width: 330px;

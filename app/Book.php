@@ -55,11 +55,7 @@ class Book extends Model
   // public function bookstatuses(){
   //     return $this->hasManyThrough('\App\BookStatus','\App\Bookable','book_id','bookable_id');
   // }
-	public function bookstatuses(){
-			$statuses = [];
-			
-	    return $statuses;
-	}
+
 
   public function owners(){
       return $this->morphedByMany('\App\User','bookable')->withPivot('status_id');
@@ -67,5 +63,54 @@ class Book extends Model
 	public function bookclubs(){
       return $this->morphedByMany('\App\BookClub','bookable')->withPivot('status_id');
   }
+
+	public function status($bookId, $modelType, $modelId){
+		$model = $modelType::find($modelId);
+		$status_id = $model->books()->where('book_id','=',$bookId)->first()->pivot->status_id;
+		$status = \App\BookStatus::find($status_id);
+		return $status;
+	}
+	public function statusInClub($bookId, $clubId)
+	{
+		return $this->status($bookId, 'App\BookClub', $clubId);
+	}
+	public function statusWithUser($bookId, $userId = 0)
+	{
+		if(!$userId && auth()->check()){ $userId = auth()->user()->id; }
+		return $this->status($bookId, 'App\User', $userId);
+	}
+
+	public function ownerstatus()
+	{
+		$result = [];
+		foreach($this->owners as $owner)
+		{
+			$result[] = $this->statusWithUser($this->id,$owner->id);
+		}
+		$result = collect($result)->groupBy('name');
+
+		$statuses = collect();
+		foreach ($result as $key => $value) {
+			$statuses->put($key ,count($value));
+		}
+		return $statuses;
+	}
+	public function clubstatus()
+	{
+		$result = [];
+		foreach($this->bookclubs as $bookclub)
+		{
+			$result[] = $this->statusInClub($this->id,$bookclub->id);
+		}
+		$result = collect($result)->groupBy('name');
+
+		$statuses = collect();
+		foreach ($result as $key => $value) {
+			$statuses->put($key ,count($value));
+		}
+		return $statuses;
+	}
+
+
 
 }

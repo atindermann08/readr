@@ -14,7 +14,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class=""><a href="#"><i class="fa fa-leanpub fa-fw"></i>My Library<span class="sr-only">(current)</span></a></li>
         <li class="dropdown">
          <a href="{{route('books.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
            <i class=' fa fa-book fa-fw'></i>Books
@@ -40,7 +39,7 @@
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control search-bar" id="top-search-bar" placeholder="Search">
+          <input type="text" class="form-control search-bar" id="top-search-bar" placeholder="Coming Soon">
         </div>
         <button type="submit" class="btn btn-default search-bar-btn">Search</button>
       </form>
