@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -61,5 +62,54 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+
+    public function postRegister(Request $request)
+    {
+        //return \Redirect::back()->with('message','register function hijacked');
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $activation_code = str_random(60);
+
+        $user = new \App\User;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->activation_code = $activation_code;
+
+        if ($user->save()) {
+          $data = array(
+                      'name' => $user->name,
+                      'code' => $activation_code,
+                      );
+          \Mail::send('emails.activate', $data, function($message) use ($user) {
+                      $message->to($user->email, 'Please activate your account.');
+                });
+          \Auth::login($user);
+          return view('auth.activate');
+        }
+        else {
+          flash('Your account couldn\’t be created please try again');
+          return redirect()->back()->withInput();
+        }
+    }
+
+    public function getActivateAccount($activationCode, \App\User $user)
+    {
+      if($user->activate($activationCode))
+      {
+        flash('Congrats, Your account activated successfully.');
+        return redirect('/');
+      }
+      flash('Account could not be activated, please try again.');
+      return redirect('/');
+
     }
 }

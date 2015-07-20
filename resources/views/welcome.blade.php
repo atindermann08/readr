@@ -3,6 +3,8 @@
 @section('content')
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
+      @include('flash::message')
+      @include('layouts.partials._errors')
       <div class="jumbotron">
         <h1>Welcome to Livrogo!</h1>
         <p>Create and Join Book clubs and share book with others. Enjoy reading.</p>

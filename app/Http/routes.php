@@ -11,6 +11,7 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
+Route::get('account/activate/{activationCode}',[ 'as' => 'account.activate', 'uses' => 'Auth\AuthController@getActivateAccount']);
 Route::controller('auth', 'Auth\AuthController');
 Route::controller('password', 'Auth\PasswordController');
 

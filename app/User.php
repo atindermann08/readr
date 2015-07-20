@@ -62,4 +62,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
           return true;
         return false;
     }
+
+    public function activate($code)
+    {
+      $user = $this->where('activation_code','=',$code)->first();
+      // if($user)
+      // {
+        $user->active = 1;
+        $user->activation_code = '';
+
+        if($user->save())
+        {
+            \Auth::login($user);
+            \Mail::send('emails.welcome', ['name' => $user->name], function($message) use ($user) {
+                        $message->to($user->email, 'Account activated successfully!');
+                  });
+        }
+
+        return true;
+      // }
+      return false;
+    }
 }
