@@ -4,8 +4,10 @@
     <h3>Books</h3>
     <hr/>
     @include('flash::message')
-
-    @foreach ($books->chunk(2) as $chunk)
+    @if($books->count() == 0)
+      No Books Available at the moment. 
+    @else
+      @foreach ($books->chunk(2) as $chunk)
           <div class="row">
             @foreach ($chunk as $book)
               <div class="col-md-6">
@@ -45,5 +47,6 @@
               </div>
             @endforeach
         </div>
-    @endforeach
+        @endforeach
+      @endif
 @stop()
