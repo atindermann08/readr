@@ -31,7 +31,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => ['getLogout','activateAccount']]);
     }
 
     /**
@@ -101,15 +101,26 @@ class AuthController extends Controller
         }
     }
 
-    public function getActivateAccount($activationCode, \App\User $user)
+    public function activateAccount($activationCode)
     {
-      if($user->activate($activationCode))
+      $user = \App\User::where('activation_code','=',$activationCode)->first();
+      if($user)
       {
-        flash('Congrats, Your account activated successfully.');
-        return redirect('/');
+        $user->active = 1;
+        $user->activation_code = '';
+
+        if($user->save())
+        {
+            \Auth::login($user);
+            \Mail::send('emails.welcome', ['name' => $user->name], function($message) use ($user) {
+                        $message->to($user->email, 'Account activated successfully!');
+                  });
+            flash('Congrats, Your account activated successfully.');
+            return redirect('/');
+        }
+
       }
       flash('Account could not be activated, please try again.');
       return redirect('/');
-
     }
 }

@@ -43,7 +43,7 @@ class Authenticate
         }
         if (!\Auth::user()->active) {
             flash('Please activate your account to proceed.');
-            // return redirect()->guest('home');
+            return redirect()->guest('home');
         }
 
         return $next($request);
