@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'team@readr.com', 'name' => 'Team Reader'],
+    'from' => ['address' => 'team@livrogo.com', 'name' => 'Team Livrogo'],
 
     /*
     |--------------------------------------------------------------------------
@@ -119,6 +119,6 @@ return [
     |
     */
 
-    'pretend' => true,
+    'pretend' => false,
 
 ];
