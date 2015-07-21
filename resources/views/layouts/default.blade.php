@@ -19,7 +19,6 @@
       @yield('content')
       </div>
     </div>
-    <div class="push"></div>
   </div>
   @include('layouts.partials._footer')
   {!! Html::script('vendor/js/jquery.min.js') !!}

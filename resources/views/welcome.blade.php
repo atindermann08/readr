@@ -5,7 +5,7 @@
     <div class="col-md-8 col-md-offset-2">
       @include('flash::message')
       @include('layouts.partials._errors')
-      <div class="jumbotron">
+      <div id='jumbotron' class="jumbotron">
         <h1>Welcome to Livrogo!</h1>
         <p>Create your own Book club or join an existing one. Share book and Enjoy reading.</p>
         <blockquote><p>A book is a device to ignite the imagination.</p><p><small>Alan Bennett</small></p></blockquote>
