@@ -15,7 +15,7 @@
                       Not Available
                     @endif</small>
         <p>Description: {{$book->description}}</p><br/>
-        @unless(\Auth::user()->ownBook($book->id))
+        @unless($user->ownBook($book->id))
           <p>{!! link_to_route('books.addtolibrary','Add to My Library', $book->id, ['class'=>'btn btn-primary']) !!}</p>
         @else
           <p class='' >You own this book</p>

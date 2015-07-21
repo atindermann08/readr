@@ -12,7 +12,7 @@
           <p>Description: {{$bookclub->description}}</p>
           <small>{{count($bookclub->members)}} Members</small>
           <small>{{count($bookclub->books)}} Books</small><br/><br/>
-          @unless(\Auth::user()->isMember($bookclub->id))
+          @unless($user->isMember($bookclub->id))
             <p>{!! link_to_route('bookclubs.join','Join Club', $bookclub->id, ['class'=>'btn btn-primary']) !!}</p>
           @else
             <p class='' >Already Member</p>

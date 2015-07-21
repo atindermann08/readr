@@ -13,7 +13,7 @@ class BookController extends Controller
 
 
     public function __construct(){
-      $this->middleware('auth', ['except' => ['index' , 'show']]);
+      $this->middleware('auth', ['except' => ['index', 'show' ]]);
     }
 
     /**
@@ -142,9 +142,10 @@ class BookController extends Controller
      */
     public function show($id)
     {
+      $user = auth()->check()?auth()->user():new \App\User;
         $book = App\Book::with('author','publisher','category', 'language')->find($id);
         return view('books.show')
-              ->with('book',$book);
+              ->with(compact('book','user'));
     }
 
     /**

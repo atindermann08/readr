@@ -81,11 +81,12 @@ class BookClubController extends Controller
      */
     public function show($id)
     {
+      $user = auth()->check()?auth()->user():new \App\User;
       $bookclub = \App\BookClub::find($id);
       if($bookclub){
 
         return view('bookclubs.show')
-        ->with(compact('bookclub'));
+        ->with(compact('bookclub','user'));
       }
       return \Redirect::back()
                 ->with('error', 'Book Club does not exist.');
