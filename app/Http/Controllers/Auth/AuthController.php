@@ -90,7 +90,7 @@ class AuthController extends Controller
                       'code' => $activation_code,
                       );
           \Mail::send('emails.activate', $data, function($message) use ($user) {
-                      $message->to($user->email, 'Please activate your account.');
+                      $message->to($user->email, $user->name)->subject('Please activate your account.');
                 });
           \Auth::login($user);
           return view('auth.activate');
@@ -113,7 +113,7 @@ class AuthController extends Controller
         {
             \Auth::login($user);
             \Mail::send('emails.welcome', ['name' => $user->name], function($message) use ($user) {
-                        $message->to($user->email, 'Account activated successfully!');
+                        $message->to($user->email,  $user->name)->subject('Account activated successfully!');
                   });
             flash('Congrats, Your account activated successfully.');
             return redirect('/');
