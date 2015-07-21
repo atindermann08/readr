@@ -24,5 +24,6 @@
   @include('layouts.partials._footer')
   {!! Html::script('vendor/js/jquery.min.js') !!}
   {!! Html::script('vendor/js/bootstrap.min.js') !!}
+  {!! Html::script('js/app.js') !!}
 </body>
 </html>
