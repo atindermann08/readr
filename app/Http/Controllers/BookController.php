@@ -90,7 +90,7 @@ class BookController extends Controller
       $request['language_id'] = App\Language::firstOrCreate(['name' => ucfirst(\Input::get('language'))])->id;
 
       //create book
-      $book = auth()->user()->books()->create($request->all());
+      $book = auth()->user()->books()->create($request->all(),['status_id'=>1]);
 
       //atached book to authors
       $book->authors()->attach($authorIds);

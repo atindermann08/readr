@@ -48,7 +48,7 @@ class BookClubController extends Controller
       $request['user_id'] = \Auth::user()->id;
       $bookclub = \Auth::user()->bookclubs()->create($request->all());
 
-      $bookclub->books()->attach($request->input('books'));
+      $bookclub->books()->attach($request->input('books'),['status_id' => 1]);
 
       return \Redirect::back()
                         ->with('message','Book Club Created.');

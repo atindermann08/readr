@@ -23,7 +23,10 @@ class Book extends Model
 	{
 		$this->attributes['release_date'] = Carbon::parse($date);
 	}
-
+	public function setStatusIdAttribute($id)
+	{
+		$this->attributes['status_id'] = $id?$id:1;
+	}
   /*
   * Relationships
   */
