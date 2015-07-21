@@ -11,6 +11,9 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
+Route::get('feedback',[ 'as' => 'feedback.create', 'uses' => 'FeedbackController@create']);
+Route::post('feedback',[ 'as' => 'feedback.store', 'uses' => 'FeedbackController@store']);
+
 Route::get('account/activate/{activationCode}',[ 'as' => 'account.activate', 'uses' => 'Auth\AuthController@activateAccount']);
 Route::controller('auth', 'Auth\AuthController');
 Route::controller('password', 'Auth\PasswordController');

@@ -6014,6 +6014,20 @@ body {
   padding-left: 23px;
   margin-bottom: 30px; }
 
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: #f1f1f1;
+  border-top-color: black;
+  border-top-width: 4px; }
+
+.footer, .push {
+  height: 50px;
+  left: 0;
+  padding: 15px;
+  padding-left: 7%; }
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
