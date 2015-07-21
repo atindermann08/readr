@@ -101,7 +101,7 @@ class BookController extends Controller
       //attach book to book clubs
       $book->bookclubs()->attach($request->input('bookclubs'));
 
-      return \Redirect::back()->with('message','Book added by single call.');
+      return \Redirect::back()->with('message','Book added.');
 
       // $validator = \Validator::make(\Input::all(), \App\Book::$rules);
       //

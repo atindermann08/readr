@@ -51,7 +51,7 @@ class BookClubController extends Controller
       $bookclub->books()->attach($request->input('books'));
 
       return \Redirect::back()
-                        ->with('message','Book Club Created using request.');
+                        ->with('message','Book Club Created.');
 
       // $validator = \Validator::make(\Input::all(), \App\BookClub::$rules);
       //
