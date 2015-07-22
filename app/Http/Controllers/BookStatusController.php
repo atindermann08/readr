@@ -63,7 +63,7 @@ class BookStatusController extends Controller
    {
      $bookstatus = \App\BookStatus::find($id);
      if($bookstatus){
-         return view('bookstatuses.edit',['Book Status' => $bookstatus]);
+         return view('bookstatuses.edit',['bookstatus' => $bookstatus]);
        }
      return \Redirect::back()
                ->with('error', 'Book Status does not exist.');
