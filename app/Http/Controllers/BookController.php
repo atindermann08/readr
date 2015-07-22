@@ -90,7 +90,9 @@ class BookController extends Controller
       $request['language_id'] = App\Language::firstOrCreate(['name' => ucfirst(\Input::get('language'))])->id;
 
       //create book
-      $book = auth()->user()->books()->create($request->all(),['status_id'=>1]);
+
+      $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
+      $book = auth()->user()->books()->create($request->all(),['status_id' => $status_id]);
 
       //atached book to authors
       $book->authors()->attach($authorIds);
@@ -208,7 +210,8 @@ class BookController extends Controller
 
     public function addtolibrary($bookId)
     {
-          auth()->user()->books()->attach($bookId,['status_id'=>1]);
+          $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
+          auth()->user()->books()->attach($bookId,['status_id'=>$status_id]);
 
           return \Redirect::back()
                 ->with('message', 'Book added to library.');
