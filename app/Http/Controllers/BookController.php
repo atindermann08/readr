@@ -208,7 +208,7 @@ class BookController extends Controller
 
     public function addtolibrary($bookId)
     {
-          auth()->user()->books()->attach($bookId);
+          auth()->user()->books()->attach($bookId,['status_id'=>1]);
 
           return \Redirect::back()
                 ->with('message', 'Book added to library.');
