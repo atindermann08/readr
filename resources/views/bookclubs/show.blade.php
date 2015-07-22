@@ -29,7 +29,13 @@
           </div>
           <div class="media-body">
             <h3 class="media-heading">{!! link_to_route('books.show',$book->title,$book->id) !!}</h3>
-            <small>by: {{$book->author->name}}</small>
+            <small>by:  @if( count($book->authors) > 0 )
+                      @foreach ($book->authors as $author )
+                        {{ $author->name }},
+                      @endforeach
+                    @else
+                      Not Available
+                    @endif</small>
             <p>{{$book->description}}</p>
             <small>{{count($book->bookclubs)}} Book Clubs</small>
             <small>Language: {{$book->language->name}}</small>

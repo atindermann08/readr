@@ -142,7 +142,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-      $user = auth()->check()?auth()->user():new \App\User;
+        $user = auth()->check()?auth()->user():new \App\User;
         $book = App\Book::with('author','publisher','category', 'language')->find($id);
         return view('books.show')
               ->with(compact('book','user'));
