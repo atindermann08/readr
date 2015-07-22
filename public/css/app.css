@@ -6031,11 +6031,10 @@ body {
   border-top-color: black;
   border-top-width: 4px; }
 
-.footer, .push {
+.footer {
   height: 50px;
   left: 0;
-  padding: 15px;
-  padding-left: 7%; }
+  padding: 15px; }
 
 .form-signin {
   max-width: 330px;
