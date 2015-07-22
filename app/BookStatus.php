@@ -8,7 +8,7 @@ class BookStatus extends Model
 	protected $fillable = ['name'];
 
 	public static $rules = [
-		'name' => 'required|min:2|unique:categories'
+		'name' => 'required|min:2|unique:book_statuses'
 	];
 
   public function book(){

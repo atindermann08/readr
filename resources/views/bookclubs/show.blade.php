@@ -21,25 +21,6 @@
       </div>
       <hr/>
       @foreach($bookclub->books as $book)
-        <div class="media">
-          <div class="media-left">
-            <a href="{{route('books.show',$book->id)}}">
-                <i class='fa fa-leanpub fa-4x book-default-pic'></i>
-            </a>
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading">{!! link_to_route('books.show',$book->title,$book->id) !!}</h3>
-            <small>by:  @if( count($book->authors) > 0 )
-                      @foreach ($book->authors as $author )
-                        {{ $author->name }},
-                      @endforeach
-                    @else
-                      Not Available
-                    @endif</small>
-            <p>{{$book->description}}</p>
-            <small>{{count($book->bookclubs)}} Book Clubs</small>
-            <small>Language: {{$book->language->name}}</small>
-          </div>
-        </div>
+        @include('partials._showbook')
       @endforeach
 @stop()

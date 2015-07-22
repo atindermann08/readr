@@ -9,7 +9,7 @@ class Author extends Model
 	protected $fillable = ['name'];
 
 	public static $rules = [
-		'name' => 'required|min:2|unique:categories',
+		'name' => 'required|min:2|unique:authors',
     'bio' => 'required|min:3'
 	];
 
