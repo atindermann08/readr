@@ -21,6 +21,6 @@
       </div>
       <hr/>
       @foreach($bookclub->books as $book)
-        @include('partials._showbook')
+        @include('partials._showbook',['statuses' => $book->ownerstatus()])
       @endforeach
 @stop()

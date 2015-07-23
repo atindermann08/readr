@@ -31,7 +31,7 @@ class BookController extends Controller
       // $languages = \App\Language::all();
       // return response()->json(\App\Book::first()->clubstatus());
       return view('books.index')
-        ->with('books' , $books);
+        ->with(compact('books'));
         // ->with('authors' , $authors)
         // ->with('publishers' , $publishers)
         // ->with('categories' , $categories)
@@ -145,8 +145,9 @@ class BookController extends Controller
     {
         $user = auth()->check()?auth()->user():new \App\User;
         $book = App\Book::with('author','publisher','category', 'language')->find($id);
+        $statuses = $book->ownerstatus();
         return view('books.show')
-              ->with(compact('book','user'));
+              ->with(compact('book','user', 'statuses'));
     }
 
     /**
