@@ -113,7 +113,7 @@ class BookClubController extends Controller
 
     public function requestbook($bookId, $bookclubId)
     {
-        flash('To be implemnted.. Thanks for your patience');
+        flash('To be implemented.. Thanks for your patience');
       return \Redirect::back();
     }
 

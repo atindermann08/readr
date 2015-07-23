@@ -3,7 +3,6 @@
 @section('content')
     <h3>Provide Feedback</h3>
     <hr/>
-      @include('flash::message')
       {{-- @include('layouts.partials._errors') --}}
       {!! Form::open(['route' => 'feedback.store']) !!}
         <div class="form-group">

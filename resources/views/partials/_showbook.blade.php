@@ -5,7 +5,13 @@
     </a>
   </div>
   <div class="media-body">
-    <h3 class="media-heading">{!! link_to_route('books.show',$book->title,$book->id) !!}</h3>
+    <h3 class="media-heading">
+      @if(isset($book_clickable))
+        {!! link_to_route('books.show',$book->title,$book->id) !!}
+      @else
+        {{ $book->title }}
+      @endif
+    </h3>
     <small>
       by:
         @foreach($book->authors as $key => $author)

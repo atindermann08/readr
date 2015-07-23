@@ -3,7 +3,6 @@
 @section('content')
     <h3>Books</h3>
     <hr/>
-    @include('flash::message')
     @if($books->count() == 0)
       No Books Available at the moment.
     @else

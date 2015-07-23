@@ -31,6 +31,7 @@ class BookController extends Controller
       // $languages = \App\Language::all();
       // return response()->json(\App\Book::first()->clubstatus());
       return view('books.index')
+        ->with('book_clickable', true)
         ->with(compact('books'));
         // ->with('authors' , $authors)
         // ->with('publishers' , $publishers)
@@ -181,7 +182,7 @@ class BookController extends Controller
 
     public function request($bookId)
     {
-        flash('To be implemnted.. Thanks for your patience');
+        flash('To be implemented.. Thanks for your patience');
         return \Redirect::back();
     }
 
