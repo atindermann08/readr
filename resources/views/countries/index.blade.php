@@ -5,7 +5,7 @@
   <div class="col-md-8 col-md-offset-2">
     <h4>Countries</h4>
     <hr/>
-    @include('layouts.partials._errors')
+    {{-- @include('layouts.partials._errors') --}}
     {!! Form::open(['route' => 'countries.store', 'class' => 'form-inline']) !!}
       <div class="form-group">
         {!! Form::label('name', 'Name') !!}

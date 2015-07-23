@@ -22,5 +22,10 @@
       <hr/>
       @foreach($bookclub->books as $book)
         @include('partials._showbook',['statuses' => $book->ownerstatus()])
+        @unless(false)
+          <p>{!! link_to_route('bookclubs.requestbook','Request Book', [$bookclub->id, $book->id], ['class'=>'btn btn-primary']) !!}</p>
+        @else
+          <p class=''>Request Pending</p>
+        @endunless
       @endforeach
 @stop()

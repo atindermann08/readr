@@ -3,7 +3,7 @@
 @section('content')
     <h3>Create Book Club</h3>
     <hr/>
-      @include('layouts.partials._errors')
+    {{-- @include('layouts.partials._errors') --}}
       {!! Form::open(['route' => 'bookclubs.store']) !!}
         <div class="form-group">
           {!! Form::label('name', 'Name') !!}

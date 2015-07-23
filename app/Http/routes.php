@@ -22,9 +22,15 @@ Route::controller('password', 'Auth\PasswordController');
 
 Route::resource('books','BookController',['except'=>'destroy']);
 Route::get('books/addtolibrary/{bookId}',['as' => 'books.addtolibrary', 'uses' => 'BookController@addtolibrary']);
+Route::get('books/request/{bookId}',['as' => 'books.request', 'uses' => 'BookController@request']);
 
 Route::resource('bookclubs','BookClubController',['except'=>'destroy']);
-Route::get('bookclubs/join/{bookClubId}',['as' => 'bookclubs.join', 'uses' => 'BookClubController@joinclub']);
+Route::get('bookclubs/join/{bookClubId}',
+              [ 'as' => 'bookclubs.join',
+                'uses' => 'BookClubController@joinclub']);
+Route::get('bookclubs/{bookClubId}/requestbook/{bookId}',
+              [ 'as' => 'bookclubs.requestbook',
+                'uses' => 'BookClubController@requestbook']);
 
 Route::resource('authors','AuthorController',['except'=>'destroy']);
 Route::resource('publishers','PublisherController',['except'=>'destroy']);

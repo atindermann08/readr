@@ -5,7 +5,7 @@
   <div class="col-md-8 col-md-offset-2">
     <h4>Edit Category</h4>
     <hr/>
-    @include('layouts.partials._errors')
+    {{-- @include('layouts.partials._errors') --}}
     {!! Form::open(['route' => ['categories.update', $category->id],'method' => 'PUT']) !!}
       <div class="form-group">
         {!! Form::label('name', 'Name') !!}

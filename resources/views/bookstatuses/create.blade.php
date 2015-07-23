@@ -5,7 +5,7 @@
   <div class="col-md-8 col-md-offset-2">
     <h4>Add Book Status</h4>
     <hr/>
-        @include('layouts.partials._errors')
+    {{-- @include('layouts.partials._errors') --}}
     {!! Form::open(['route' => 'bookstatuses.store']) !!}
       <div class="form-group">
         {!! Form::label('name', 'Name') !!}

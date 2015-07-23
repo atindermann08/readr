@@ -5,7 +5,7 @@
     <div class="col-md-6 col-md-offset-3">
       <h3>Reset Password</h3>
       <hr />
-      @include('layouts.partials._errors')
+      {{-- @include('layouts.partials._errors') --}}
       <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="token" value="{{ $token }}">

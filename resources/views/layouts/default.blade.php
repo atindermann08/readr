@@ -15,7 +15,7 @@
     @show
     <div class="row">
       <div class="col-md-12">
-      {{-- @include('flash::message') --}}
+      @include('flash::message')
       @yield('content')
       </div>
     </div>

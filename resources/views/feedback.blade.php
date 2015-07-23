@@ -4,7 +4,7 @@
     <h3>Provide Feedback</h3>
     <hr/>
       @include('flash::message')
-      @include('layouts.partials._errors')
+      {{-- @include('layouts.partials._errors') --}}
       {!! Form::open(['route' => 'feedback.store']) !!}
         <div class="form-group">
           {!! Form::label('name', 'Name') !!}

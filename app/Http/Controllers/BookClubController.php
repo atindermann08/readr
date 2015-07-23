@@ -53,25 +53,6 @@ class BookClubController extends Controller
 
       return \Redirect::back()
                         ->with('message','Book Club Created.');
-
-      // $validator = \Validator::make(\Input::all(), \App\BookClub::$rules);
-      //
-      // if($validator->passes())
-      // {
-      //   // \App\BookClub;
-      //   $bookclub->name = \Input::get('name');
-      //   $bookclub->description = \Input::get('description');
-      //   $bookclub->rules = \Input::get('rules');
-      //   $bookclub->user_id = 1;//Auth::user()->id;
-      //   $bookclub->save();
-      //   // $bookclub->
-      //   return \Redirect::back()->with('message','Book Club Created.');
-      // }
-      //
-      // return \Redirect::back()
-      //       //->with('message','There were some errors. Please try again later..')
-      //       ->withInput()
-      //       ->withErrors($validator);
     }
 
     /**
@@ -129,4 +110,12 @@ class BookClubController extends Controller
 
         return \Redirect::back();
     }
+
+    public function requestbook($bookId, $bookclubId)
+    {
+        flash('To be implemnted.. Thanks for your patience');
+      return \Redirect::back();
+    }
+
+
 }

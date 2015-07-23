@@ -5,7 +5,7 @@
   <div class="col-md-6 col-md-offset-3">
     <h4>Add Book</h4>
     <hr/>
-      @include('layouts.partials._errors')
+    {{-- @include('layouts.partials._errors') --}}
       {!! Form::open(['route' => ['books.update',$book->id],'method' => 'PATCH']) !!}
         <div class="form-group">
           {!! Form::label('title', 'Title') !!}

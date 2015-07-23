@@ -95,44 +95,11 @@ class BookController extends Controller
       //atached book to authors
       $book->authors()->attach($authorIds);
 
-      //attach book to user
-      // auth()->user()->books()->attach($book->id);
-
       //attach book to book clubs
       $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
       $book->bookclubs()->attach($request->input('bookclubs'),['status_id' => $status_id]);
 
       return \Redirect::back()->with('message','Book added.');
-
-      // $validator = \Validator::make(\Input::all(), \App\Book::$rules);
-      //
-      // if($validator->passes())
-      // {
-      //   $book = new \App\Book;
-      //   $book->title = \Input::get('title');
-      //   $book->description = \Input::get('description');
-      //   $book->author_id = App\Author::firstOrCreate(['name' => ucfirst(\Input::get('author'))])->id;
-      //   $book->publisher_id = App\Publisher::firstOrCreate(['name' => ucfirst(\Input::get('publisher'))])->id;
-      //   $book->category_id = App\Category::firstOrCreate(['name' => ucfirst(\Input::get('category'))])->id;
-      //   $book->language_id = App\Language::firstOrCreate(['name' => ucfirst(\Input::get('language'))])->id;
-      //   $book->release_date = \Input::get('release_date');
-      //   $book->save();
-        // if ($request->hasFile('image')) {
-        //   $image = $request->file('image');
-        //   \Image::make($image->getRealPath())
-				// 	->resize(460,460)
-				// 	->save('../public/assets/images/books/'.$book->id.'.jpg');
-        //   $book->imgage = 'assets/images/books/'.$book->id.'.jpg';
-        //   $book->save();
-        // }
-
-      //   // return \Redirect::back()->with('message','Book added.');
-      // }
-      //
-      // return \Redirect::back()
-      //       //->with('message','There were some errors. Please try again later..')
-      //       ->withInput()
-      //       ->withErrors($validator);
     }
 
     /**
@@ -158,12 +125,7 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-      // $authors = \App\Author::all()->lists('name','id');
-      // $publishers = \App\Publisher::all()->lists('name','id');
-      // $categories = \App\Category::all()->lists('name','id');
-      // $languages = \App\Language::all()->lists('name','id');
       $book = \App\Book::with('author','publisher','category', 'language')->findOrFail($id);
-      // return response()->json($book);
       return view('books.edit', ['book' => $book]);
     }
 
@@ -216,4 +178,11 @@ class BookController extends Controller
           return \Redirect::back()
                 ->with('message', 'Book added to library.');
     }
+
+    public function request($bookId)
+    {
+        flash('To be implemnted.. Thanks for your patience');
+        return \Redirect::back();
+    }
+
 }

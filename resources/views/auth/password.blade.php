@@ -5,7 +5,7 @@
     <div class="col-md-6 col-md-offset-3">
       <h3>Forgot Password?</h3>
       <hr />
-      @include('layouts.partials._errors')
+      {{-- @include('layouts.partials._errors') --}}
 			<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
