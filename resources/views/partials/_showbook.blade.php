@@ -1,4 +1,4 @@
-<div class="media">
+<div class="media book-view">
   <div class="media-left">
     <a href="{{route('books.show',$book->id)}}">
         <i class='fa fa-leanpub fa-4x book-default-pic'></i>

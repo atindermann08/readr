@@ -6034,7 +6034,12 @@ body {
 .footer {
   height: 50px;
   left: 0;
-  padding: 15px; }
+  padding: 15px;
+  padding-left: 0; }
+
+.book-view {
+  padding: 20px;
+  background-color: #fafbf8; }
 
 .form-signin {
   max-width: 330px;
