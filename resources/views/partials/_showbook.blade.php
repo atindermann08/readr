@@ -14,20 +14,22 @@
     </h3>
     <small>
       by:
-        @foreach($book->authors as $key => $author)
-            @unless($key == 0)
-              ,
-            @endunless
+        @forelse($book->authors as $key => $author)
+            @unless($key == 0) , @endunless
             {{$author->name}}
-        @endforeach
+        @empty
+          Not Available
+        @endforelse
     </small>
     <p>Description: {{$book->description}}</p>
     <small>Language: {{$book->language->name}},</small>
     <small>Category: {{$book->category->name}},</small>
     <small>Status:
-      @foreach($statuses as $count=>$status)
+      @forelse($statuses as $count=>$status)
         {{ $status }} {{$count}}
-      @endforeach
+      @empty
+        None Available
+      @endforelse
     </small>
   </div>
 </div>
