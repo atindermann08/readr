@@ -44,7 +44,8 @@ class CategoryController extends Controller
            $category = new \App\Category;
            $category->name = \Input::get('name');
            $category->save();
-           return \Redirect::back()->with('message','category added.');
+           flash('Category added.');
+           return \Redirect::back();
          }
 
          return \Redirect::back()
@@ -65,8 +66,9 @@ class CategoryController extends Controller
        if($category){
            return view('categories.edit',['category' => $category]);
          }
-       return \Redirect::back()
-                 ->with('error', 'category does not exist.');
+
+       flash()->error('Category does not exist.');
+       return \Redirect::back();
 
      }
 
@@ -90,14 +92,15 @@ class CategoryController extends Controller
              $category->name = \Input::get('name');
              $category->save();
 
-             return \Redirect::back()->with('message','category updated.');
+             flash('Category updated.');
+             return \Redirect::back();
            }
            return \Redirect::back()
              //->with('message','There were some errors. Please try again later..')
              ->withInput()
              ->withErrors($validator);
            }
-         return \Redirect::back()
-                   ->with('error', 'category does not exist.');
+          flash()->error('Category does not exist.');
+         return \Redirect::back();
      }
 }

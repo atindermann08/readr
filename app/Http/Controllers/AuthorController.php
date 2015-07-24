@@ -45,7 +45,8 @@ class AuthorController extends Controller
            $author->name = \Input::get('name');
            $author->bio = \Input::get('bio');
            $author->save();
-           return \Redirect::back()->with('message','author added.');
+           flash('Author added.');
+           return \Redirect::back();
          }
 
          return \Redirect::back()
@@ -66,8 +67,9 @@ class AuthorController extends Controller
        if($author){
            return view('authors.edit',['author' => $author]);
          }
-       return \Redirect::back()
-                 ->with('error', 'author does not exist.');
+         flash()->error('Author does not exist.');
+
+         return \Redirect::back();
 
      }
 
@@ -91,14 +93,15 @@ class AuthorController extends Controller
              $author->name = \Input::get('name');
              $author->save();
 
-             return \Redirect::back()->with('message','author updated.');
+             flash('Author updated.');
+             return \Redirect::back();
            }
            return \Redirect::back()
              //->with('message','There were some errors. Please try again later..')
              ->withInput()
              ->withErrors($validator);
            }
-         return \Redirect::back()
-                   ->with('error', 'author does not exist.');
+           flash()->error('Author does not exist.');
+         return \Redirect::back();
      }
 }

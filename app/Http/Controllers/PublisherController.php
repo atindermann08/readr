@@ -44,7 +44,8 @@ class PublisherController extends Controller
           $publisher = new \App\Publisher;
           $publisher->name = \Input::get('name');
           $publisher->save();
-          return \Redirect::back()->with('message','Publisher added.');
+          flash('Publisher added.')
+          return \Redirect::back();
         }
 
         return \Redirect::back()
@@ -65,8 +66,8 @@ class PublisherController extends Controller
       if($publisher){
           return view('publishers.edit',['publisher' => $publisher]);
         }
-      return \Redirect::back()
-                ->with('error', 'Publisher does not exist.');
+      flash()->error('Publisher does not exist.');
+      return \Redirect::back();
 
     }
 
@@ -89,16 +90,16 @@ class PublisherController extends Controller
       			$publisher = \App\Publisher::find($id);
       			$publisher->name = \Input::get('name');
       			$publisher->save();
-
-      			return \Redirect::back()->with('message','Publisher updated.');
+            flash('Publisher updated');
+      			return \Redirect::back();
   		    }
       		return \Redirect::back()
       		  //->with('message','There were some errors. Please try again later..')
       		  ->withInput()
       		  ->withErrors($validator);
           }
-        return \Redirect::back()
-                  ->with('error', 'Publisher does not exist.');
+        flash()->error('Publisher does not exist.');
+        return \Redirect::back();
     }
 
 }

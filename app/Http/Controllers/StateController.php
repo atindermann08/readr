@@ -47,7 +47,8 @@ class StateController extends Controller
         $state->name = \Input::get('name');
         $state->country_id = \Input::get('country');
         $state->save();
-        return \Redirect::back()->with('message','State added.');
+        flash('State added.');
+        return \Redirect::back();
       }
 
       return \Redirect::back()
@@ -69,8 +70,8 @@ class StateController extends Controller
       if($state){
           return view('states.edit',['state' => $state,'countries'=>$countries]);
         }
-      return \Redirect::back()
-                ->with('error', 'State does not exist.');
+      flash()->error('State does not exist.');
+      return \Redirect::back();
 
     }
 
@@ -94,16 +95,16 @@ class StateController extends Controller
           $state->name = \Input::get('name');
           $state->country_id = \Input::get('country');
           $state->save();
-
-          return \Redirect::back()->with('message','State updated.');
+          flash('State updated.');
+          return \Redirect::back();
         }
         return \Redirect::back()
           //->with('message','There were some errors. Please try again later..')
           ->withInput()
           ->withErrors($validator);
         }
-      return \Redirect::back()
-                ->with('error', 'State does not exist.');
+      flash()->error('State does not exist.');
+      return \Redirect::back();
     }
 
 }

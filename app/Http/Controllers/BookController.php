@@ -73,7 +73,8 @@ class BookController extends Controller
       $book = \App\Book::where('title','=',$request->input('title'))->first();
       if($book)
       {
-        return \Redirect::route('books.show',$book->id)->with('message','This book already exits add it to your library.');
+        flash('This book already exits add it to your library.');
+        return \Redirect::route('books.show',$book->id);
       }
       $request['author_id'] = auth()->user()->id;
 
@@ -100,7 +101,8 @@ class BookController extends Controller
       $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
       $book->bookclubs()->attach($request->input('bookclubs'),['status_id' => $status_id]);
 
-      return \Redirect::back()->with('message','Book added.');
+      flash('Book added.');
+      return \Redirect::back();
     }
 
     /**
@@ -159,15 +161,17 @@ class BookController extends Controller
             $book->release_date = \Input::get('release_date');
             $book->save();
 
-            return \Redirect::back()->with('message','Book updated.');
+            flash('Book updated.');
+            return \Redirect::back();
           }
           return \Redirect::back()
             //->with('message','There were some errors. Please try again later..')
             ->withInput()
             ->withErrors($validator);
           }
-        return \Redirect::back()
-                  ->with('error', 'Book does not exist.');
+
+          flash()->error('Book does not exist.');
+        return \Redirect::back();
     }
 
 
@@ -176,8 +180,8 @@ class BookController extends Controller
           $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
           auth()->user()->books()->attach($bookId,['status_id'=>$status_id]);
 
-          return \Redirect::back()
-                ->with('message', 'Book added to library.');
+          flash('Book added to library.');
+          return \Redirect::back();
     }
 
     public function request($bookId)

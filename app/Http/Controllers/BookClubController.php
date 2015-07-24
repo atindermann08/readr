@@ -51,8 +51,8 @@ class BookClubController extends Controller
       $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
       $bookclub->books()->attach($request->input('books'),['status_id' => $status_id]);
 
-      return \Redirect::back()
-                        ->with('message','Book Club Created.');
+      flash('Book Club Created.');
+      return \Redirect::back();
     }
 
     /**
@@ -70,8 +70,9 @@ class BookClubController extends Controller
         return view('bookclubs.show')
         ->with(compact('bookclub','user'));
       }
-      return \Redirect::back()
-                ->with('error', 'Book Club does not exist.');
+
+      flash()->error('Book Club does not exist.');
+      return \Redirect::back();
     }
 
     /**

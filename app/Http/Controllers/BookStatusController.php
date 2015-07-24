@@ -44,7 +44,8 @@ class BookStatusController extends Controller
          $bookstatus = new \App\BookStatus;
          $bookstatus->name = \Input::get('name');
          $bookstatus->save();
-         return \Redirect::back()->with('message','Book Status added.');
+         flash('Book Status added.');
+         return \Redirect::back();
        }
 
        return \Redirect::back()
@@ -65,9 +66,9 @@ class BookStatusController extends Controller
      if($bookstatus){
          return view('bookstatuses.edit',['bookstatus' => $bookstatus]);
        }
-     return \Redirect::back()
-               ->with('error', 'Book Status does not exist.');
 
+     flash()->error('Book Status does not exist.');
+     return \Redirect::back();
    }
 
    /**
@@ -90,14 +91,16 @@ class BookStatusController extends Controller
            $bookstatus->name = \Input::get('name');
            $bookstatus->save();
 
-           return \Redirect::back()->with('message','Book Status updated.');
+           flash('Book Status updated');
+           return \Redirect::back();
          }
          return \Redirect::back()
            //->with('message','There were some errors. Please try again later..')
            ->withInput()
            ->withErrors($validator);
          }
-       return \Redirect::back()
-                 ->with('error', 'Book Status does not exist.');
+
+       flash()->error('Book Status does not exist.');
+       return \Redirect::back();
    }
 }

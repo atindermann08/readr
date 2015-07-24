@@ -44,7 +44,8 @@ class CountryController extends Controller
           $country = new \App\Country;
           $country->name = \Input::get('name');
           $country->save();
-          return \Redirect::back()->with('message','Country added.');
+          flash('Country added.');
+          return \Redirect::back();
         }
 
         return \Redirect::back()
@@ -65,8 +66,8 @@ class CountryController extends Controller
       if($country){
           return view('countries.edit',['country' => $country]);
         }
-      return \Redirect::back()
-                ->with('error', 'Country does not exist.');
+      flash()->error('Country does not exist.');
+      return \Redirect::back();
 
     }
 
@@ -89,16 +90,16 @@ class CountryController extends Controller
       			$country = \App\Country::find($id);
       			$country->name = \Input::get('name');
       			$country->save();
-
-      			return \Redirect::back()->with('message','Country updated.');
+            flash('Country updated.');
+      			return \Redirect::back();
   		    }
       		return \Redirect::back()
       		  //->with('message','There were some errors. Please try again later..')
       		  ->withInput()
       		  ->withErrors($validator);
           }
-        return \Redirect::back()
-                  ->with('error', 'Country does not exist.');
+        flash()->error('Country does not exist.')
+        return \Redirect::back();
     }
 
 }

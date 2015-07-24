@@ -44,7 +44,8 @@ class LanguageController extends Controller
            $language = new \App\Language;
            $language->name = \Input::get('name');
            $language->save();
-           return \Redirect::back()->with('message','Language added.');
+           flash('Language added.');
+           return \Redirect::back();
          }
 
          return \Redirect::back()
@@ -65,8 +66,8 @@ class LanguageController extends Controller
        if($language){
            return view('languages.edit',['language' => $language]);
          }
-       return \Redirect::back()
-                 ->with('error', 'Language does not exist.');
+      flash()->error('Language does not exist.')
+       return \Redirect::back();
 
      }
 
@@ -89,15 +90,15 @@ class LanguageController extends Controller
              $language = \App\Language::find($id);
              $language->name = \Input::get('name');
              $language->save();
-
-             return \Redirect::back()->with('message','Language updated.');
+             flash('Language updated.');
+             return \Redirect::back();
            }
            return \Redirect::back()
              //->with('message','There were some errors. Please try again later..')
              ->withInput()
              ->withErrors($validator);
            }
-         return \Redirect::back()
-                   ->with('error', 'Language does not exist.');
+          flash()->error('Language does not exist.');
+         return \Redirect::back();
      }
 }
