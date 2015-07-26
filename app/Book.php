@@ -61,10 +61,10 @@ class Book extends Model
 
 
   public function owners(){
-      return $this->morphedByMany('\App\User','bookable')->withPivot('status_id');
+      return $this->belongsToMany('\App\User')->withPivot('status_id');
   }
 	public function bookclubs(){
-      return $this->morphedByMany('\App\BookClub','bookable')->withPivot('status_id');
+      return $this->belongsToMany('\App\BookClub')->withPivot('owner_id', 'status_id');
   }
 
 	public function status($bookId, $modelType, $modelId){

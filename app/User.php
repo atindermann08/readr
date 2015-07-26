@@ -41,7 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function books(){
-      return $this->morphToMany('App\Book', 'bookable')->withPivot('status_id');
+      return $this->belongsToMany('App\Book')->withPivot('status_id');
     }
 
     public function ownedclubs(){
@@ -63,5 +63,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
-  
+
 }
