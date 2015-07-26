@@ -23,10 +23,16 @@ class Book extends Model
 	{
 		$this->attributes['release_date'] = Carbon::parse($date);
 	}
-	public function setStatusIdAttribute($id)
-	{
-		$this->attributes['status_id'] = $id?$id:1;
-	}
+	// public function setStatusIdAttribute($id)
+	// {
+	// 	$this->attributes['status_id'] = $id?$id:1;
+	// }
+
+	// public function setOwnerIdAttribute($id)
+	// {
+	// 	$this->attributes['owner_id'] = $id?$id:auth()->user()->id;
+	// }
+
   /*
   * Relationships
   */
@@ -113,9 +119,9 @@ class Book extends Model
 		return $statuses;
 	}
 
-	public function hasDetails($id)
+	public function findOrCreateByName($name)
 	{
-
+		//to be implemented
 		return false;
 	}
 

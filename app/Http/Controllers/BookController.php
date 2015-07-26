@@ -52,15 +52,15 @@ class BookController extends Controller
       // $categories = \App\Category::all()->lists('name','id');
       // $languages = \App\Language::all()->lists('name','id');
       //
-      // $bookclubs = \Auth::user()->bookclubs()->lists('name','id');
+      $bookclubs = \Auth::user()->bookclubs()->lists('name','id');
 
       return view('books.create')
-        ->with(compact('books'));
+        ->with(compact('books'))
         // ->with('authors' , $authors)
         // ->with('publishers' , $publishers)
         // ->with('categories' , $categories)
         // ->with('languages' , $languages)
-        // ->with(compact('bookclubs'));
+        ->with(compact('bookclubs'));
     }
 
     /**
@@ -71,49 +71,60 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
       $titles = $request->get('titles');
-      $booksIds = [];
+      $bookclubs = $request->get('bookclubs');
+      $bookIds = [];
+
+      $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+
       foreach ($titles as $title) {
-        $booksIds[] =  App\Book::firstOrCreate(['title' => ucfirst($title)])->id;
+        $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
+
+        auth()->user()->books()->detach($book->id);
+        auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
+        //$bookIds[] =  $bookId => ['status_id' => $status_id];
+        foreach ($bookclubs as $bookclub) {
+          $book->bookclubs()->detach($bookclub);
+          $book->bookclubs()->attach($bookclub,['owner_id' => auth()->user()->id]);
+        }
       }
+
 
       flash('Book/Books added to your library.');
       return \Redirect::back();
 
-      $book = \App\Book::where('title','=',$request->input('title'))->first();
-      if($book)
-      {
-        flash('This book already exits add it to your library.');
-        return \Redirect::route('books.show',$book->id);
-      }
-      $request['author_id'] = auth()->user()->id;
+      // $book = \App\Book::where('title','=',$request->input('title'))->first();
+      // if($book)
+      // {
+      //   flash('This book already exits add it to your library.');
+      //   return \Redirect::route('books.show',$book->id);
+      // }
+      // $request['author_id'] = auth()->user()->id;
 
       // Convert comma separated string into array of author names
-      $authors = explode(',',$request->get('author'));
+      // $authors = explode(',',$request->get('author'));
 
       //going over author names build up array of author ids by getting author ids and creating author if does not exist
-      $authorIds = [];
-      foreach ($authors as $author) {
-        $authorIds[] =  App\Author::firstOrCreate(['name' => ucfirst($author)])->id;
-      }
+      // $authorIds = [];
+      // foreach ($authors as $author) {
+        // $authorIds[] =  App\Author::firstOrCreate(['name' => ucfirst($author)])->id;
+      // }
       // $request['author_id']  = App\Author::firstOrCreate(['name' => ucfirst(\Input::get('author'))])->id;
-      $request['publisher_id'] = App\Publisher::firstOrCreate(['name' => ucfirst(\Input::get('publisher'))])->id;
-      $request['category_id'] = App\Category::firstOrCreate(['name' => ucfirst(\Input::get('category'))])->id;
-      $request['language_id'] = App\Language::firstOrCreate(['name' => ucfirst(\Input::get('language'))])->id;
+      // $request['publisher_id'] = App\Publisher::firstOrCreate(['name' => ucfirst(\Input::get('publisher'))])->id;
+      // $request['category_id'] = App\Category::firstOrCreate(['name' => ucfirst(\Input::get('category'))])->id;
+      // $request['language_id'] = App\Language::firstOrCreate(['name' => ucfirst(\Input::get('language'))])->id;
 
 
-
-      $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
       //create book
-      $book = auth()->user()->books()->create($request->all(),['status_id' => $status_id]);
+      // $book = auth()->user()->books()->create($request->all(),['status_id' => $status_id]);
 
       //atached book to authors
-      $book->authors()->attach($authorIds);
+      // $book->authors()->attach($authorIds);
 
       //attach book to book clubs
-      $book->bookclubs()->attach($request->input('bookclubs'),['status_id' => $status_id]);
+      // $book->bookclubs()->attach($request->input('bookclubs'),['status_id' => $status_id]);
 
-      flash('Book added.');
-      return \Redirect::back();
+      // flash('Book added.');
+      // return \Redirect::back();
     }
 
     /**

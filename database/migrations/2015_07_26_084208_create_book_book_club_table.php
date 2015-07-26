@@ -16,7 +16,7 @@ class CreateBookBookClubTable extends Migration
             $table->integer('book_id')->unsigned();
             $table->integer('book_club_id')->unsigned();
             $table->integer('owner_id')->unsigned();
-            $table->integer('status_id')->unsigned();
+            $table->integer('status_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

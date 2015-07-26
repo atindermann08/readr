@@ -5,7 +5,11 @@ $(".multi-select").select2({
   tokenSeparators: [','],
   tags: true
 });
+$(".multi-select-book-club").select2({
+  allowClear: true,
+  tokenSeparators: [','],
 
+});
 //
 // function formatBook (book) {
 //   return book.title;

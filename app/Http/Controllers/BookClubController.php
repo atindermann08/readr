@@ -45,12 +45,16 @@ class BookClubController extends Controller
      */
     public function store(BookClubRequest $request)
     {
-      $request['user_id'] = \Auth::user()->id;
+      $books = $request->get('books');
+      $request['user_id'] = auth()->user()->id;
       $bookclub = \Auth::user()->bookclubs()->create($request->all());
 
-      $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
-      $bookclub->books()->attach($request->input('books'),['status_id' => $status_id]);
-
+      //$status_id = \App\BookStatus::findOrCreate(['name' => 'Available'])->id;
+      //$bookclub->books()->attach($request->input('books'),['status_id' => $status_id]);
+      foreach ($books as $book) {
+        $bookclub->books()->detach($book);
+        $bookclub->books()->attach($book,['owner_id' => auth()->user()->id]);
+      }
       flash('Book Club Created.');
       return \Redirect::back();
     }

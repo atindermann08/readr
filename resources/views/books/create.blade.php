@@ -34,11 +34,11 @@
         <div class="form-group">
           {!! Form::label('release_date', 'Release Date') !!}
           {!! Form::input('date', 'release_date', null, ['class' => 'form-control','placeholder'=>'MM-DD-YYYY']) !!}
-        </div>
+        </div>--}}
         <div class="form-group">
-          {!! Form::label('bookclubs', 'Add Book to Book Clubs(Ctrl+click to select multiple)') !!}
-          {!! Form::select('bookclubs[]', $bookclubs ,null, ['class' => 'form-control dropdown js-placeholder-single' , 'multiple']) !!}
-        </div> --}}
+          {!! Form::label('bookclubs', 'Add Book to Book Clubs') !!}
+          {!! Form::select('bookclubs[]', $bookclubs ,null, ['class' => 'form-control dropdown multi-select-book-club' , 'multiple', 'placeholder' => 'Add books to Book Clubs']) !!}
+        </div>
         {{--
         <div class="form-group">
           {!! Form::label('image', 'Photo') !!}
