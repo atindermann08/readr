@@ -24,7 +24,7 @@ class BookRequest extends Request
     public function rules()
     {
         $rules = [
-          'title' => 'required|min:3'
+          //'title' => 'required|min:3'
         ];
 
         return $rules;

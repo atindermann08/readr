@@ -59,8 +59,7 @@ class Book extends Model
   //     return $this->hasManyThrough('\App\BookStatus','\App\Bookable','book_id','bookable_id');
   // }
 
-
-  public function owners(){
+	public function owners(){
       return $this->belongsToMany('\App\User')->withPivot('status_id');
   }
 	public function bookclubs(){
@@ -114,6 +113,10 @@ class Book extends Model
 		return $statuses;
 	}
 
+	public function hasDetails($id)
+	{
 
+		return false;
+	}
 
 }

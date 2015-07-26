@@ -2,14 +2,15 @@
 
 @section('content')
 
-    <h3>Add Book</h3>
+    <h3>Add Book to your library</h3>
     <hr/>
     {{-- @include('layouts.partials._errors') --}}
       {!! Form::open(['route' => 'books.store']) !!}
         <div class="form-group">
-          {!! Form::label('title', 'Title') !!}
-          {!! Form::text('title', null, ['class' => 'form-control','placeholder' => 'Book Title']) !!}
+          {!! Form::label('titles', 'Title') !!}
+          {!! Form::select('titles[]', $books ,null, ['class' => 'form-control multi-select','placeholder' => 'Book Title', 'multiple']) !!}
         </div>
+        {{--
         <div class="form-group">
           {!! Form::label('description', 'Description') !!}
           {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 3,'placeholder' => 'Book description maximum 10 characters'])  !!}
@@ -36,8 +37,8 @@
         </div>
         <div class="form-group">
           {!! Form::label('bookclubs', 'Add Book to Book Clubs(Ctrl+click to select multiple)') !!}
-          {!! Form::select('bookclubs[]', $bookclubs ,null, ['class' => 'form-control dropdown' , 'multiple']) !!}
-        </div>
+          {!! Form::select('bookclubs[]', $bookclubs ,null, ['class' => 'form-control dropdown js-placeholder-single' , 'multiple']) !!}
+        </div> --}}
         {{--
         <div class="form-group">
           {!! Form::label('image', 'Photo') !!}

@@ -6,6 +6,7 @@
   <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
   {!! Html::style('css/app.css') !!}
   {!! Html::style('vendor/css/font-awesome.min.css') !!}
+  {!! Html::style('vendor/css/select2.min.css') !!}
 
 </head>
 <body>
@@ -23,6 +24,7 @@
   @include('layouts.partials._footer')
   {!! Html::script('vendor/js/jquery.min.js') !!}
   {!! Html::script('vendor/js/bootstrap.min.js') !!}
+  {!! Html::script('vendor/js/select2.min.js') !!}
   {!! Html::script('js/app.js') !!}
 </body>
 </html>

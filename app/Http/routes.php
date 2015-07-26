@@ -4,6 +4,10 @@
 Route::get('/', function () {    return view('welcome');});
 Route::get('/home', function () {    return view('welcome');});
 
+
+Route::get('/api/books', 'BookController@apiBooks');
+Route::get('/api/books/q', 'BookController@searchBooks');
+
 Route::get('feedback',[ 'as' => 'feedback.create', 'uses' => 'FeedbackController@create']);
 Route::post('feedback',[ 'as' => 'feedback.store', 'uses' => 'FeedbackController@store']);
 

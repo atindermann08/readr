@@ -46,21 +46,21 @@ class BookController extends Controller
      */
     public function create()
     {
-      //$books = \App\Book::all();
-      $authors = \App\Author::all()->lists('name','id');
-      $publishers = \App\Publisher::all()->lists('name','id');
-      $categories = \App\Category::all()->lists('name','id');
-      $languages = \App\Language::all()->lists('name','id');
-
-      $bookclubs = \Auth::user()->bookclubs()->lists('name','id');
+      $books = \App\Book::all()->lists('title', 'title');
+      // $authors = \App\Author::all()->lists('name','id');
+      // $publishers = \App\Publisher::all()->lists('name','id');
+      // $categories = \App\Category::all()->lists('name','id');
+      // $languages = \App\Language::all()->lists('name','id');
+      //
+      // $bookclubs = \Auth::user()->bookclubs()->lists('name','id');
 
       return view('books.create')
-        //->with('books' , 'books')
-        ->with('authors' , $authors)
-        ->with('publishers' , $publishers)
-        ->with('categories' , $categories)
-        ->with('languages' , $languages)
-        ->with(compact('bookclubs'));
+        ->with(compact('books'));
+        // ->with('authors' , $authors)
+        // ->with('publishers' , $publishers)
+        // ->with('categories' , $categories)
+        // ->with('languages' , $languages)
+        // ->with(compact('bookclubs'));
     }
 
     /**
@@ -70,6 +70,15 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
+      $titles = $request->get('titles');
+      $booksIds = [];
+      foreach ($titles as $title) {
+        $booksIds[] =  App\Book::firstOrCreate(['title' => ucfirst($title)])->id;
+      }
+
+      flash('Book/Books added to your library.');
+      return \Redirect::back();
+
       $book = \App\Book::where('title','=',$request->input('title'))->first();
       if($book)
       {
@@ -115,6 +124,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
+      return \App\Book::
         $user = auth()->check()?auth()->user():new \App\User;
         $book = App\Book::with('author','publisher','category', 'language')->find($id);
         $statuses = $book->ownerstatus();
@@ -198,5 +208,14 @@ class BookController extends Controller
         return view('mylibrary')
                 ->with(compact('books'));
     }
-
+    public function apiBooks()
+    {
+        $books = \App\Book::all();//->lists('title','id');
+        return $books;
+    }
+    public function searchBooks()
+    {
+        $books = \App\Book::all();//->lists('title','id');
+        return $books;
+    }
 }

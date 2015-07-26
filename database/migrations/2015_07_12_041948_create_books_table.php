@@ -18,7 +18,6 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->text('description',120)->nullable();
             $table->string('image')->nullable();
-            $table->integer('author_id')->unsigned();
             $table->integer('publisher_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('language_id')->unsigned();

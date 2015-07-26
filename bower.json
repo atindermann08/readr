@@ -17,5 +17,8 @@
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.3.0",
     "bootstrap-sass": "~3.3.5"
+  },
+  "resolutions": {
+    "select2": "~4.0.0"
   }
 }

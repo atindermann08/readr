@@ -21,9 +21,9 @@
           Not Available
         @endforelse
     </small>
-    <p>Description: {{$book->description}}</p>
-    <small>Language: {{$book->language->name}},</small>
-    <small>Category: {{$book->category->name}},</small>
+    <p>Description: {{$book->description or 'Not Available'}}</p>
+    <small>Language: {{$book->language->name or 'Not Available'}},</small>
+    <small>Category: {{$book->category->name or 'Not Available'}},</small>
     <small>Status:
       @forelse($statuses as $count=>$status)
         {{ $status }} {{$count}}
