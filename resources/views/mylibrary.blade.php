@@ -11,11 +11,15 @@
             @foreach ($chunk as $book)
               <div class="col-md-6">
                   @include('partials._showbook',['statuses' => $book->ownerstatus()])
-                  {{--@unless(true)
+
+                  {{--
+                  @unless(true)
                     <p>{!! link_to_route('books.request','Request Book', $book->id, ['class'=>'btn btn-primary']) !!}</p>
                   @else
                     <p class=''>Request Pending</p>
-                  @endunless--}}
+                  @endunless
+                  --}}
+                  
                   <hr>
               </div>
             @endforeach
