@@ -11,40 +11,6 @@
           {!! Form::text('title', null, ['class' => 'form-control','placeholder' => 'Book Title']) !!}
         </div>
         <div class="form-group">
-          {!! Form::label('description', 'Description') !!}
-          {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 3,'placeholder' => 'Book description maximum 10 characters'])  !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('author', 'Author') !!}
-          {!! Form::text('author' ,null, ['class' => 'form-control','placeholder' => 'Author Name (Spearate by comma if multiple)']) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('publisher', 'Publisher') !!}
-          {!! Form::text('publisher' ,null, ['class' => 'form-control','placeholder' => 'Book Publisher']) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('category', 'Category') !!}
-          {!! Form::text('category' ,null, ['class' => 'form-control','placeholder' => 'Book Category']) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('language', 'Language') !!}
-          {!! Form::text('language' ,null, ['class' => 'form-control','placeholder' => 'Book Langugae']) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('release_date', 'Release Date') !!}
-          {!! Form::input('date', 'release_date', null, ['class' => 'form-control','placeholder'=>'MM-DD-YYYY']) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('bookclubs', 'Add Book to Book Clubs(Ctrl+click to select multiple)') !!}
-          {!! Form::select('bookclubs[]', $bookclubs ,null, ['class' => 'form-control dropdown' , 'multiple']) !!}
-        </div>
-        {{--
-        <div class="form-group">
-          {!! Form::label('image', 'Photo') !!}
-          {!! Form::file('image', ['class' => '']) !!}
-        </div>
-        --}}
-        <div class="form-group">
           {!! Form::submit('Add', ['class' => 'form-control btn btn-primary']) !!}
         </div>
       {!! Form::close() !!}
