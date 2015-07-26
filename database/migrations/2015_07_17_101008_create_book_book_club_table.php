@@ -15,6 +15,8 @@ class CreateBookBookClubTable extends Migration
         Schema::create('book_book_club', function (Blueprint $table) {
             $table->integer('book_id')->unsigned();
             $table->integer('book_club_id')->unsigned();
+            $table->integer('owner_id')->unsigned();
+            $table->integer('status_id')->unsigned();
             $table->timestamps();
         });
     }

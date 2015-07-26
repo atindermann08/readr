@@ -12,22 +12,22 @@ class CreateBookablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookables', function (Blueprint $table) {
-            $table->integer('book_id')->unsigned();
-            $table->integer('bookable_id')->unsigned();
-            $table->string('bookable_type');
-            $table->integer('status_id')->unsigned();
-            $table->timestamps();
-        });
+        // Schema::create('bookables', function (Blueprint $table) {
+        //     $table->integer('book_id')->unsigned();
+        //     $table->integer('bookable_id')->unsigned();
+        //     $table->string('bookable_type');
+        //     $table->integer('status_id')->unsigned();
+        //     $table->timestamps();
+        // });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    //
+    // /**
+    //  * Reverse the migrations.
+    //  *
+    //  * @return void
+    //  */
     public function down()
     {
-        Schema::drop('bookables');
+        // Schema::drop('bookables');
     }
 }
