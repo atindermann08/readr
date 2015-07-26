@@ -91,14 +91,16 @@ class BookController extends Controller
       $request['category_id'] = App\Category::firstOrCreate(['name' => ucfirst(\Input::get('category'))])->id;
       $request['language_id'] = App\Language::firstOrCreate(['name' => ucfirst(\Input::get('language'))])->id;
 
+
+
+      $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
       //create book
-      $book = auth()->user()->books()->create($request->all());
+      $book = auth()->user()->books()->create($request->all(),['status_id' => $status_id]);
 
       //atached book to authors
       $book->authors()->attach($authorIds);
 
       //attach book to book clubs
-      $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
       $book->bookclubs()->attach($request->input('bookclubs'),['status_id' => $status_id]);
 
       flash('Book added.');

@@ -10,7 +10,7 @@
         <div class="media">
           <div class="media-left">
             <a href="{{route('bookclubs.show',$bookclub->id)}}">
-                <i class='fa fa-leanpub fa-4x book-default-pic'></i>
+                <i class='fa fa-leanpub fa-4x  book-default-pic img-round'></i>
             </a>
           </div>
           <div class="media-body">
