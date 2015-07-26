@@ -190,4 +190,11 @@ class BookController extends Controller
         return \Redirect::back();
     }
 
+    public function mylibrary()
+    {
+        $books = auth()->user()->books;
+        return view('mylibrary')
+                ->with(compact('books'));
+    }
+
 }

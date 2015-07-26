@@ -23,6 +23,7 @@
            <li><a href="{{route('books.create')}} ">Add Book</a></li>
            <li role="separator" class="divider"></li>
            <li><a href="{{route('books.index')}}">List</a></li>
+           <li><a href="{{route('mylibrary')}}">My Library</a></li>
          </ul>
        </li>
        <li class="dropdown">
@@ -37,12 +38,14 @@
          </ul>
        </li>
       </ul>
+      {{--
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control search-bar" id="top-search-bar" placeholder="Coming Soon">
         </div>
         <button type="submit" class="btn btn-default search-bar-btn">Search</button>
       </form>
+      --}}
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
           <li><a>Welcome, {{ucfirst(\Auth::user()->name)}}</a></li>

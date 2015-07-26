@@ -1,15 +1,8 @@
 <?php
 
 
-Route::get('/', function () {
-	// Mail::send('welcome', [], function($m) {
-	// 	$m->to('atindermann08@gmail.com', 'Atinder')->subject('Testing!');
-	// });
-    return view('welcome');
-});
-Route::get('/home', function () {
-    return view('welcome');
-});
+Route::get('/', function () {    return view('welcome');});
+Route::get('/home', function () {    return view('welcome');});
 
 Route::get('feedback',[ 'as' => 'feedback.create', 'uses' => 'FeedbackController@create']);
 Route::post('feedback',[ 'as' => 'feedback.store', 'uses' => 'FeedbackController@store']);
@@ -18,7 +11,7 @@ Route::get('account/activate/{activationCode}',[ 'as' => 'account.activate', 'us
 Route::controller('auth', 'Auth\AuthController');
 Route::controller('password', 'Auth\PasswordController');
 
-// Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@library']);
+Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@mylibrary']);
 
 Route::resource('books','BookController',['except'=>'destroy']);
 Route::get('books/addtolibrary/{bookId}',['as' => 'books.addtolibrary', 'uses' => 'BookController@addtolibrary']);

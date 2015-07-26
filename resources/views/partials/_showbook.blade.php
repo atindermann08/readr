@@ -6,11 +6,11 @@
   </div>
   <div class="media-body">
     <h3 class="media-heading">
-      @if(isset($book_clickable))
+      {{-- @if(isset($book_clickable)) --}}
         {!! link_to_route('books.show',$book->title,$book->id) !!}
-      @else
+      {{-- @else
         {{ $book->title }}
-      @endif
+      @endif --}}
     </h3>
     <small>
       by:
@@ -53,7 +53,7 @@
 }());
 </script>
 <!-- END: Livefyre Embed -->
-            
+
 
 
 </div>
