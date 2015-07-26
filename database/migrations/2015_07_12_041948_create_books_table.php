@@ -16,13 +16,13 @@ class CreateBooksTable extends Migration
             // $table->engine = "InnoDB";
             $table->increments('id');
             $table->string('title');
-            $table->text('description',120);
+            $table->text('description',120)->nullable();
             $table->string('image')->nullable();
             $table->integer('author_id')->unsigned();
             $table->integer('publisher_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('language_id')->unsigned();
-            $table->date('release_date');
+            $table->date('release_date')->nullable();
             $table->timestamps();
         });
         // Schema::table('books', function (Blueprint $table) {

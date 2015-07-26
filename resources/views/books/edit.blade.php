@@ -9,7 +9,7 @@
       {!! Form::open(['route' => ['books.update',$book->id],'method' => 'PATCH']) !!}
         <div class="form-group">
           {!! Form::label('title', 'Title') !!}
-          {!! Form::text('title', $book->title, ['class' => 'form-control']) !!}
+          {!! Form::label('title', $book->title, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('description', 'Description') !!}
