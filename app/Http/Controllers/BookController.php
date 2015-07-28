@@ -141,7 +141,7 @@ class BookController extends Controller
     {
       //return \App\Book::
         $user = auth()->check()?auth()->user():new \App\User;
-        $book = App\Book::with('authors','publisher','category', 'language')->find($id);
+        $book = App\Book::with('authors','publisher','category', 'language')->findOrFail($id);
         $statuses = $book->ownerstatus();
         return view('books.show')
               ->with(compact('book','user', 'statuses'));
@@ -156,8 +156,12 @@ class BookController extends Controller
     public function edit($id)
     {
       $book = \App\Book::with('authors','publisher','category', 'language')->findOrFail($id);
-      // dd($book);
-      return view('books.edit', ['book' => $book]);
+      $authors = \App\Author::all()->lists('name','name');
+      $book_authors = $book->authors()->lists('name');
+      // return $book_authors;
+      return view('books.edit')
+              ->with(compact('book'))
+              ->with(compact('authors','book_authors'));
     }
 
     /**
@@ -166,40 +170,48 @@ class BookController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
-        $book = \App\Book::find($id);
+        $book = \App\Book::findOrFail($id);
 
         // $book->update(\Input::all());
         // return \Redirect::back()->with('message','Book updated.');
-        if($book){
-          $rules = \App\Book::$rules;
+        // if($book){
+          // $rules = \App\Book::$rules;
           //$rules['name'] = 'required|min:2';
-          $validator = \Validator::make(\Input::all(), $rules);
+          // $validator = \Validator::make(\Input::all(), $rules);
 
-          if($validator->passes())
-          {
-            $book = \App\State::find($id);
-            $book->title = \Input::get('title');
-            $book->description = \Input::get('description');
-            $book->author_id = \Input::get('author');
-            $book->publisher_id = \Input::get('publisher');
-            $book->category_id = \Input::get('category');
-            $book->language_id = \Input::get('language');
-            $book->release_date = \Input::get('release_date');
+          // if($validator->passes())
+          // {
+            $book->description = $request->description;
+            $book->publisher_id = \App\Publisher::firstOrCreate(['name' => ucfirst($request->publisher)])->id;
+            $book->category_id = \App\Category::firstOrCreate(['name' => ucfirst($request->category)])->id;
+            $book->language_id = \App\Language::firstOrCreate(['name' => ucfirst($request->language)])->id;
+            $book->release_date = $request->release_date;
             $book->save();
+
+            //going over author names build up array of author ids by getting author ids and creating author if does not exist
+            $authorIds = [];
+            $authors = $request->authors;
+            foreach ($authors as $author) {
+              $authorIds[] =  App\Author::firstOrCreate(['name' => ucfirst($author)])->id;
+            }
+            //atached book to authors
+            $book->authors()->sync($authorIds);
+            // $book->authors()->attach($authorIds);
+
 
             flash('Book updated.');
             return \Redirect::back();
-          }
-          return \Redirect::back()
-            //->with('message','There were some errors. Please try again later..')
-            ->withInput()
-            ->withErrors($validator);
-          }
-
-          flash()->error('Book does not exist.');
-        return \Redirect::back();
+        //   }
+        //   return \Redirect::back()
+        //     //->with('message','There were some errors. Please try again later..')
+        //     ->withInput()
+        //     ->withErrors($validator);
+        //   }
+        //
+        //   flash()->error('Book does not exist.');
+        // return \Redirect::back();
     }
 
 

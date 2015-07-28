@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           {!! Form::label('authors', 'Authors') !!}
-          {!! Form::select('authors[]', $book->authors()->lists('name','name') ,null, ['class' => 'form-control multi-select-authors','placeholder' => 'Book Title', 'multiple']) !!}
+          {!! Form::select('authors[]', $authors, $book_authors, ['class' => 'form-control multi-select-authors','placeholder' => 'Book Title', 'multiple']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('publisher', 'Publisher') !!}
