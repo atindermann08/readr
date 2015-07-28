@@ -34,8 +34,8 @@
     </small>
   </div>
   <div class="media-right">
-    <a href="{{ route('books.edit', $book->id) }}" class='btn btn-primary'>
-        Edit Details
+    <a href="{{ route('books.edit', $book->id) }}" class='btn'>
+        <i class='fa fa-edit'></i>
     </a>
   </div>
 

@@ -193,13 +193,14 @@ class BookController extends Controller
             //going over author names build up array of author ids by getting author ids and creating author if does not exist
             $authorIds = [];
             $authors = $request->authors;
-            foreach ($authors as $author) {
-              $authorIds[] =  App\Author::firstOrCreate(['name' => ucfirst($author)])->id;
+            if($authors){
+              foreach ($authors as $author) {
+                $authorIds[] =  App\Author::firstOrCreate(['name' => ucfirst($author)])->id;
+              }
+              //atached book to authors
+              $book->authors()->sync($authorIds);
+              // $book->authors()->attach($authorIds);
             }
-            //atached book to authors
-            $book->authors()->sync($authorIds);
-            // $book->authors()->attach($authorIds);
-
 
             flash('Book updated.');
             return \Redirect::back();
