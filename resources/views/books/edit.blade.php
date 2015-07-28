@@ -16,24 +16,24 @@
           {!! Form::textarea('description', $book->description, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-          {!! Form::label('author', 'Author') !!}
-          {!! Form::text('author' ,$book->author->name, ['class' => 'form-control']) !!}
+          {!! Form::label('authors', 'Authors') !!}
+          {!! Form::select('authors[]', $book->authors()->lists('name','name') ,null, ['class' => 'form-control multi-select-authors','placeholder' => 'Book Title', 'multiple']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('publisher', 'Publisher') !!}
-          {!! Form::text('publisher' ,$book->publisher->name, ['class' => 'form-control']) !!}
+          {!! Form::text('publisher' , isset($book->publisher->name)?$book->publisher->name:null , ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('category', 'Category') !!}
-          {!! Form::text('category' ,$book->category->name, ['class' => 'form-control']) !!}
+          {!! Form::text('category' ,isset($book->category->name)?$book->category->name:null , ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('language', 'Language') !!}
-          {!! Form::text('language' ,$book->language->name, ['class' => 'form-control']) !!}
+          {!! Form::text('language' , isset($book->language->name)?$book->language->name:null , ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('release_date', 'Release Date') !!}
-          {!! Form::input('date', 'release_date', $book->release_date, ['class' => 'form-control','placeholder'=>'MM-DD-YYYY']) !!}
+          {!! Form::input('date', 'release_date', isset($book->release_date)?$book->release_date:null , ['class' => 'form-control','placeholder'=>'MM-DD-YYYY']) !!}
         </div>
         {{--
         <div class="form-group">

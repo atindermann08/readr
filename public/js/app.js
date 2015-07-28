@@ -9,7 +9,13 @@ $(".book-title-select").select2({
 $(".multi-select-book-club").select2({
   allowClear: true,
   tokenSeparators: [','],
+});
 
+$(".multi-select-authors").select2({
+  allowClear: true,
+  placeholder: 'Add Single or Multiple Authors separated by comma',
+  tokenSeparators: [','],
+  tags: true
 });
 //
 // function formatBook (book) {

@@ -22,8 +22,9 @@
         @endforelse
     </small>
     <p>Description: {{$book->description or 'Not Available'}}</p>
-    <small>Language: {{$book->language->name or 'Not Available'}},</small>
-    <small>Category: {{$book->category->name or 'Not Available'}},</small>
+    <small>@if(isset($book->language->name)) Language: {{$book->language->name }} , @endif</small>
+    <small>@if(isset($book->category->name)) Category: {{$book->category->name }} , @endif</small>
+    <small>@if(isset($book->publisher->name)) Publisher: {{$book->publisher->name }} , @endif</small>
     <small>Status:
       @forelse($statuses as $count=>$status)
         {{ $status }} {{$count}}
@@ -31,6 +32,11 @@
         None Available
       @endforelse
     </small>
+  </div>
+  <div class="media-right">
+    <a href="{{ route('books.edit', $book->id) }}" class='btn btn-primary'>
+        Edit Details
+    </a>
   </div>
 
 </div>

@@ -71,8 +71,8 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
       $titles = $request->get('titles');
-      $bookclubs = $request->get('bookclubs');
-      $bookIds = [];
+      // $bookclubs = $request->get('bookclubs');
+      // $bookIds = [];
 
       $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
 
@@ -81,17 +81,20 @@ class BookController extends Controller
 
         auth()->user()->books()->detach($book->id);
         auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
+
+        //send mail to user for added books and adding details
+
         //$bookIds[] =  $bookId => ['status_id' => $status_id];
-        foreach ($bookclubs as $bookclub) {
-          $book->bookclubs()->detach($bookclub);
-          $book->bookclubs()->attach($bookclub,['owner_id' => auth()->user()->id]);
-        }
+        // foreach ($bookclubs as $bookclub) {
+        //   $book->bookclubs()->detach($bookclub);
+        //   $book->bookclubs()->attach($bookclub,['owner_id' => auth()->user()->id]);
+        // }
       }
 
 
       flash('Book/Books added to your library.');
       return \Redirect::back();
-
+      /***
       // $book = \App\Book::where('title','=',$request->input('title'))->first();
       // if($book)
       // {
@@ -125,6 +128,7 @@ class BookController extends Controller
 
       // flash('Book added.');
       // return \Redirect::back();
+      ***/
     }
 
     /**
@@ -135,9 +139,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-      return \App\Book::
+      //return \App\Book::
         $user = auth()->check()?auth()->user():new \App\User;
-        $book = App\Book::with('author','publisher','category', 'language')->find($id);
+        $book = App\Book::with('authors','publisher','category', 'language')->find($id);
         $statuses = $book->ownerstatus();
         return view('books.show')
               ->with(compact('book','user', 'statuses'));
@@ -151,7 +155,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-      $book = \App\Book::with('author','publisher','category', 'language')->findOrFail($id);
+      $book = \App\Book::with('authors','publisher','category', 'language')->findOrFail($id);
+      // dd($book);
       return view('books.edit', ['book' => $book]);
     }
 
