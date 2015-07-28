@@ -1,7 +1,8 @@
 $('div.alert').not('.alert-important').delay(3000).slideUp(300);
 
-$(".multi-select").select2({
+$(".book-title-select").select2({
   allowClear: true,
+  placeholder: 'Add Single or Multiple Book titles to your library',
   tokenSeparators: [','],
   tags: true
 });

@@ -215,9 +215,12 @@ class BookController extends Controller
 
     public function mylibrary()
     {
-        $books = auth()->user()->books;
+        $mybooks = auth()->user()->books;
+        $books = \App\Book::all()->lists('title', 'title');
+        //$books = array_except($books, $mybooks->lists('id'));
         return view('mylibrary')
-                ->with(compact('books'));
+                ->with(compact('books'))
+                ->with(compact('mybooks'));
     }
     public function apiBooks()
     {
