@@ -20,6 +20,6 @@ class BookClub extends Model
     return $this->belongsToMany('App\Book')->withPivot('status_id', 'owner_id');
   }
   public function admin(){
-      return $this->belongsTo('\App\User');
+      return $this->belongsTo('\App\User','user_id');
   }
 }

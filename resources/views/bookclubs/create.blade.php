@@ -21,6 +21,13 @@
           {!! Form::label('books', 'Add Your Books to Book Club(Ctrl+click to select multiple)') !!}
           {!! Form::select('books[]', $books ,null, ['class' => 'form-control dropdown' , 'multiple']) !!}
         </div>
+        <div class="form-group">
+          <label for="is_closed">
+            <input type="checkbox" id='is_closed' checked>
+                Group is Closed? <small>(Requires request approval to join group)</small>
+            </input>
+          </label>
+        </div>
         {{--
         <div class="form-group">
           {!! Form::label('image', 'Photo') !!}

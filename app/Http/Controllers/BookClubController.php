@@ -21,10 +21,12 @@ class BookClubController extends Controller
      */
     public function index()
     {
-      $bookclubs = \App\BookClub::with('books','members')->get();
+      $bookclubs = App\BookClub::with('books','members','admin')
+                                  ->orderBy('user_id')
+                                  ->get();
       // return response()->json($bookclubs);
       return view('bookclubs.index')
-        ->with('bookclubs' , $bookclubs);
+              ->with('bookclubs' , $bookclubs);
     }
 
     /**

@@ -21,3 +21,10 @@ user can share his material
 - later make different links clickable like language author status to show books for that
 - implement search
 - implement images
+
+allow adding books from creaate bookclub page
+edit book club implements
+allow to make club open or closed
+implement request for closed Club
+implement book status change for owned books in club and outside
+implemnt request in club

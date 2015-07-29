@@ -19,6 +19,13 @@
             <small>{{count($bookclub->members)}} Members,</small>
             <small>{{count($bookclub->books)}} Books</small>
           </div>
+          @if(auth()->user()->id == $bookclub->admin->id)
+            <div class="media-right">
+              <a href="{{ route('bookclubs.edit', $bookclub->id) }}" class='btn'>
+                <i class='fa fa-edit'></i>
+              </a>
+            </div>
+          @endif
         </div>
       @endforeach
     @endif
