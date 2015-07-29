@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BookClub extends Model
 {
-  protected $fillable = ['name','description','rules','user_id'];
+  protected $fillable = ['name','description','rules','user_id', 'is_closed'];
 
 	public static $rules = [
 		'name' => 'required|min:3|unique:book_clubs',

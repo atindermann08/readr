@@ -21,7 +21,7 @@ class BookClubController extends Controller
      */
     public function index()
     {
-      $bookclubs = App\BookClub::with('books','members','admin')
+      $bookclubs = \App\BookClub::with('books','members','admin')
                                   ->orderBy('user_id')
                                   ->get();
       // return response()->json($bookclubs);
@@ -47,15 +47,20 @@ class BookClubController extends Controller
      */
     public function store(BookClubRequest $request)
     {
-      $books = $request->get('books');
+      // return $request->all();
       $request['user_id'] = auth()->user()->id;
+      $request['is_closed'] = $request->input('is_closed',0);
       $bookclub = \Auth::user()->bookclubs()->create($request->all());
 
       //$status_id = \App\BookStatus::findOrCreate(['name' => 'Available'])->id;
       //$bookclub->books()->attach($request->input('books'),['status_id' => $status_id]);
-      foreach ($books as $book) {
-        $bookclub->books()->detach($book);
-        $bookclub->books()->attach($book,['owner_id' => auth()->user()->id]);
+
+      $books = $request->input('books');
+      if($books){
+        foreach ($books as $book) {
+          $bookclub->books()->detach($book);
+          $bookclub->books()->attach($book,['owner_id' => auth()->user()->id]);
+        }
       }
       flash('Book Club Created.');
       return \Redirect::back();

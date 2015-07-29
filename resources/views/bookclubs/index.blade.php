@@ -18,6 +18,7 @@
             <p>Description: {{$bookclub->description}}</p>
             <small>{{count($bookclub->members)}} Members,</small>
             <small>{{count($bookclub->books)}} Books</small>
+            <small>@if($bookclub->is_closed) 'Closed Club' @else 'Open Club' @endif</small>
           </div>
           @if(auth()->user()->id == $bookclub->admin->id)
             <div class="media-right">

@@ -22,11 +22,11 @@
           {!! Form::select('books[]', $books ,null, ['class' => 'form-control dropdown' , 'multiple']) !!}
         </div>
         <div class="form-group">
-          <label for="is_closed">
-            <input type="checkbox" id='is_closed' checked>
+          {!! Form::checkbox('is_closed', '1', true, ['id' => 'is_closed']) !!}
+            <label for="is_closed">
                 Group is Closed? <small>(Requires request approval to join group)</small>
-            </input>
-          </label>
+            </label>
+          </input>
         </div>
         {{--
         <div class="form-group">
