@@ -9,13 +9,21 @@
     <p>Description: {{$bookclub->description}}</p>
     <small>{{count($bookclub->members)}} Members,</small>
     <small>{{count($bookclub->books)}} Books</small>
-    <small>@if($bookclub->is_closed) 'Closed Club' @else 'Open Club' @endif</small>
+    <p class='pull-right'>
+      @unless(auth()->user()->isMember($bookclub->id))
+        @if($bookclub->is_closed)
+          <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-primary'>Send Join Request</a>
+        @else
+          <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-primary'>Join Club</a>
+        @endif
+      @endunless
+    </p>
   </div>
-  @if(auth()->user()->id == $bookclub->admin->id)
-    <div class="media-right">
+  <div class="media-right">
+    @if(auth()->user()->id == $bookclub->admin->id)
       <a href="{{ route('bookclubs.edit', $bookclub->id) }}" class='btn'>
         <i class='fa fa-edit'></i>
       </a>
-    </div>
-  @endif
+    @endif
+  </div>
 </div>

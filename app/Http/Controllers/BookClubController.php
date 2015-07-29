@@ -142,6 +142,7 @@ class BookClubController extends Controller
      */
     public function joinclub($bookClubId)
     {
+      //check for open and closed club and if closed create request to be approved by admin
         auth()->user()->bookclubs()->attach($bookClubId);
 
         flash('Book Club Joined.');
