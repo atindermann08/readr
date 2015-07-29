@@ -99,7 +99,9 @@ class BookClubController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bookclub = \App\BookClub::findOrFail($id);
+        $books = \Auth::user()->books()->lists('title','title');
+        return view('bookclubs.edit',compact('books', 'bookclub'));
     }
 
     /**
