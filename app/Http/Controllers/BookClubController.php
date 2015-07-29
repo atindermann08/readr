@@ -110,9 +110,28 @@ class BookClubController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
-        //
+        $bookclub = \App\BookClub::findOrFail($id);
+
+        $request['is_closed'] = $request->input('is_closed', 0);
+        $bookclub->update($request->all());
+
+
+        $titles = $request->input('books');
+        $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+        if($titles){
+          foreach ($titles as $title) {
+            $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
+            auth()->user()->books()->detach($book->id);
+            auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
+
+            $bookclub->books()->detach($book->id);
+            $bookclub->books()->attach($book->id, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
+          }
+        }
+        flash('Book Club updated.');
+        return \Redirect::back();
     }
 
     /**

@@ -22,9 +22,8 @@ user can share his material
 - implement search
 - implement images
 
-allow adding books from creaate bookclub page
-edit book club implements
-allow to make club open or closed
+
+allow to add remove books from club
 implement request for closed Club
 implement book status change for owned books in club and outside
 implemnt request in club
