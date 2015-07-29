@@ -80,15 +80,11 @@ class BookClubController extends Controller
     public function show($id)
     {
       $user = auth()->check()?auth()->user():new \App\User;
-      $bookclub = \App\BookClub::find($id);
-      if($bookclub){
+      $bookclub = \App\BookClub::findOrFail($id);
 
-        return view('bookclubs.show')
-        ->with(compact('bookclub','user'));
-      }
-
-      flash()->error('Book Club does not exist.');
-      return \Redirect::back();
+      $show_route = 'bookclubs.books.show';
+      return view('bookclubs.show')
+              ->with(compact('bookclub','user', 'show_route'));
     }
 
     /**
@@ -154,6 +150,24 @@ class BookClubController extends Controller
     {
         flash('To be implemented.. Thanks for your patience');
       return \Redirect::back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showbook($bookClubId, $bookId)
+    {
+      //return \App\Book::
+        $user = auth()->check()?auth()->user():new \App\User;
+        $book = \App\Book::with('authors','publisher','category', 'language')->findOrFail($bookId);
+        $statuses = $book->ownerstatus();
+        $bookclub = \App\BookClub::findOrFail($bookClubId);
+        $request_route = 'bookclubs.books.requestbook';
+        return view('bookclubs.books.show')
+              ->with(compact('book', 'bookclub' ,'user', 'statuses', 'request_route'));
     }
 
 

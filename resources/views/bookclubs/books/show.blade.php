@@ -8,7 +8,7 @@
       <li class="list-group-item">
         @unless($owner->id == auth()->user()->id)
           <span class="pull-right">
-            <a href="{{ route('books.request', $book->id) }}" class=''>
+            <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id]) }}" class=''>
               Request Book
             </a>
           </span>

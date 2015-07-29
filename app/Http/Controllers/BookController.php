@@ -25,6 +25,7 @@ class BookController extends Controller
     {
       $books = \App\Book::with('authors','language','category','publisher','owners')->get();
 
+      $show_route = 'books.show';
       // $authors = \App\Author::all();
       // $publishers = \App\Publisher::all();
       // $categories = \App\Category::all();
@@ -32,7 +33,7 @@ class BookController extends Controller
       // return response()->json(\App\Book::first()->clubstatus());
       return view('books.index')
         ->with('book_clickable', true)
-        ->with(compact('books'));
+        ->with(compact('books','show_route'));
         // ->with('authors' , $authors)
         // ->with('publishers' , $publishers)
         // ->with('categories' , $categories)
@@ -143,8 +144,9 @@ class BookController extends Controller
         $user = auth()->check()?auth()->user():new \App\User;
         $book = App\Book::with('authors','publisher','category', 'language')->findOrFail($id);
         $statuses = $book->ownerstatus();
+        $request_route = 'books.request';
         return view('books.show')
-              ->with(compact('book','user', 'statuses'));
+              ->with(compact('book','user', 'statuses', 'request_route'));
     }
 
     /**

@@ -8,7 +8,7 @@
       {!! Form::open(['route' => 'books.store']) !!}
         <div class="form-group">
           {!! Form::label('titles', 'Title') !!}
-          {!! Form::select('titles[]', $books ,null, ['class' => 'form-control multi-select','placeholder' => 'Book Title', 'multiple']) !!}
+          {!! Form::select('titles[]', $books ,null, ['class' => 'form-control book-title-select','placeholder' => 'Book Title', 'multiple']) !!}
         </div>
         {{--
         <div class="form-group">

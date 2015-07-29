@@ -6,11 +6,15 @@
   </div>
   <div class="media-body">
     <h3 class="media-heading">
-      {{-- @if(isset($book_clickable)) --}}
-        {!! link_to_route('books.show',$book->title,$book->id) !!}
-      {{-- @else
+      @if(isset($show_route) and $show_route == 'bookclubs.books.show' )
+        <a href="{{ route($show_route, [$bookclub->id, $book->id]) }}">
+          {{ $book->title }}
+        </a>
+      @else
+      <a href="{{ route('books.show', $book->id) }}">
         {{ $book->title }}
-      @endif --}}
+      </a>
+      @endif
     </h3>
     <small>
       by:
