@@ -70,7 +70,7 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
-      $titles = $request->get('titles');
+      $titles = $request->input('titles');
       // $bookclubs = $request->get('bookclubs');
       // $bookIds = [];
 

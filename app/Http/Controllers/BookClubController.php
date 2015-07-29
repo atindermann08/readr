@@ -36,7 +36,7 @@ class BookClubController extends Controller
      */
     public function create()
     {
-      $books = \Auth::user()->books()->lists('title','id');
+      $books = \Auth::user()->books()->lists('title','title');
       return view('bookclubs.create',compact('books'));
     }
 
@@ -49,17 +49,22 @@ class BookClubController extends Controller
     {
       // return $request->all();
       $request['user_id'] = auth()->user()->id;
-      $request['is_closed'] = $request->input('is_closed',0);
+      $request['is_closed'] = $request->input('is_closed', 0);
       $bookclub = \Auth::user()->bookclubs()->create($request->all());
 
       //$status_id = \App\BookStatus::findOrCreate(['name' => 'Available'])->id;
       //$bookclub->books()->attach($request->input('books'),['status_id' => $status_id]);
 
-      $books = $request->input('books');
-      if($books){
-        foreach ($books as $book) {
-          $bookclub->books()->detach($book);
-          $bookclub->books()->attach($book,['owner_id' => auth()->user()->id]);
+      $titles = $request->input('books');
+      $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+      if($titles){
+        foreach ($titles as $title) {
+          $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
+          auth()->user()->books()->detach($book->id);
+          auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
+
+          $bookclub->books()->detach($book->id);
+          $bookclub->books()->attach($book->id, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
         }
       }
       flash('Book Club Created.');

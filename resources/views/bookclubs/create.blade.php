@@ -18,8 +18,8 @@
           {!! Form::textarea('rules' ,null, ['class' => 'form-control','rows' => '5']) !!}
         </div>
         <div class="form-group">
-          {!! Form::label('books', 'Add Your Books to Book Club(Ctrl+click to select multiple)') !!}
-          {!! Form::select('books[]', $books ,null, ['class' => 'form-control dropdown' , 'multiple']) !!}
+          {!! Form::label('books', 'Add Your Books to Book Club') !!}
+          {!! Form::select('books[]', $books ,null, ['class' => 'form-control dropdown book-title-select' , 'multiple']) !!}
         </div>
         <div class="form-group">
           {!! Form::checkbox('is_closed', '1', true, ['id' => 'is_closed']) !!}
