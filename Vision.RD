@@ -22,8 +22,7 @@ user can share his material
 - implement search
 - implement images
 
-
-allow to add remove books from club
-implement request for closed Club
+implement join page to add books and similar view to add remove books in later use and book status change in club
+and join request
 implement book status change for owned books in club and outside
-implemnt request in club
+implement request in club
