@@ -15,6 +15,7 @@ class CreateRequestsBookClubBooksTable extends Migration
         Schema::create('request_book_club_books', function (Blueprint $table) {
             $table->integer('book_club_id')->unsigned();
             $table->integer('book_id')->unsigned();
+            $table->integer('owner_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
