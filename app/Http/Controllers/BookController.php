@@ -76,20 +76,21 @@ class BookController extends Controller
       // $bookIds = [];
 
       $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+      if(count($titles)){
+        foreach ($titles as $title) {
+          $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
 
-      foreach ($titles as $title) {
-        $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
+          auth()->user()->books()->detach($book->id);
+          auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
 
-        auth()->user()->books()->detach($book->id);
-        auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
+          //send mail to user for added books and adding details
 
-        //send mail to user for added books and adding details
-
-        //$bookIds[] =  $bookId => ['status_id' => $status_id];
-        // foreach ($bookclubs as $bookclub) {
-        //   $book->bookclubs()->detach($bookclub);
-        //   $book->bookclubs()->attach($bookclub,['owner_id' => auth()->user()->id]);
-        // }
+          //$bookIds[] =  $bookId => ['status_id' => $status_id];
+          // foreach ($bookclubs as $bookclub) {
+          //   $book->bookclubs()->detach($bookclub);
+          //   $book->bookclubs()->attach($bookclub,['owner_id' => auth()->user()->id]);
+          // }
+        }
       }
 
 

@@ -110,10 +110,9 @@ class Book extends Model
 	{
 		$all_owners = $this->owners;
 
-		$owners = $all_owners->filter(function ($item) {
+		$owners = $all_owners->filter(function ($item) use ($bookClubId) {
     		return $item->isMember($bookClubId);
 		});
-
 		return $owners;
 	}
 	public function findOrCreateByName($name)

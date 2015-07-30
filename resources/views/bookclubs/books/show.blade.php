@@ -8,7 +8,7 @@
   <hr/>
   <h4>Book Owners</h4>
   <ul class="list-group">
-    @foreach($book->memberOwners as $owner)
+    @foreach($book->memberOwners($bookclub->id) as $owner)
       <li class="list-group-item">
         @unless($owner->id == auth()->user()->id)
           @if(auth()->user()->isMember($bookclub->id))
