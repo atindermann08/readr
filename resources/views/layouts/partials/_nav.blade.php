@@ -57,10 +57,12 @@
               <i class=' fa fa-bell fa-fw'></i>
             </a>
             <ul class="dropdown-menu">
-              <li class='dropdown-header'>Notifications</li>
-              @foreach($notifications as $notification)
-                <li><a href="{{ route('notifications') }}">{{ $notification['count'] }} {{ $notification['type'] }}</a></li>
-              @endforeach
+              @if(count($notifications))
+                <li class='dropdown-header'>Notifications</li>
+                @foreach($notifications as $notification)
+                  <li><a href="{{ route('notifications') }}">{{ $notification['count'] }} {{ $notification['type'] }}</a></li>
+                @endforeach
+              @endif
             </ul>
           </li>
           <li><a>Welcome, {{ucfirst(\Auth::user()->name)}}</a></li>
