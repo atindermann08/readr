@@ -3,7 +3,7 @@
 @section('content')
   @include('partials._showbook')
   <hr/>
-  <h4>Book Owners</h4>
+  <h4>Book Clubs</h4>
   <ul class="list-group">
     @foreach($book->bookclubs as $bookclub)
       <li class="list-group-item">

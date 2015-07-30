@@ -18,6 +18,9 @@ user can share his material
 - implement search
 - implement images
 
+
+add remove icon to show book for user and club
+
 implement join page to add books and similar view to add remove books in later use and book status change in club
 and join request
 implement book status change for owned books in club and outside

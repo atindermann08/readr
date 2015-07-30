@@ -21,12 +21,14 @@
         <span class='btn btn-default disabled'>Already Member</span>
       @else
         @if(auth()->user()->isJoinRequestSent($bookclub->id))
-          <span class='btn btn-default disabled'>Request Sent</span>
+          <a href="{{ route('bookclubs.requests.cancel', auth()->user()->joinRequest($bookclub->id)->id) }}" class='btn btn-danger'>
+            Cancel Join Request
+          </a>
         @else
           @if($bookclub->is_closed)
             <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-primary'>Send Join Request</a>
           @else
-            <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-primary'>Join Club</a>
+            <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-success'>Join Club</a>
           @endif
         @endif
       @endif
