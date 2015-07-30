@@ -30,6 +30,13 @@ Route::resource('bookclubs','BookClubController',['except'=>'destroy']);
 Route::get('bookclubs/join/{bookClubId}',
               [ 'as' => 'bookclubs.join',
                 'uses' => 'BookClubController@joinclub']);
+Route::get('bookclubs/requests/{requestId}/accept',
+              [ 'as' => 'bookclubs.requests.accept',
+                'uses' => 'BookClubController@acceptJoinRequest']);
+Route::get('bookclubs/requests/{requestId}/reject',
+              [ 'as' => 'bookclubs.requests.reject',
+                'uses' => 'BookClubController@rejectJoinRequest']);
+
 Route::get('bookclubs/{bookClubId}/books/{bookId}',
               [ 'as' => 'bookclubs.books.show',
                 'uses' => 'BookClubController@showbook']);

@@ -193,4 +193,30 @@ class BookClubController extends Controller
         return view('bookclubs.books.add')
               ->with(compact('bookclub', 'books'));
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function acceptJoinRequest($requestId)
+    {
+        flash('To be implemented.');
+        return redirect()->back();
+        flash('Request Accepted succesfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function rejectJoinRequest($requestId)
+    {
+        \App\RequestBookClub::findOrFail($requestId)->delete();
+        flash('Request Rejected succesfully.');
+        return redirect()->back();
+    }
 }
