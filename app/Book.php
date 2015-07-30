@@ -82,14 +82,12 @@ class Book extends Model
 	public function ownerStatus()
 	{
 		$result = [];
-		foreach($this->owners as $owner)
-		{
-			// $result[] = $this->statusWithUser($this->id,$owner->id);
-		}
-		$result = collect($result)->groupBy('name');
-
 		$statuses = collect();
-		foreach ($result as $key => $value) {
+		$result = collect($this->owners)->groupBy('pivot.status_id');
+			// dd()
+		foreach($result->toArray() as $key => $value)
+		{
+			$key = \App\BookStatus::findOrFail($key)->name;
 			$statuses->put($key ,count($value));
 		}
 		return $statuses;

@@ -9,7 +9,7 @@ $(".book-title-select").select2({
 
 $(".book-title-select-book-club").select2({
   allowClear: true,
-  placeholder: 'Add Single or Multiple Book titles to Book Club',
+  placeholder: 'Add Book title(s) to Book Club(separatd by comma)',
   tokenSeparators: [','],
   tags: true
 });

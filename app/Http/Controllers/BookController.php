@@ -94,7 +94,7 @@ class BookController extends Controller
       }
       else
       {
-        flash()->error('Please enter atleast one book title');
+        flash()->error('Please enter atleast one Book Title');
         return \Redirect::back();
       }
 
