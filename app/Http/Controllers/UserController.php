@@ -89,5 +89,16 @@ class UserController extends Controller
 
     }
 
+    /**
+    * perform login.
+    *
+    * @param  int  $id
+    * @return Response
+    */
+    public function showNotifications()
+    {
+      flash('To be implemeted');
+      return \Redirect::back();
+    }
 
 }

@@ -58,11 +58,9 @@
             </a>
             <ul class="dropdown-menu">
               <li class='dropdown-header'>Notifications</li>
-              <li role="separator" class="divider"></li>
               @foreach($notifications as $notification)
-                <li><a href="">My Library</a></li>
+                <li><a href="{{ route('notifications') }}">{{ $notification['count'] }} {{ $notification['type'] }}</a></li>
               @endforeach
-              <li role="separator" class="divider"></li>
             </ul>
           </li>
           <li><a>Welcome, {{ucfirst(\Auth::user()->name)}}</a></li>
@@ -73,5 +71,5 @@
         @endif
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  </div><!-- /.container -->
 </nav>

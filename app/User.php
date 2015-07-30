@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'activation_code'];
 
     public function bookclubs(){
         return $this->belongsToMany('\App\BookClub');
@@ -101,7 +101,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function clubJoinRequestsReceived(){
-      return $this->hasMany('\App\RequestBookClub', 'owner_id');
+      return $this->hasMany('\App\RequestBookClub');
     }
 
     public function clubJoinRequestsSent(){
@@ -110,7 +110,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function notifications()
     {
-      return ['1', '2'];
+      $bookclubs = $this->ownedclubs()->lists('id');
+      $count = \App\RequestBookClub::whereIn('user_id', $bookclubs)->get()->count();
+      $requests = 'Request';
+
+      if($count)
+      {
+        $requests = ($count>1)?'Requests':$requests;
+        $join_notification = [
+                          'type' => 'Book Club Joining '.$requests,
+                          'count' => $count
+                        ];
+        $notifications = [$join_notification];
+      }
+
+      // foreach($this->ownedclubs as $bookclub)
+      // {
+      //
+      // }
+      // dd($notifications);
+      return $notifications;
     }
 
 }
