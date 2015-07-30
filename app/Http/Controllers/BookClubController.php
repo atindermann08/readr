@@ -202,9 +202,12 @@ class BookClubController extends Controller
      */
     public function acceptJoinRequest($requestId)
     {
-        flash('To be implemented.');
-        return redirect()->back();
+        $request = \App\RequestBookClub::with('requestee')->findOrFail($requestId);
+        $request->requestee->joinClub($request->book_club_id);
+        $request->delete();
+        //fire event send mail;
         flash('Request Accepted succesfully.');
+        return redirect()->back();
     }
 
     /**
