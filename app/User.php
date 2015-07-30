@@ -107,7 +107,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function clubJoinRequestsReceived(){
-      return $this->hasMany('\App\RequestBookClub');
+      $bookclubs = $this->ownedclubs()->lists('id');
+      $requests = \App\RequestBookClub::whereIn('book_club_id', $bookclubs)->get();
+      // $requests = 'Request';
+      //
+      // $notifications = [];
+      // if($count)
+      // {
+      //   $requests = ($count>1)?'Requests':$requests;
+      //   $join_notification = [
+      //                     'type' => 'Book Club Joining '.$requests,
+      //                     'count' => $count
+      //                   ];
+      //   $notifications = [$join_notification];
+      // }
+
+      return $requests;
     }
 
     public function clubJoinRequestsSent(){
@@ -117,7 +132,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function notifications()
     {
       $bookclubs = $this->ownedclubs()->lists('id');
-      $count = \App\RequestBookClub::whereIn('user_id', $bookclubs)->get()->count();
+      $count = \App\RequestBookClub::whereIn('book_club_id', $bookclubs)->get()->count();
       $requests = 'Request';
 
       $notifications = [];

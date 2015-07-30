@@ -97,7 +97,7 @@ class UserController extends Controller
     */
     public function showNotifications()
     {
-      $requests = \App\RequestBookClub::where('user_id', auth()->user()->id)->with('bookclub', 'requestee')->get();
+      $requests = auth()->user()->clubJoinRequestsReceived();
       // $requests->load('bookclub', 'requestee');
       // return ($requests);
       return view('notifications')
