@@ -148,7 +148,7 @@ class BookClubController extends Controller
       //return \App\Book::
         $user = auth()->check()?auth()->user():new \App\User;
         $book = \App\Book::with('authors','publisher','category', 'language')->findOrFail($bookId);
-        $statuses = $book->ownerstatus();
+        $statuses = $book->clubstatus();
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         $request_route = 'bookclubs.books.requestbook';
         return view('bookclubs.books.show')
