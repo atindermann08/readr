@@ -113,7 +113,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       $bookclubs = $this->ownedclubs()->lists('id');
       $count = \App\RequestBookClub::whereIn('user_id', $bookclubs)->get()->count();
       $requests = 'Request';
-
+      
+      $notifications = [];
       if($count)
       {
         $requests = ($count>1)?'Requests':$requests;
