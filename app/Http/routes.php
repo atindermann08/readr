@@ -31,6 +31,9 @@ Route::get('bookclubs/{bookClubId}/books/{bookId}',
 Route::get('bookclubs/{bookClubId}/requestbook/{bookId}',
               [ 'as' => 'bookclubs.books.requestbook',
                 'uses' => 'BookClubController@requestbook']);
+Route::get('bookclubs/{bookClubId}/addbooks',
+              [ 'as' => 'bookclubs.books.add',
+                'uses' => 'BookClubController@addBooks']);
 
 Route::resource('authors','AuthorController',['except'=>'destroy']);
 Route::resource('publishers','PublisherController',['except'=>'destroy']);

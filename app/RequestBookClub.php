@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RequestBookClub extends Model
 {
-
+    protected $fillable = ['book_club_id','user_id'];
 
     public function requestee(){
       return $this->belongsTo('\App\User');

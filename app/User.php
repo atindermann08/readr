@@ -56,6 +56,35 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
+    public function isJoinRequestSent($bookClubId)
+    {
+
+        if(auth()->check() && count(\App\RequestBookClub::where('book_club_id', '=', $bookClubId)
+                                        ->where('user_id', '=', auth()->user()->id)
+                                        ->get()))
+          return true;
+        return false;
+    }
+
+    public function joinClub($bookClubId)
+    {
+        $this->bookclubs()->detach($bookClubId);
+        return $this->bookclubs()->attach($bookClubId);
+    }
+    public function sendJoinRequest($bookClubId)
+    {
+      \App\RequestBookClub::where('book_club_id', '=', $bookClubId)
+                                      ->where('user_id', '=', auth()->user()->id)
+                                      ->delete();
+
+      $bookclub = \App\BookClub::findOrFail($bookClubId);
+      $bookclub->joinrequests()->create([
+            'book_club_id' => $bookClubId,
+            'user_id' => auth()->user()->id
+            ]);
+    }
+
+
     public function ownBook($bookId)
     {
         if(count($this->books()->where('book_id','=',$bookId)->get()))

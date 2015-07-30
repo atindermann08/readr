@@ -130,21 +130,6 @@ class BookClubController extends Controller
         return \Redirect::back();
     }
 
-    /**
-     *
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function joinclub($bookClubId)
-    {
-      //check for open and closed club and if closed create request to be approved by admin
-        auth()->user()->bookclubs()->attach($bookClubId);
-
-        flash('Book Club Joined.');
-
-        return \Redirect::back();
-    }
 
     public function requestbook($bookId, $bookclubId)
     {
@@ -170,5 +155,42 @@ class BookClubController extends Controller
               ->with(compact('book', 'bookclub' ,'user', 'statuses', 'request_route'));
     }
 
+    /**
+     *
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function joinclub($bookClubId)
+    {
+      //check for open and closed club and if closed create request to be approved by admin
+        // auth()->user()->joinClub($bookClubId);
 
+        $bookclub = \App\BookClub::findOrFail($bookClubId);
+        if($bookclub->is_closed)
+        {
+          auth()->user()->sendJoinRequest($bookClubId);
+          flash('Request sent for joining BookClub.');
+          return \Redirect::back();
+        }
+        else {
+          auth()->user()->joinClub($bookClubId);
+          flash('Book Club Joined. Add your book collection to share with other members.');
+          return redirect()->route('bookclubs.books.add',$bookClubId);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function addBooks($bookClubId)
+    {
+        $bookclub = \App\BookClub::findOrFail($bookClubId);
+        $books = auth()->user()->books;
+        return view('bookclubs.books.add')
+              ->with(compact('bookclub', 'books'));
+    }
 }

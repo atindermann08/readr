@@ -24,7 +24,9 @@ class BookClub extends Model
   }
 
   public function joinrequests(){
-    return $this->belongsTo('\App\RequestBookClub');
+    return $this->hasMany('\App\RequestBookClub');
   }
+
+  
 
 }
