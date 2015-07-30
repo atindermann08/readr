@@ -2,14 +2,14 @@ $('div.alert').not('.alert-important').delay(3000).slideUp(300);
 
 $(".book-title-select").select2({
   allowClear: true,
-  placeholder: 'Add Single or Multiple Book titles to your library',
+  placeholder: 'Add Book title(s) to your library(separated by comma)',
   tokenSeparators: [','],
   tags: true
 });
 
 $(".book-title-select-book-club").select2({
   allowClear: true,
-  placeholder: 'Add Book title(s) to Book Club(separatd by comma)',
+  placeholder: 'Add Book title(s) to Book Club(separated by comma)',
   tokenSeparators: [','],
   tags: true
 });
@@ -21,7 +21,7 @@ $(".multi-select-book-club").select2({
 
 $(".multi-select-authors").select2({
   allowClear: true,
-  placeholder: 'Add Single or Multiple Authors separated by comma',
+  placeholder: 'Add Single or Multiple Authors(separated by comma)',
   tokenSeparators: [','],
   tags: true
 });
