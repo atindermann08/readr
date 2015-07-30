@@ -20,9 +20,11 @@
            <span class="caret"></span>
         </a>
          <ul class="dropdown-menu">
+          {{--
            <li><a href="{{route('books.create')}} ">Add Book</a></li>
            <li role="separator" class="divider"></li>
            <li><a href="{{route('books.index')}}">List</a></li>
+           --}}
            <li><a href="{{route('mylibrary')}}">My Library</a></li>
          </ul>
        </li>

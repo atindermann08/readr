@@ -9,10 +9,6 @@ user can share his material
 
 
 
-- book status show pass status to partial and show status based on context booklcub status in bookclub view and vice versa
-- no need to show owners as status is shown
-- show category
-
 
 - allow to request book if member of club and book is Available
 - allow multiple requests for single book
