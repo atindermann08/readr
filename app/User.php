@@ -106,21 +106,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
+    public function ownBookClubBook($bookClubId, $bookId)
+    {
+        if(count(\DB::select('select * from book_book_club where book_id = '.$bookId.' and book_club_id ='.$bookClubId.' and owner_id = '.auth()->user()->id.';')))
+          return true;
+        return false;
+    }
+
     public function clubJoinRequestsReceived(){
       $bookclubs = $this->ownedclubs()->lists('id');
       $requests = \App\RequestBookClub::whereIn('book_club_id', $bookclubs)->get();
-      // $requests = 'Request';
-      //
-      // $notifications = [];
-      // if($count)
-      // {
-      //   $requests = ($count>1)?'Requests':$requests;
-      //   $join_notification = [
-      //                     'type' => 'Book Club Joining '.$requests,
-      //                     'count' => $count
-      //                   ];
-      //   $notifications = [$join_notification];
-      // }
 
       return $requests;
     }
@@ -146,11 +141,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $notifications = [$join_notification];
       }
 
-      // foreach($this->ownedclubs as $bookclub)
-      // {
-      //
-      // }
-      // dd($notifications);
       return $notifications;
     }
 

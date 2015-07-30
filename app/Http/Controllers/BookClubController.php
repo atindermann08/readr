@@ -254,15 +254,7 @@ class BookClubController extends Controller
     public function removeBook($bookClubId, $bookId, Request $request)
     {
         $bookclub = \App\BookClub::findOrFail($bookClubId);
-        // $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
-        //
-        // $bookIds = $request->input('bookIds');
-        // // dd($request->all());
-        // foreach($bookIds as $bookId)
-        // {
-        $bookclub->books()->detach($bookId);
-        //   $bookclub->books()->attach($bookId, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
-        // }
+        \DB::delete('DELETE FROM book_book_club WHERE book_id = '.$bookId.' AND book_club_id = '.$bookClubId.' AND owner_id = '.auth()->user()->id.';');
 
         flash('Book removed from club');
         return redirect()->back();
