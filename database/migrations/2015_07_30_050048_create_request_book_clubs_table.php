@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookClubJoinRequestsTable extends Migration
+class CreateRequestBookClubsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateBookClubJoinRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('book_club_join_requests', function (Blueprint $table) {
+        Schema::create('request_book_clubs', function (Blueprint $table) {
             $table->integer('book_club_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateBookClubJoinRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('book_club_join_requests');
+        Schema::drop('request_book_clubs');
     }
 }
