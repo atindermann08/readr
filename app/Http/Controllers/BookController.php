@@ -97,8 +97,6 @@ class BookController extends Controller
         flash()->error('Please enter atleast one book title');
         return \Redirect::back();
       }
-    }
-
 
       flash('Book/Books added to your library.');
       return \Redirect::back();
