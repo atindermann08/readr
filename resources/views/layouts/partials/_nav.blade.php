@@ -63,7 +63,7 @@
                   <li><a href="{{ route('notifications') }}">{{ $notification['count'] }} {{ $notification['type'] }}</a></li>
                 @endforeach
               @else
-                <li>No Unread Notifications</li>
+                <li><a>No Unread Notifications<span></a>
               @endif
             </ul>
           </li>
