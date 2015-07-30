@@ -22,7 +22,8 @@ elixir(function(mix) {
       .copy("bower_components/font-awesome/fonts/FontAwesome.otf", "public/vendor/fonts/FontAwesome.otf")
       .copy("bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js", "public/vendor/js/bootstrap.min.js")
       .copy("bower_components/jquery/dist/jquery.min.js", "public/vendor/js/jquery.min.js")
-      .copy("bower_components/select2/dist/js/select2.min.js", "public/vendor/js/select2.min.js")
+      // .copy("bower_components/select2/dist/js/select2.min.js", "public/vendor/js/select2.min.js")
+      .copy("bower_components/select2/dist/js/select2.full.min.js", "public/vendor/js/select2.min.js")
       .copy("bower_components/select2/dist/css/select2.min.css", "public/vendor/css/select2.min.css")
       .copy("bower_components/select2-bootstrap-css/select2-bootstrap.min.css", "public/vendor/css/select2-bootstrap.min.css")
       .copy(
