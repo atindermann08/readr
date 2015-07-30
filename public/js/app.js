@@ -6,6 +6,14 @@ $(".book-title-select").select2({
   tokenSeparators: [','],
   tags: true
 });
+
+$(".book-title-select-book-club").select2({
+  allowClear: true,
+  placeholder: 'Add Single or Multiple Book titles to Book Club',
+  tokenSeparators: [','],
+  tags: true
+});
+
 $(".multi-select-book-club").select2({
   allowClear: true,
   tokenSeparators: [','],

@@ -81,10 +81,10 @@ class BookClubController extends Controller
     {
       $user = auth()->check()?auth()->user():new \App\User;
       $bookclub = \App\BookClub::findOrFail($id);
-
+      $books = $user->books->lists('title', 'id');
       $show_route = 'bookclubs.books.show';
       return view('bookclubs.show')
-              ->with(compact('bookclub','user', 'show_route'));
+              ->with(compact('bookclub','user', 'books', 'show_route'));
     }
 
     /**
@@ -220,6 +220,28 @@ class BookClubController extends Controller
     {
         \App\RequestBookClub::findOrFail($requestId)->delete();
         flash('Request Rejected succesfully.');
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function storeBooks($bookClubId, Request $request)
+    {
+        $bookclub = \App\BookClub::findOrFail($bookClubId);
+        $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+
+        $bookIds = $request->input('bookIds');
+        // dd($request->all());
+        foreach($bookIds as $bookId)
+        {
+          $bookclub->books()->detach($bookId);
+          $bookclub->books()->attach($bookId, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
+        }
+        flash('Books added successfully.');
         return redirect()->back();
     }
 }
