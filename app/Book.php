@@ -23,15 +23,6 @@ class Book extends Model
 	{
 		$this->attributes['release_date'] = Carbon::parse($date);
 	}
-	// public function setStatusIdAttribute($id)
-	// {
-	// 	$this->attributes['status_id'] = $id?$id:1;
-	// }
-
-	// public function setOwnerIdAttribute($id)
-	// {
-	// 	$this->attributes['owner_id'] = $id?$id:auth()->user()->id;
-	// }
 
   /*
   * Relationships
@@ -78,22 +69,22 @@ class Book extends Model
 		$status = \App\BookStatus::find($status_id);
 		return $status;
 	}
-	public function statusInClub($bookId, $clubId)
-	{
-		return $this->status($bookId, 'App\BookClub', $clubId);
-	}
-	public function statusWithUser($bookId, $userId = 0)
-	{
-		if(!$userId && auth()->check()){ $userId = auth()->user()->id; }
-		return $this->status($bookId, 'App\User', $userId);
-	}
+	// public function statusInClub($bookId, $clubId)
+	// {
+	// 	return $this->status($bookId, 'App\BookClub', $clubId);
+	// }
+	// public function statusWithUser($bookId, $userId = 0)
+	// {
+	// 	if(!$userId && auth()->check()){ $userId = auth()->user()->id; }
+	// 	return $this->status($bookId, 'App\User', $userId);
+	// }
 
-	public function ownerstatus()
+	public function ownerStatus()
 	{
 		$result = [];
 		foreach($this->owners as $owner)
 		{
-			$result[] = $this->statusWithUser($this->id,$owner->id);
+			// $result[] = $this->statusWithUser($this->id,$owner->id);
 		}
 		$result = collect($result)->groupBy('name');
 
@@ -103,22 +94,28 @@ class Book extends Model
 		}
 		return $statuses;
 	}
-	public function clubstatus()
+	public function clubStatus($bookClubId)
 	{
 		$result = [];
-		foreach($this->bookclubs as $bookclub)
-		{
-			$result[] = $this->statusInClub($this->id,$bookclub->id);
-		}
-		$result = collect($result)->groupBy('name');
-
 		$statuses = collect();
-		foreach ($result as $key => $value) {
+		$bookclubs = $this->bookclubs()->where('book_club_id', $bookClubId)->get()->groupBy('pivot.status_id');
+		foreach($bookclubs->toArray() as $key => $value)
+		{
+			$key = \App\BookStatus::findOrFail($key)->name;
 			$statuses->put($key ,count($value));
 		}
 		return $statuses;
 	}
+	public function memberOwners($bookClubId)
+	{
+		$all_owners = $this->owners;
 
+		$owners = $all_owners->filter(function ($item) {
+    		return $item->isMember($bookClubId);
+		});
+
+		return $owners;
+	}
 	public function findOrCreateByName($name)
 	{
 		//to be implemented

@@ -44,7 +44,7 @@ Route::get('bookclubs/requests/{requestId}/cancel',
 
 Route::get('bookclubs/{bookClubId}/books/{bookId}',
               [ 'as' => 'bookclubs.books.show',
-                'uses' => 'BookClubController@showbook']);
+                'uses' => 'BookClubController@showBook']);
 Route::get('bookclubs/{bookClubId}/requestbook/{bookId}',
               [ 'as' => 'bookclubs.books.requestbook',
                 'uses' => 'BookClubController@requestbook']);

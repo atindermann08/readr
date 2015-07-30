@@ -17,11 +17,11 @@
         </div>
         {!! Form::close() !!}
       </div>
-      @foreach ($bookclub->books->chunk(2) as $chunk)
+      @foreach ($bookclub->books->unique()->chunk(2) as $chunk)
           <div class="row">
             @foreach ($chunk as $book)
               <div class="col-md-6">
-                @include('partials._showbook',['statuses' => $book->clubstatus()])
+                @include('partials._showbook',['statuses' => $book->clubstatus($bookclub->id)])
                   <hr>
               </div>
             @endforeach

@@ -30,8 +30,8 @@
     <small>@if(isset($book->category->name)) Category: {{$book->category->name }} , @endif</small>
     <small>@if(isset($book->publisher->name)) Publisher: {{$book->publisher->name }} , @endif</small>
     <small>Status:
-      @forelse($statuses as $count=>$status)
-        {{ $status }} {{$count}}
+      @forelse($statuses as $status=>$count)
+        {{ $count }} {{$status}}
       @empty
         None Available
       @endforelse

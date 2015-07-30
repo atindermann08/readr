@@ -143,12 +143,12 @@ class BookClubController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function showbook($bookClubId, $bookId)
+    public function showBook($bookClubId, $bookId)
     {
       //return \App\Book::
         $user = auth()->check()?auth()->user():new \App\User;
         $book = \App\Book::with('authors','publisher','category', 'language')->findOrFail($bookId);
-        $statuses = $book->clubstatus();
+        $statuses = $book->clubStatus($bookClubId);
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         $request_route = 'bookclubs.books.requestbook';
         return view('bookclubs.books.show')
