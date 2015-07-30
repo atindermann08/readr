@@ -49,7 +49,12 @@ Route::get('bookclubs/{bookClubId}/addbooks',
 
 Route::post('bookclubs/{bookClubId}/books/add',
                 [ 'as' => 'bookclubs.books.store',
-                'uses' => 'BookClubController@storeBooks']);
+                'uses' => 'BookClubController@storeBook']);
+
+Route::get('bookclubs/{bookClubId}/books/{bookId}/remove',
+                [ 'as' => 'bookclubs.books.remove',
+                'uses' => 'BookClubController@removeBook']);
+
 
 Route::resource('authors','AuthorController',['except'=>'destroy']);
 Route::resource('publishers','PublisherController',['except'=>'destroy']);

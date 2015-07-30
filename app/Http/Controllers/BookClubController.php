@@ -229,7 +229,7 @@ class BookClubController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function storeBooks($bookClubId, Request $request)
+    public function storeBook($bookClubId, Request $request)
     {
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
@@ -242,6 +242,29 @@ class BookClubController extends Controller
           $bookclub->books()->attach($bookId, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
         }
         flash('Books added successfully.');
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function removeBook($bookClubId, $bookId, Request $request)
+    {
+        $bookclub = \App\BookClub::findOrFail($bookClubId);
+        // $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+        //
+        // $bookIds = $request->input('bookIds');
+        // // dd($request->all());
+        // foreach($bookIds as $bookId)
+        // {
+        $bookclub->books()->detach($bookId);
+        //   $bookclub->books()->attach($bookId, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
+        // }
+
+        flash('Book removed from club');
         return redirect()->back();
     }
 }

@@ -5,16 +5,15 @@
   <hr/>
   <h4>Book Owners</h4>
   <ul class="list-group">
-    @foreach($book->owners as $owner)
+    @foreach($book->bookclubs as $bookclub)
       <li class="list-group-item">
-        @unless($owner->id == auth()->user()->id)
+
           <span class="pull-right">
-            <a href="{{ route('books.request', $book->id) }}" class=''>
-              Request Book
+            <a href="{{ route('bookclubs.books.remove', [$bookclub->id, $book->id]) }}" class=''>
+              Remove from BookClub
             </a>
           </span>
-        @endunless
-        {{ $owner->name }} ({{ $owner->email }})
+        {{ $bookclub->name }} <small>(created by: {{ $bookclub->admin->name }} )</small>
       </li>
     @endforeach
   </ul>
