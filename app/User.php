@@ -58,7 +58,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isJoinRequestSent($bookClubId)
     {
-
         if(auth()->check() && count(\App\RequestBookClub::where('book_club_id', '=', $bookClubId)
                                         ->where('user_id', '=', auth()->user()->id)
                                         ->get()))
@@ -66,11 +65,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
+    public function isClubAdmin($bookClubId)
+    {
+      $bookclub = \App\BookClub::with('admin')->findOrFail($bookClubId);
+      if(auth()->user()->id == $bookclub->admin->id )
+        return true;
+      return false;
+    }
+
     public function joinClub($bookClubId)
     {
         $this->bookclubs()->detach($bookClubId);
         return $this->bookclubs()->attach($bookClubId);
     }
+
     public function sendJoinRequest($bookClubId)
     {
       \App\RequestBookClub::where('book_club_id', '=', $bookClubId)

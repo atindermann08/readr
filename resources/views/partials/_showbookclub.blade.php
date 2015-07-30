@@ -11,7 +11,7 @@
     <small>{{count($bookclub->books)}} Books</small>
   </div>
   <div class="media-right">
-    @if(auth()->user()->id == $bookclub->admin->id)
+    @if(auth()->user()->isClubAdmin($bookclub->id))
       <a href="{{ route('bookclubs.edit', $bookclub->id) }}" class='btn pull-right'>
         <i class='fa fa-edit'></i>
       </a><br><br>
