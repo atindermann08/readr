@@ -22,4 +22,9 @@ class BookClub extends Model
   public function admin(){
       return $this->belongsTo('\App\User','user_id');
   }
+
+  public function joinrequests(){
+    return $this->belongsTo('\App\RequestBookClub');
+  }
+
 }

@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,6 +52,19 @@
       --}}
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class=' fa fa-bell fa-fw'></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li class='dropdown-header'>Notifications</li>
+              <li role="separator" class="divider"></li>
+              @foreach($notifications as $notification)
+                <li><a href="">My Library</a></li>
+              @endforeach
+              <li role="separator" class="divider"></li>
+            </ul>
+          </li>
           <li><a>Welcome, {{ucfirst(\Auth::user()->name)}}</a></li>
           <li><a href="{{url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a></li>
         @else

@@ -166,6 +166,12 @@ return [
         */
         HieuLe\Active\ActiveServiceProvider::class,
 
+
+
+
+        //view composer service provider
+        App\Providers\ComposerServiceProvider::class,
+
     ],
 
     /*

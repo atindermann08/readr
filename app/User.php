@@ -63,5 +63,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
+    public function clubJoinRequestsReceived(){
+      return $this->hasMany('\App\RequestBookClub', 'owner_id');
+    }
+
+    public function clubJoinRequestsSent(){
+      return $this->hasMany('\App\RequestBookClub');
+    }
+
+    public function notifications()
+    {
+      return ['1', '2'];
+    }
 
 }
