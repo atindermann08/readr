@@ -91,12 +91,13 @@ class BookController extends Controller
           //   $book->bookclubs()->attach($bookclub,['owner_id' => auth()->user()->id]);
           // }
         }
-        else
-        {
-          flash()->error('Please enter atleast one book title');
-          return \Redirect::back();
-        }
       }
+      else
+      {
+        flash()->error('Please enter atleast one book title');
+        return \Redirect::back();
+      }
+    }
 
 
       flash('Book/Books added to your library.');
