@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BookClubJoinRequest extends Model
+class RequestBookClub extends Model
 {
     //
 }
