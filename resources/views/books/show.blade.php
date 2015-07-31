@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-  @include('partials._showbook')
+  @include('partials._showbook', ['page' => 'books'])
   <hr/>
   <h4>Book Clubs</h4>
   <ul class="list-group">
