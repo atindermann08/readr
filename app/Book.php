@@ -104,13 +104,26 @@ class Book extends Model
 		}
 		return $statuses;
 	}
+
 	public function memberOwners($bookClubId)
 	{
-		$all_owners = $this->owners;
 
-		$owners = $all_owners->filter(function ($item) use ($bookClubId) {
-    		return $item->isMember($bookClubId);
-		});
+    // $owners =  $this->belongsToMany('\App\User', 'book_book_club', 'book_id', 'owner_id')->with('status_id', 'book_club_id')->get();
+		// dd($owners);
+		// return $owners;
+		// dd($bookClubId);
+		$ownerIds = \DB::table('book_book_club')
+										->select('owner_id')
+										->where('book_id','=',$this->id)
+										->where('book_club_id', '=', $bookClubId)->get();
+		$ownerIds = array_pluck($ownerIds, 'owner_id');
+		// $all_owners = $this->owners;
+		// $owners = $all_owners->filter(function ($item) use ($bookClubId) {
+    // 		return $item->isMember($bookClubId);
+		// });
+		// dd($ownerIds);
+		$owners = \App\User::findMany($ownerIds);
+		// dd($owners);
 		return $owners;
 	}
 	public function findOrCreateByName($name)

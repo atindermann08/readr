@@ -273,7 +273,12 @@ class BookClubController extends Controller
         // dd($request->all());
         foreach($bookIds as $bookId)
         {
-          $bookclub->books()->detach($bookId);
+          \DB::table('book_book_club')
+                ->where('book_club_id', $bookClubId)
+                ->where('book_id', $bookId)
+                ->where('owner_id', auth()->user()->id)
+                ->delete();
+
           $bookclub->books()->attach($bookId, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
         }
         flash('Books added successfully.');
