@@ -5,8 +5,8 @@ Route::get('/', function () {    return view('welcome');});
 Route::get('/home', function () {    return view('welcome');});
 
 
-Route::get('/api/books', 'BookController@apiBooks');
-Route::get('/api/books/q', 'BookController@searchBooks');
+// Route::get('/api/books', 'BookController@apiBooks');
+// Route::get('/api/books/q', 'BookController@searchBooks');
 
 
 Route::get('/notifications',
@@ -23,7 +23,8 @@ Route::controller('password', 'Auth\PasswordController');
 Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@mylibrary']);
 
 Route::resource('books','BookController',['except'=>'destroy']);
-Route::get('books/addtolibrary/{bookId}',['as' => 'books.addtolibrary', 'uses' => 'BookController@addtolibrary']);
+Route::get('books/{bookId}/addtolibrary',['as' => 'books.addtolibrary', 'uses' => 'BookController@addtolibrary']);
+Route::get('books/{bookId}/removefromlibrary',['as' => 'books.removefromlibrary', 'uses' => 'BookController@removefromlibrary']);
 Route::get('books/request/{bookId}',['as' => 'books.request', 'uses' => 'BookController@request']);
 
 Route::resource('bookclubs','BookClubController',['except'=>'destroy']);

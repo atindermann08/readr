@@ -10,7 +10,7 @@
           <div class="row">
             @foreach ($chunk as $book)
               <div class="col-md-6">
-                  @include('partials._showbook',['statuses' => $book->ownerstatus()])
+                  @include('partials._showbook',['statuses' => $book->ownerstatus(), 'page' => 'books'])
                   <hr>
               </div>
             @endforeach

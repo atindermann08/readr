@@ -21,7 +21,7 @@
           <div class="row">
             @foreach ($chunk as $book)
               <div class="col-md-6">
-                @include('partials._showbook',['statuses' => $book->clubstatus($bookclub->id)])
+                @include('partials._showbook',['statuses' => $book->clubstatus($bookclub->id), 'page' => 'bookclub'])
                   <hr>
               </div>
             @endforeach

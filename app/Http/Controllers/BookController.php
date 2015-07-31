@@ -232,6 +232,15 @@ class BookController extends Controller
           return \Redirect::back();
     }
 
+    public function removefromlibrary($bookId)
+    {
+          auth()->user()->books()->detach($bookId);
+
+          flash('Book removed from library.');
+          return \Redirect::back();
+    }
+
+
     public function request($bookId)
     {
         flash('To be implemented.. Thanks for your patience');
