@@ -169,12 +169,13 @@ class BookClubController extends Controller
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         if($bookclub->is_closed)
         {
-          auth()->user()->sendJoinRequest($bookClubId);
+          $request = auth()->user()->sendJoinRequest($bookClubId);
 
           //generate Notification later extract and make use of events
           $notification = $bookclub->admin->notifications()->create([
               'text' => auth()->user()->name.' sent request to join '.$bookclub->name,
               'url' => route('notifications'),
+              'request_id' => $request->id,
               'is_read' => false
             ]);
           $notification->save();
@@ -214,8 +215,18 @@ class BookClubController extends Controller
     {
         $request = \App\RequestBookClub::with('requestee')->findOrFail($requestId);
         $request->requestee->joinClub($request->book_club_id);
-        $request->delete();
         //fire event send mail;
+        //generate Notification later extract and make use of events
+        \App\Notification::where('request_id', $request->id)->first()->delete();
+        $notification = $request->requestee->notifications()->create([
+            'text' => 'Your request to join '.$request->bookclub->name.' was accepted.',
+            'url' => route('notifications.destroy', 1),
+            'is_read' => false
+          ]);
+        $notification->url = route('notifications.destroy', $notification->id);
+        $notification->save();
+        $request->delete();
+
         flash('Request Accepted succesfully.');
         return redirect()->back();
     }
@@ -228,7 +239,21 @@ class BookClubController extends Controller
      */
     public function rejectJoinRequest($requestId)
     {
-        \App\RequestBookClub::findOrFail($requestId)->delete();
+        $request = \App\RequestBookClub::findOrFail($requestId);
+        \App\Notification::where('request_id', $request->id)->first()->delete();
+        $notification = $request->requestee->notifications()->create([
+            'text' => 'Your request to join '.$request->bookclub->name.' was rejected or canceled.',
+            'url' => route('notifications.destroy', 1),
+            'is_read' => false
+          ]);
+        $notification->url = route('notifications.destroy', $notification->id);
+        $notification->save();
+        // dd($notification);
+
+        $request->delete();
+        //generate Notification later extract and make use of events
+
+
         flash('Request Rejected succesfully.');
         return redirect()->back();
     }

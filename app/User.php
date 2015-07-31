@@ -95,7 +95,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                                       ->delete();
 
       $bookclub = \App\BookClub::findOrFail($bookClubId);
-      $bookclub->joinrequests()->create([
+      return $bookclub->joinrequests()->create([
             'book_club_id' => $bookClubId,
             'user_id' => auth()->user()->id
             ]);
