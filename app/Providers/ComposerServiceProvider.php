@@ -22,7 +22,7 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer('layouts.partials._nav', function ($view) {
               $notifications = [];
               if(\Auth::check()){
-                  $notifications = \Auth::user()->notifications();
+                  $notifications = \Auth::user()->notifications;
               }
               $view->with('notifications', $notifications);
         });

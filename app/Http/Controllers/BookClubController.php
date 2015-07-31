@@ -170,10 +170,20 @@ class BookClubController extends Controller
         if($bookclub->is_closed)
         {
           auth()->user()->sendJoinRequest($bookClubId);
+
+          //generate Notification later extract and make use of events
+          $notification = $bookclub->admin->notifications()->create([
+              'text' => auth()->user()->name.' sent request to join '.$bookclub->name,
+              'url' => route('notifications'),
+              'is_read' => false
+            ]);
+          $notification->save();
+
           flash('Request sent for joining BookClub.');
           return \Redirect::back();
         }
-        else {
+        else
+        {
           auth()->user()->joinClub($bookClubId);
           flash('Book Club Joined. Add your book collection to share with other members.');
           return redirect()->route('bookclubs.books.add',$bookClubId);

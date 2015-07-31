@@ -127,24 +127,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       return $this->hasMany('\App\RequestBookClub');
     }
 
-    public function notifications()
-    {
-      $bookclubs = $this->ownedclubs()->lists('id');
-      $count = \App\RequestBookClub::whereIn('book_club_id', $bookclubs)->get()->count();
-      $requests = 'Request';
-
-      $notifications = [];
-      if($count)
-      {
-        $requests = ($count>1)?'Requests':$requests;
-        $join_notification = [
-                          'type' => 'Book Club Joining '.$requests,
-                          'count' => $count
-                        ];
-        $notifications = [$join_notification];
-      }
-
-      return $notifications;
-    }
+//replaced with notification model and relation with user
+    // public function notifications()
+    // {
+    //   $bookclubs = $this->ownedclubs()->lists('id');
+    //   $count = \App\RequestBookClub::whereIn('book_club_id', $bookclubs)->get()->count();
+    //   $requests = 'Request';
+    //
+    //   $notifications = [];
+    //   if($count)
+    //   {
+    //     $requests = ($count>1)?'Requests':$requests;
+    //     $join_notification = [
+    //                       'type' => 'Book Club Joining '.$requests,
+    //                       'count' => $count
+    //                     ];
+    //     $notifications = [$join_notification];
+    //   }
+    //
+    //   return $notifications;
+    // }
 
 }

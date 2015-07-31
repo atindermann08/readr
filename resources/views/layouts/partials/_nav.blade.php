@@ -60,7 +60,7 @@
               @if(count($notifications))
                 <li class='dropdown-header'>Notifications</li>
                 @foreach($notifications as $notification)
-                  <li><a href="{{ route('notifications') }}">{{ $notification['count'] }} {{ $notification['type'] }}</a></li>
+                  <li><a href="{{ $notification->url }}">{{ $notification->text }} </a></li>
                 @endforeach
               @else
                 <li><a>No Unread Notifications<span></a>
