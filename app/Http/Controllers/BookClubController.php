@@ -63,7 +63,11 @@ class BookClubController extends Controller
           auth()->user()->books()->detach($book->id);
           auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
 
-          $bookclub->books()->detach($book->id);
+          \DB::table('book_book_club')
+                ->where('book_club_id', $bookclub->id)
+                ->where('book_id', $book->id)
+                ->where('owner_id', auth()->user()->id)
+                ->delete();
           $bookclub->books()->attach($book->id, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
         }
       }
@@ -122,7 +126,11 @@ class BookClubController extends Controller
             auth()->user()->books()->detach($book->id);
             auth()->user()->books()->attach($book->id, ['status_id' => $status_id]);
 
-            $bookclub->books()->detach($book->id);
+            \DB::table('book_book_club')
+                  ->where('book_club_id', $bookclub->id)
+                  ->where('book_id', $book->id)
+                  ->where('owner_id', auth()->user()->id)
+                  ->delete();
             $bookclub->books()->attach($book->id, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
           }
         }
