@@ -38,13 +38,15 @@
     </small>
   </div>
   <div class="media-right">
-    <a href="{{ route('books.edit', $book->id) }}" class='btn'>
-        <i class='fa fa-edit'></i>
-    </a>
-    @if(auth()->user()->ownBookClubBook($bookclub->id, $book->id))
-      <a href="{{ route('bookclubs.books.remove', [$bookclub->id, $book->id]) }}" class='btn'>
-          <i class='fa fa-trash'></i>
+    @if(auth()->check())
+      <a href="{{ route('books.edit', $book->id) }}" class='btn'>
+          <i class='fa fa-edit'></i>
       </a>
+      @if(auth()->user()->ownBookClubBook($bookclub->id, $book->id))
+        <a href="{{ route('bookclubs.books.remove', [$bookclub->id, $book->id]) }}" class='btn'>
+            <i class='fa fa-trash'></i>
+        </a>
+      @endif
     @endif
   </div>
 
