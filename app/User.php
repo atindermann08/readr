@@ -41,13 +41,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function books(){
-      return $this->belongsToMany('App\Book')->withPivot('status_id');
+      return $this->belongsToMany('\App\Book')->withPivot('status_id');
     }
 
     public function ownedclubs(){
-      return $this->hasMany('App\BookClub');
+      return $this->hasMany('\App\BookClub');
     }
 
+    public function notifications(){
+      return $this->hasMany('\App\Notification');
+    }
 
     public function isMember($bookClubId)
     {
