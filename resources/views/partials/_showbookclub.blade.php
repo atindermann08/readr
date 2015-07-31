@@ -11,24 +11,26 @@
     <small>{{count($bookclub->books)}} Books</small>
   </div>
   <div class="media-right">
-    @if(auth()->user()->isClubAdmin($bookclub->id))
-      <a href="{{ route('bookclubs.edit', $bookclub->id) }}" class='btn pull-right'>
-        <i class='fa fa-edit'></i>
-      </a><br><br>
-    @endif
-    <p class='pull-right'>
-      @if(auth()->user()->isMember($bookclub->id))
-        <span class='btn btn-default disabled'>Already Member</span>
-      @else
-        @if(auth()->user()->isJoinRequestSent($bookclub->id))
-          <a href="{{ route('bookclubs.requests.cancel', auth()->user()->joinRequest($bookclub->id)->id) }}" class='btn btn-danger'>
-            Cancel Join Request
-          </a>
+    @if(auth()->check())
+      @if(auth()->user()->isClubAdmin($bookclub->id))
+        <a href="{{ route('bookclubs.edit', $bookclub->id) }}" class='btn pull-right'>
+          <i class='fa fa-edit'></i>
+        </a><br><br>
+      @endif
+      <p class='pull-right'>
+        @if(auth()->user()->isMember($bookclub->id))
+          <span class='btn btn-default disabled'>Already Member</span>
         @else
-          @if($bookclub->is_closed)
-            <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-primary'>Send Join Request</a>
+          @if(auth()->user()->isJoinRequestSent($bookclub->id))
+            <a href="{{ route('bookclubs.requests.cancel', auth()->user()->joinRequest($bookclub->id)->id) }}" class='btn btn-danger'>
+              Cancel Join Request
+            </a>
           @else
-            <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-success'>Join Club</a>
+            @if($bookclub->is_closed)
+              <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-primary'>Send Join Request</a>
+            @else
+              <a href="{{ route('bookclubs.join', $bookclub->id) }}" class='btn btn-success'>Join Club</a>
+            @endif
           @endif
         @endif
       @endif
