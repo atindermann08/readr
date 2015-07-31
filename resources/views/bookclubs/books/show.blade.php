@@ -4,7 +4,7 @@
 
 @include('partials._showbookclub')
   <hr/>
-  @include('partials._showbook')
+  @include('partials._showbook', ['page' => 'bookclub'])
   <hr/>
   <h4>Book Owners</h4>
   <ul class="list-group">
