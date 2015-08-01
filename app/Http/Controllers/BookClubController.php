@@ -195,7 +195,7 @@ class BookClubController extends Controller
         {
           auth()->user()->joinClub($bookClubId);
           flash('Book Club Joined. Add your book collection to share with other members.');
-          return redirect()->route('bookclubs.books.add',$bookClubId);
+          return redirect()->route('bookclubs.show',$bookClubId);
         }
     }
 
@@ -307,7 +307,7 @@ class BookClubController extends Controller
               ->where('book_id', $bookId)
               ->where('owner_id', auth()->user()->id)
               ->delete();
-              
+
         flash('Book removed from club');
         return redirect()->back();
     }

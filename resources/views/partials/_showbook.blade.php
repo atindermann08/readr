@@ -29,12 +29,13 @@
     <small>@if(isset($book->language->name)) Language: {{$book->language->name }}, @endif</small>
     <small>@if(isset($book->category->name)) Category: {{$book->category->name }}, @endif</small>
     <small>@if(isset($book->publisher->name)) Publisher: {{$book->publisher->name }}, @endif</small>
-    <small>Status:
-      @forelse($statuses as $status=>$count)
-        {{ $count }} {{$status}}
-      @empty
-        None Available
-      @endforelse
+    <small>@if($statuses->count()) Status:
+            @forelse($statuses as $status=>$count)
+              {{ $count }} {{$status}}
+            @empty
+              None Available
+            @endforelse
+          @endif
     </small>
   </div>
   <div class="media-right">

@@ -148,7 +148,7 @@ class BookController extends Controller
       //return \App\Book::
         $user = auth()->check()?auth()->user():new \App\User;
         $book = App\Book::with('authors','publisher','category', 'language')->findOrFail($id);
-        $statuses = $book->ownerstatus();
+        $statuses = collect([]);//$book->ownerstatus();
         $request_route = 'books.request';
         $bookclubs = $book->bookclubs()->get();
         // dd($bookclubs);
