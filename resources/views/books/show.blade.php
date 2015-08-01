@@ -5,7 +5,7 @@
   <hr/>
   <h4>Book Clubs</h4>
   <ul class="list-group">
-    @foreach($book->bookclubs as $bookclub)
+    @foreach($bookclubs as $bookclub)
       <li class="list-group-item">
 
           <span class="pull-right">

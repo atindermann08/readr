@@ -55,12 +55,19 @@ class Book extends Model
   // public function bookstatuses(){
   //     return $this->hasManyThrough('\App\BookStatus','\App\Bookable','book_id','bookable_id');
   // }
+	// public function scopeMy($query)
+  // {
+  //     return $query->where('user_id', '=', auth()->user()->id);
+  // }
 
 	public function owners(){
       return $this->belongsToMany('\App\User')->withPivot('status_id');
   }
 	public function bookclubs(){
-      return $this->belongsToMany('\App\BookClub')->withPivot('owner_id', 'status_id');
+      return $this->belongsToMany('\App\BookClub', 'book_book_club','book_id','book_club_id')
+									->where('owner_id',auth()->user()->id)
+									->withPivot('owner_id', 'status_id')
+									;
   }
 
 	public function status($bookId, $modelType, $modelId){

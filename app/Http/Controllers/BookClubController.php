@@ -302,8 +302,12 @@ class BookClubController extends Controller
     public function removeBook($bookClubId, $bookId, Request $request)
     {
         $bookclub = \App\BookClub::findOrFail($bookClubId);
-        \DB::delete('DELETE FROM book_book_club WHERE book_id = '.$bookId.' AND book_club_id = '.$bookClubId.' AND owner_id = '.auth()->user()->id.';');
-
+        \DB::table('book_book_club')
+              ->where('book_club_id', $bookClubId)
+              ->where('book_id', $bookId)
+              ->where('owner_id', auth()->user()->id)
+              ->delete();
+              
         flash('Book removed from club');
         return redirect()->back();
     }
