@@ -27,6 +27,14 @@ class BookClub extends Model
     return $this->hasMany('\App\RequestBookClub');
   }
 
-  
+  public function bookStatus($bookId)
+  {
+    return $this->belongsToMany('\App\BookStatus', 'book_book_club','book_club_id','status_id')
+                ->where('owner_id',auth()->user()->id)
+                ->where('book_id', $bookId)
+                ->withPivot('owner_id', 'status_id')->first()
+                ;
+  }
+
 
 }

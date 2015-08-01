@@ -151,9 +151,10 @@ class BookController extends Controller
         $statuses = collect([]);//$book->ownerstatus();
         $request_route = 'books.request';
         $bookclubs = $book->bookclubs()->get();
+        $book_statuses = \App\BookStatus::all()->lists('name', 'id');
         // dd($bookclubs);
         return view('books.show')
-              ->with(compact('book', 'bookclubs', 'user', 'statuses', 'request_route'));
+              ->with(compact('book', 'bookclubs', 'user', 'statuses', 'request_route', 'book_statuses'));
     }
 
     /**

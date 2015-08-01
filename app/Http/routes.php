@@ -65,6 +65,9 @@ Route::get('bookclubs/{bookClubId}/books/{bookId}/remove',
                 [ 'as' => 'bookclubs.books.remove',
                 'uses' => 'BookClubController@removeBook']);
 
+Route::put('bookclubs/{bookClubId}/books/{bookId}/status/update',
+                [ 'as' => 'bookclubs.books.status.update',
+                'uses' => 'BookClubController@bookStatusUpdate']);
 
 Route::resource('authors','AuthorController',['except'=>'destroy']);
 Route::resource('publishers','PublisherController',['except'=>'destroy']);

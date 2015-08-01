@@ -311,4 +311,24 @@ class BookClubController extends Controller
         flash('Book removed from club');
         return redirect()->back();
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function bookStatusUpdate($bookClubId, $bookId, Request $request)
+    {
+      $statusId = $request->input('book_status');
+      // dd($statusId);
+        \DB::table('book_book_club')
+              ->where('book_club_id', $bookClubId)
+              ->where('book_id', $bookId)
+              ->where('owner_id', auth()->user()->id)
+              ->update(['status_id' => $statusId]);
+
+        flash('Book status updated');
+        return redirect()->back();
+    }
 }
