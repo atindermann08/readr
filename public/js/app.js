@@ -1,5 +1,6 @@
 $('div.alert').not('.alert-important').delay(3000).slideUp(300);
 
+$(".single-select").select2();
 $(".book-title-select").select2({
   allowClear: true,
   placeholder: 'Add Book title(s) to your library(separated by comma)',
