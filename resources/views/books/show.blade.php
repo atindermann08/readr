@@ -13,7 +13,7 @@
               Remove from BookClub
             </a>
           </span>
-        {{ $bookclub->name }} <small>(created by: {{ $bookclub->admin->name }} )</small>
+        <a href="{{ route('bookclubs.show', $bookclub->id) }}">{{ $bookclub->name }}</a> <small>(created by: {{ $bookclub->admin->name }} )</small>
       </li>
     @endforeach
   </ul>
