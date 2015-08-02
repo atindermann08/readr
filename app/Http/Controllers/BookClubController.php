@@ -139,12 +139,6 @@ class BookClubController extends Controller
     }
 
 
-    public function requestbook($bookId, $bookclubId)
-    {
-        flash('To be implemented.. Thanks for your patience');
-      return \Redirect::back();
-    }
-
     /**
      * Display the specified resource.
      *
@@ -197,6 +191,34 @@ class BookClubController extends Controller
           auth()->user()->joinClub($bookClubId);
           flash('Book Club Joined. Add your book collection to share with other members.');
           return redirect()->route('bookclubs.show',$bookClubId);
+        }
+    }
+
+
+    public function requestbook($bookClubId, $bookId, $userId)
+    {
+        $bookclub = \App\BookClub::findOrFail($bookClubId);
+        $book = \App\Book::findOrFail($bookId);
+        if($bookclub->isMember())
+        {
+          $request = auth()->user()->sendBookRequest($bookClubId, $bookId, $userId);
+          $owner = \App\User::findOrFail($userId);
+          //generate Notification later extract and make use of events
+          $notification = $owner->notifications()->create([
+              'text' => auth()->user()->name.' sent request for ' . $book->title . $bookclub->name . ' in book club.',
+              'url' => route('notifications'),
+              'request_id' => $request->id,
+              'is_read' => false
+            ]);
+          $notification->save();
+
+          flash('Request sent for Book.');
+          return \Redirect::back();
+        }
+        else
+        {
+          flash('You need to join this club before requesting books.');
+          return redirect()->back();
         }
     }
 

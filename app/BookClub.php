@@ -41,5 +41,12 @@ class BookClub extends Model
                 ;
   }
 
+  public function isMember($user = null)
+  {
+      if(!$user) $user = auth()->user();
+      if(count($user->bookclubs()->where('book_club_id','=',$this->id)->get()))
+        return true;
+      return false;
+  }
 
 }

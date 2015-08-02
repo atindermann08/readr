@@ -67,12 +67,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
           return true;
         return false;
     }
-    public function joinRequest($bookClubId)
-    {
-        return \App\RequestBookClub::where('book_club_id', '=', $bookClubId)
-                                        ->where('user_id', '=', auth()->user()->id)
-                                        ->first();
-    }
 
     public function isClubAdmin($bookClubId)
     {
@@ -101,6 +95,36 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ]);
     }
 
+    public function sendBookRequest($bookClubId ,$bookId, $userId)
+    {
+      \App\RequestBookClubBook::where('book_club_id', '=', $bookClubId)
+                                      ->where('book_id', '=', $bookId)
+                                      ->where('user_id', '=', auth()->user()->id)
+                                      ->where('owner_id', '=', $userId)
+                                      ->delete();
+
+      $bookclub = \App\BookClub::findOrFail($bookClubId);
+      return auth()->user()->bookClubBookRequestsSent()->create([
+            'book_club_id' => $bookClubId,
+            'book_id' => $bookId,
+            'owner_id' => $userId,
+            ]);
+    }
+
+    public function bookClubBookRequestsSent(){
+      return $this->hasMany('\App\RequestBookClub', 'user_id');
+    }
+
+    public function bookClubBookRequestsReceived(){
+      return $this->hasMany('\App\RequestBookClub', 'owner_id');
+    }
+
+    public function joinRequest($bookClubId)
+    {
+        return \App\RequestBookClub::where('book_club_id', '=', $bookClubId)
+                                        ->where('user_id', '=', auth()->user()->id)
+                                        ->first();
+    }
 
     public function ownBook($bookId)
     {

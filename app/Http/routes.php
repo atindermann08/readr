@@ -29,7 +29,7 @@ Route::get('/mylibrary', ['as'=>'mylibrary', 'uses'=>'BookController@mylibrary']
 Route::resource('books','BookController',['except'=>'destroy']);
 Route::get('books/{bookId}/addtolibrary',['as' => 'books.addtolibrary', 'uses' => 'BookController@addtolibrary']);
 Route::get('books/{bookId}/removefromlibrary',['as' => 'books.removefromlibrary', 'uses' => 'BookController@removefromlibrary']);
-Route::get('books/request/{bookId}',['as' => 'books.request', 'uses' => 'BookController@request']);
+// Route::get('books/request/{bookId}',['as' => 'books.request', 'uses' => 'BookController@request']);
 
 Route::resource('bookclubs','BookClubController',['except'=>'destroy']);
 Route::get('bookclubs/join/{bookClubId}',
@@ -50,9 +50,11 @@ Route::get('bookclubs/requests/{requestId}/cancel',
 Route::get('bookclubs/{bookClubId}/books/{bookId}',
               [ 'as' => 'bookclubs.books.show',
                 'uses' => 'BookClubController@showBook']);
-Route::get('bookclubs/{bookClubId}/requestbook/{bookId}',
+
+Route::get('bookclubs/{bookClubId}/book/{bookId}/user/{userId}/request',
               [ 'as' => 'bookclubs.books.requestbook',
                 'uses' => 'BookClubController@requestbook']);
+
 Route::get('bookclubs/{bookClubId}/addbooks',
               [ 'as' => 'bookclubs.books.add',
                 'uses' => 'BookClubController@addBooks']);

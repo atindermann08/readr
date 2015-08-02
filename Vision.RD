@@ -18,5 +18,4 @@ user can share his material
 - implement search
 - implement images
 
-implement book status change for owned books in club and outside
 implement request in club

@@ -17,7 +17,7 @@
                 {!! Form::select('book_status', $book_statuses, $bookclub->bookStatus($book->id)->id, ['class' => 'single-select', 'onchange' => 'this.form.submit()' ]) !!}
               {!! Form::close() !!}
             @else
-              <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id]) }}" class=''>
+              <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id, $owner->id]) }}" class=''>
                 Request Book
               </a>
             @endif
