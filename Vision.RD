@@ -10,12 +10,6 @@ user can share his material
 
 
 
-- allow to request book if member of club and book is Available
-- allow multiple requests for single book
-- allow owner to approve single request
-- show notification to owner for request and other user for approval and disapproval
 - later make different links clickable like language author status to show books for that
 - implement search
 - implement images
-
-implement request in club

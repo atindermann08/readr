@@ -6041,6 +6041,9 @@ body {
   padding: 20px;
   background-color: #fafbf8; }
 
+.notifications-active {
+  color: chocolate; }
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
