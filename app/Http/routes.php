@@ -47,6 +47,16 @@ Route::get('bookclubs/requests/{requestId}/cancel',
                 'uses' => 'BookClubController@rejectJoinRequest']);
 
 
+Route::get('bookclubs/books/requests/{requestId}/accept',
+                [ 'as' => 'bookclubs.books.requests.accept',
+                'uses' => 'BookClubController@acceptBookRequest']);
+Route::get('bookclubs/books/requests/{requestId}/reject',
+                [ 'as' => 'bookclubs.books.requests.reject',
+                'uses' => 'BookClubController@rejectBookRequest']);
+Route::get('bookclubs/books/requests/{requestId}/cancel',
+                [ 'as' => 'bookclubs.books.requests.cancel',
+                'uses' => 'BookClubController@rejectBookRequest']);
+
 Route::get('bookclubs/{bookClubId}/books/{bookId}',
               [ 'as' => 'bookclubs.books.show',
                 'uses' => 'BookClubController@showBook']);

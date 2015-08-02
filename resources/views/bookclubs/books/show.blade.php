@@ -17,9 +17,19 @@
                 {!! Form::select('book_status', $book_statuses, $bookclub->bookStatus($book->id)->id, ['class' => 'single-select', 'onchange' => 'this.form.submit()' ]) !!}
               {!! Form::close() !!}
             @else
-              <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id, $owner->id]) }}" class=''>
-                Request Book
-              </a>
+              @if(auth()->user()->hasBorrowedBook($bookclub->id, $book->id))
+                <span class='btn'>
+                  Borrowed
+                </span>
+              @elseif(auth()->user()->isBookRequested($bookclub->id, $book->id))
+                <a href="{{ route('bookclubs.books.requests.cancel', auth()->user()->bookRequest($bookclub->id, $book->id)->id) }}" class=''>
+                  Cancel Request
+                </a>
+              @else
+                <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id, $owner->id]) }}" class=''>
+                  Request Book
+                </a>
+              @endif
             @endif
           </span>
         @endif

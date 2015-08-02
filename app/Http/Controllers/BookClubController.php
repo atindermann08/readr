@@ -176,9 +176,10 @@ class BookClubController extends Controller
 
           //generate Notification later extract and make use of events
           $notification = $bookclub->admin->notifications()->create([
-              'text' => auth()->user()->name.' sent request to join '.$bookclub->name,
+              'text' => auth()->user()->name . ' sent request to join ' . $bookclub->name,
               'url' => route('notifications'),
               'request_id' => $request->id,
+              'type' => 'RequestBookClub',
               'is_read' => false
             ]);
           $notification->save();
@@ -207,6 +208,7 @@ class BookClubController extends Controller
           $notification = $owner->notifications()->create([
               'text' => auth()->user()->name.' sent request for ' . $book->title . $bookclub->name . ' in book club.',
               'url' => route('notifications'),
+              'type' => 'RequestBookClubBook',
               'request_id' => $request->id,
               'is_read' => false
             ]);
@@ -271,7 +273,7 @@ class BookClubController extends Controller
     public function rejectJoinRequest($requestId)
     {
         $request = \App\RequestBookClub::findOrFail($requestId);
-        \App\Notification::where('request_id', $request->id)->first()->delete();
+        \App\Notification::where('request_id', $requestId)->first()->delete();
         $notification = $request->requestee->notifications()->create([
             'text' => 'Your request to join '.$request->bookclub->name.' was rejected or canceled.',
             'url' => route('notifications.destroy', 1),
@@ -288,6 +290,63 @@ class BookClubController extends Controller
         flash('Request Rejected succesfully.');
         return redirect()->back();
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function acceptBookRequest($requestId)
+    {
+        $request = \App\RequestBookClubBook::with('requestee')->findOrFail($requestId);
+        $request->requestee->borrowBook($request->book_club_id, $request->book->id, $request->owner->id);
+        //fire event send mail;
+        //generate Notification later extract and make use of events
+        \App\Notification::where('request_id', $request->id)->first()->delete();
+        $notification = $request->requestee->notifications()->create([
+            'text' => 'Your request for ' . $request->book->title . ' from BookClub ' . $request->bookclub->name . ' was accepted.',
+            'url' => route('notifications.destroy', 1),
+            'is_read' => false
+          ]);
+        $notification->url = route('notifications.destroy', $notification->id);
+        $notification->save();
+        $request->delete();
+
+        flash('Request Accepted succesfully.');
+        return redirect()->back();
+    }
+
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function rejectBookRequest($requestId)
+    {
+        $request = \App\RequestBookClubBook::findOrFail($requestId);
+        \App\Notification::where('request_id', $requestId)->first()->delete();
+        $notification = $request->requestee->notifications()->create([
+            'text' => 'Your request for ' . $request->book->title . ' from BookClub ' . $request->bookclub->name . ' was rejected or canceled.',
+            'url' => route('notifications.destroy', 1),
+            'is_read' => false
+          ]);
+        $notification->url = route('notifications.destroy', $notification->id);
+        $notification->save();
+        // dd($notification);
+
+        $request->delete();
+        //generate Notification later extract and make use of events
+
+
+        flash('Request Rejected succesfully.');
+        return redirect()->back();
+    }
+
 
     /**
      * Display the specified resource.

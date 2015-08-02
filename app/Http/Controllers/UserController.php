@@ -97,11 +97,13 @@ class UserController extends Controller
     */
     public function showNotifications()
     {
-      $requests = auth()->user()->clubJoinRequestsReceived();
+      $clubRequests = auth()->user()->clubJoinRequestsReceived();
+      $bookRequests = auth()->user()->bookClubBookRequestsReceived();
+      // dd($bookRequests);
       // $requests->load('bookclub', 'requestee');
       // return ($requests);
       return view('notifications')
-                ->with(compact('requests'));
+                ->with(compact('clubRequests', 'bookRequests'));
     }
 
 }

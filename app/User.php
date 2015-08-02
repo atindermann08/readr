@@ -52,11 +52,46 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       return $this->hasMany('\App\Notification');
     }
 
+    public function borrowedBooks(){
+      return $this->belongsToMany('\App\Book', 'borrowed_books')->withPivot('owner_id', 'book_club_id');
+    }
+
     public function isMember($bookClubId)
     {
         if(count($this->bookclubs()->where('book_club_id','=',$bookClubId)->get()))
           return true;
         return false;
+    }
+
+    public function isBookRequested($bookClubId, $bookId)
+    {
+      if(auth()->check() && count(\App\RequestBookClubBook::where('book_club_id', '=', $bookClubId)
+                                      ->where('book_id', '=', $bookId)
+                                      ->where('user_id', '=', auth()->user()->id)
+                                      ->get()))
+        return true;
+      return false;
+    }
+
+    public function hasBorrowedBook($bookClubId, $bookId)
+    {
+        if(count($this->borrowedBooks()->where('book_club_id','=',$bookClubId)->where('book_id', '=', $bookId)->get()))
+          return true;
+        return false;
+    }
+
+    public function borrowBook($bookClubId, $bookId, $ownerId)
+    {
+      $this->borrowedBooks()->detach($bookId);
+      return $this->borrowedBooks()->attach($bookId, ['owner_id' => $ownerId, 'book_club_id' => $bookClubId]);
+    }
+
+    public function bookRequest($bookClubId, $bookId)
+    {
+        return \App\RequestBookClubBook::where('book_club_id', '=', $bookClubId)
+                                        ->where('book_id', '=', $bookId)
+                                        ->where('user_id', '=', auth()->user()->id)
+                                        ->first();
     }
 
     public function isJoinRequestSent($bookClubId)
@@ -112,12 +147,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function bookClubBookRequestsSent(){
-      return $this->hasMany('\App\RequestBookClub', 'user_id');
+      return $this->hasMany('\App\RequestBookClubBook', 'user_id');
     }
 
     public function bookClubBookRequestsReceived(){
-      return $this->hasMany('\App\RequestBookClub', 'owner_id');
+      return $this->hasMany('\App\RequestBookClubBook', 'owner_id')->get();//->where('type', 'RequestBookClubBook');
     }
+
+
 
     public function joinRequest($bookClubId)
     {
