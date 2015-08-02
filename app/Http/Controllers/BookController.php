@@ -152,8 +152,6 @@ class BookController extends Controller
         $request_route = 'books.request';
         $bookclubs = $book->bookclubs()->my()->get();
 
-        // dd($bookclubs);
-
         $book_statuses = \App\BookStatus::all()->lists('name', 'id');
         // dd($bookclubs);
         return view('books.show')

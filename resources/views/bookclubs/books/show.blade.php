@@ -10,15 +10,19 @@
   <ul class="list-group">
     @foreach($book->memberOwners($bookclub->id) as $owner)
       <li class="list-group-item">
-        @unless($owner->id == auth()->user()->id)
-          @if(auth()->user()->isMember($bookclub->id))
-            <span class="pull-right">
+        @if(auth()->user()->isMember($bookclub->id))
+          <span class="pull-right">
+            @if($owner->id == auth()->user()->id)
+              {!! Form::open(['route' => ['bookclubs.books.status.update', $bookclub->id, $book->id], 'method' => 'put']) !!}
+                {!! Form::select('book_status', $book_statuses, $bookclub->bookStatus($book->id)->id, ['class' => 'single-select', 'onchange' => 'this.form.submit()' ]) !!}
+              {!! Form::close() !!}
+            @else
               <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id]) }}" class=''>
                 Request Book
               </a>
-            </span>
-          @endif
-        @endunless
+            @endif
+          </span>
+        @endif
         {{ $owner->name }} ({{ $owner->email }})
       </li>
     @endforeach

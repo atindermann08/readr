@@ -159,8 +159,9 @@ class BookClubController extends Controller
         $statuses = $book->clubStatus($bookClubId);
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         $request_route = 'bookclubs.books.requestbook';
+        $book_statuses = \App\BookStatus::all()->lists('name', 'id');
         return view('bookclubs.books.show')
-              ->with(compact('book', 'bookclub' ,'user', 'statuses', 'request_route'));
+              ->with(compact('book', 'bookclub' ,'user', 'statuses', 'request_route', 'book_statuses'));
     }
 
     /**
