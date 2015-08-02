@@ -16,20 +16,22 @@
               {!! Form::open(['route' => ['bookclubs.books.status.update', $bookclub->id, $book->id], 'method' => 'put']) !!}
                 {!! Form::select('book_status', $book_statuses, $bookclub->bookStatus($book->id)->id, ['class' => 'single-select', 'onchange' => 'this.form.submit()' ]) !!}
               {!! Form::close() !!}
+            @elseif(auth()->user()->hasBorrowedBook($bookclub->id, $book->id))
+              <span class='btn'>
+                Borrowed
+              </span>
+            @elseif($owner->isBorrowed($bookclub->id, $book->id))
+              <span class='btn'>
+                Not Available
+              </span>
+            @elseif(auth()->user()->isBookRequested($bookclub->id, $book->id))
+              <a href="{{ route('bookclubs.books.requests.cancel', auth()->user()->bookRequest($bookclub->id, $book->id)->id) }}" class=''>
+                Cancel Request
+              </a>
             @else
-              @if(auth()->user()->hasBorrowedBook($bookclub->id, $book->id))
-                <span class='btn'>
-                  Borrowed
-                </span>
-              @elseif(auth()->user()->isBookRequested($bookclub->id, $book->id))
-                <a href="{{ route('bookclubs.books.requests.cancel', auth()->user()->bookRequest($bookclub->id, $book->id)->id) }}" class=''>
-                  Cancel Request
-                </a>
-              @else
-                <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id, $owner->id]) }}" class=''>
-                  Request Book
-                </a>
-              @endif
+              <a href="{{ route('bookclubs.books.requestbook', [$bookclub->id, $book->id, $owner->id]) }}" class=''>
+                Request Book
+              </a>
             @endif
           </span>
         @endif

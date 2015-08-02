@@ -44,6 +44,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       return $this->belongsToMany('\App\Book')->withPivot('status_id');
     }
 
+    public function borrowedBook(){
+      return $this->belongsToMany('\App\Book', 'borrowed_books')->withPivot('book_club_id', 'owner_id');
+    }
+
     public function ownedclubs(){
       return $this->hasMany('\App\BookClub');
     }
@@ -53,7 +57,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function borrowedBooks(){
-      return $this->belongsToMany('\App\Book', 'borrowed_books')->withPivot('owner_id', 'book_club_id');
+      return $this->belongsToMany('\App\Book', 'borrowed_books', 'owner_id')->withPivot('owner_id', 'book_club_id');
     }
 
     public function isMember($bookClubId)
@@ -79,6 +83,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
           return true;
         return false;
     }
+
+  	public function isBorrowed($bookClubId, $bookId)
+  	{
+      // dd($this->borrowedBooks()->get());
+  		if($this->borrowedBooks()->where('book_club_id', $bookClubId)->where('book_id', $bookId)->get()->count())
+  		  return true;
+      return false;
+  	}
 
     public function borrowBook($bookClubId, $bookId, $ownerId)
     {

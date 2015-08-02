@@ -52,6 +52,12 @@ class Book extends Model
   public function users(){
       return $this->belongsToMany('\App\User');
   }
+  public function borrowedBy(){
+      return $this->belongsToMany('\App\User');
+  }
+  public function borrowedFrom(){
+      return $this->belongsToMany('\App\BookClub');
+  }
   // public function bookstatuses(){
   //     return $this->hasManyThrough('\App\BookStatus','\App\Bookable','book_id','bookable_id');
   // }
@@ -138,5 +144,6 @@ class Book extends Model
 		//to be implemented
 		return false;
 	}
+
 
 }
