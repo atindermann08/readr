@@ -3,7 +3,7 @@
 @section('content')
     @include('partials._showbookclub')
       <hr/>
-      @if(auth()->user()->isMember($bookclub->id))
+      @if(auth()->check() && (auth()->user()->isMember($bookclub->id)))
         <div class="row">
           {!! Form::open(['route' => ['bookclubs.books.store', $bookclub->id]]) !!}
           <div class="col-md-6">
@@ -23,7 +23,7 @@
           <div class="row">
             @foreach ($chunk as $book)
               <div class="col-md-6">
-                @include('partials._showbook',['statuses' => $book->clubstatus($bookclub->id), 'page' => 'bookclub'])
+                @include('partials._showbook',['statuses' => $book->clubStatus($bookclub->id), 'page' => 'bookclub'])
                   <hr>
               </div>
             @endforeach

@@ -150,7 +150,10 @@ class BookController extends Controller
         $book = App\Book::with('authors','publisher','category', 'language')->findOrFail($id);
         $statuses = collect([]);//$book->ownerstatus();
         $request_route = 'books.request';
-        $bookclubs = $book->bookclubs()->get();
+        $bookclubs = $book->bookclubs()->my()->get();
+
+        // dd($bookclubs);
+
         $book_statuses = \App\BookStatus::all()->lists('name', 'id');
         // dd($bookclubs);
         return view('books.show')

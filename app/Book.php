@@ -57,7 +57,7 @@ class Book extends Model
   // }
 	// public function scopeMy($query)
   // {
-  //     return $query->where('user_id', '=', auth()->user()->id);
+  //     return $query->where('owner_id', '=', auth()->user()->id);
   // }
 
 	public function owners(){
@@ -65,7 +65,7 @@ class Book extends Model
   }
 	public function bookclubs(){
       return $this->belongsToMany('\App\BookClub', 'book_book_club','book_id','book_club_id')
-									->where('owner_id',auth()->user()->id)
+									// ->where('owner_id',auth()->user()->id)
 									->withPivot('owner_id', 'status_id')
 									;
   }

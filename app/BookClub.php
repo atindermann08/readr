@@ -23,6 +23,11 @@ class BookClub extends Model
       return $this->belongsTo('\App\User','user_id');
   }
 
+  public function scopeMy($query)
+  {
+      return $query->where('owner_id', '=', auth()->user()->id);
+  }
+
   public function joinrequests(){
     return $this->hasMany('\App\RequestBookClub');
   }
