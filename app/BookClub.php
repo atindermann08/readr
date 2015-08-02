@@ -40,7 +40,17 @@ class BookClub extends Model
                 ->withPivot('owner_id', 'status_id')->first()
                 ;
   }
+  public function changeStatus($bookId, $ownerId, $status)
+  {
+    $statusId = \App\BookStatus::where('name', $status)->first()->id;
+    \DB::table('book_book_club')
+          ->where('book_club_id', $this->id)
+          ->where('book_id', $bookId)
+          ->where('owner_id', $ownerId)
+          ->update(['status_id' => $statusId]);
 
+    return true;
+  }
   public function isMember($user = null)
   {
       if(!$user) $user = auth()->user();

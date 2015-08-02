@@ -312,11 +312,37 @@ class BookClubController extends Controller
         $notification->url = route('notifications.destroy', $notification->id);
         $notification->save();
         $request->delete();
-
+        $book = $request->bookclub->changeStatus($request->book->id, $request->owner->id, 'Not Available');
         flash('Request Accepted succesfully.');
         return redirect()->back();
     }
 
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function bookReceived($bookClubId, $bookId)
+    {
+        // $request = \App\RequestBookClubBook::with('requestee')->findOrFail($requestId);
+        // $request->requestee->borrowBook($request->book_club_id, $request->book->id, $request->owner->id);
+        // //fire event send mail;
+        // //generate Notification later extract and make use of events
+        // \App\Notification::where('request_id', $request->id)->first()->delete();
+        // $notification = $request->requestee->notifications()->create([
+        //     'text' => 'Your request for ' . $request->book->title . ' from BookClub ' . $request->bookclub->name . ' was accepted.',
+        //     'url' => route('notifications.destroy', 1),
+        //     'is_read' => false
+        //   ]);
+        // $notification->url = route('notifications.destroy', $notification->id);
+        // $notification->save();
+        // $request->delete();
+        //
+        // flash('Request Accepted succesfully.');
+        // return redirect()->back();
+    }
 
 
 

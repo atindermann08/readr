@@ -13,14 +13,24 @@
         @if(auth()->user()->isMember($bookclub->id))
           <span class="pull-right">
             @if($owner->id == auth()->user()->id)
-              {!! Form::open(['route' => ['bookclubs.books.status.update', $bookclub->id, $book->id], 'method' => 'put']) !!}
-                {!! Form::select('book_status', $book_statuses, $bookclub->bookStatus($book->id)->id, ['class' => 'single-select', 'onchange' => 'this.form.submit()' ]) !!}
-              {!! Form::close() !!}
+              @if($owner->isBorrowed($bookclub->id, $book->id))
+                <a href="{{ route('bookclubs.books.received', [$bookclub->id, $book->id]) }}" class=''>
+                  Received Back
+                </a>
+              @else
+                {!! Form::open(['route' => ['bookclubs.books.status.update', $bookclub->id, $book->id], 'method' => 'put']) !!}
+                  {!! Form::select('book_status', $book_statuses, $bookclub->bookStatus($book->id)->id, ['class' => 'single-select', 'onchange' => 'this.form.submit()' ]) !!}
+                {!! Form::close() !!}
+              @endif
             @elseif(auth()->user()->hasBorrowedBook($bookclub->id, $book->id))
               <span class='btn'>
                 Borrowed
               </span>
             @elseif($owner->isBorrowed($bookclub->id, $book->id))
+              <span class='btn'>
+                Borrowed By Someone
+              </span>
+            @elseif($owner->isNotAvailable($bookclub->id, $book->id))
               <span class='btn'>
                 Not Available
               </span>

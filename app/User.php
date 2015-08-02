@@ -44,8 +44,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       return $this->belongsToMany('\App\Book')->withPivot('status_id');
     }
 
-    public function borrowedBook(){
-      return $this->belongsToMany('\App\Book', 'borrowed_books')->withPivot('book_club_id', 'owner_id');
+    public function givenBooks(){
+      return $this->belongsToMany('\App\Book', 'borrowed_books', 'owner_id')->withPivot('book_club_id', 'user_id');
+    }
+
+    public function booksInClubs(){
+      return $this->belongsToMany('\App\Book', 'book_book_club', 'owner_id')->withPivot('book_club_id', 'owner_id');
     }
 
     public function ownedclubs(){
@@ -57,8 +61,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function borrowedBooks(){
-      return $this->belongsToMany('\App\Book', 'borrowed_books', 'owner_id')->withPivot('owner_id', 'book_club_id');
+      return $this->belongsToMany('\App\Book', 'borrowed_books', 'user_id')->withPivot('owner_id', 'book_club_id');
     }
+
+    // public function scopeAvailable($query)
+    // {
+    //     $statusId = \App\BookStatus::where('name', 'Available')->first()->id;
+    //     return $query->where('status_id', $statusId);
+    // }
+    //
+    // public function scopeNotAvailable($query)
+    // {
+    //     $statusId = \App\BookStatus::where('name', 'Not Available')->first()->id;
+    //     return $query->where('status_id', $statusId);
+    // }
 
     public function isMember($bookClubId)
     {
@@ -86,8 +102,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
   	public function isBorrowed($bookClubId, $bookId)
   	{
+  		if($this->givenBooks()->where('book_club_id', $bookClubId)->where('book_id', $bookId)->get()->count())
+  		  return true;
+      return false;
+  	}
+
+  	public function isAvailable($bookClubId, $bookId)
+  	{
       // dd($this->borrowedBooks()->get());
-  		if($this->borrowedBooks()->where('book_club_id', $bookClubId)->where('book_id', $bookId)->get()->count())
+      $statusId = \App\BookStatus::where('name', 'Available')->first()->id;
+  		if($this->booksInClubs()->where('book_club_id', $bookClubId)->where('book_id', $bookId)->where('status_id', $statusId)->get()->count())
+  		  return true;
+      return false;
+  	}
+
+  	public function isNotAvailable($bookClubId, $bookId)
+  	{
+      // dd($this->borrowedBooks()->get());
+      $statusId = \App\BookStatus::where('name', 'Not Available')->first()->id;
+  		if($this->booksInClubs()->where('book_club_id', $bookClubId)->where('book_id', $bookId)->where('status_id', $statusId)->get()->count())
   		  return true;
       return false;
   	}

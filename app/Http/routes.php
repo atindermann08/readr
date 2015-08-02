@@ -4,6 +4,9 @@
 Route::get('/', function () {    return view('welcome');});
 Route::get('/home', function () {    return view('welcome');});
 
+Route::get('/test', function () {
+   \App\BookClub::find(5)->changeStatus(2,2 , 'Not Available');
+});
 
 // Route::get('/api/books', 'BookController@apiBooks');
 // Route::get('/api/books/q', 'BookController@searchBooks');
@@ -80,6 +83,10 @@ Route::get('bookclubs/{bookClubId}/books/{bookId}/remove',
 Route::put('bookclubs/{bookClubId}/books/{bookId}/status/update',
                 [ 'as' => 'bookclubs.books.status.update',
                 'uses' => 'BookClubController@bookStatusUpdate']);
+
+Route::put('bookclubs/{bookClubId}/books/{bookId}/received',
+                [ 'as' => 'bookclubs.books.received',
+                'uses' => 'BookClubController@bookReceived']);
 
 Route::resource('authors','AuthorController',['except'=>'destroy']);
 Route::resource('publishers','PublisherController',['except'=>'destroy']);
