@@ -5,7 +5,7 @@ Route::get('/', function () {    return view('welcome');});
 Route::get('/home', function () {    return view('welcome');});
 
 Route::get('/test', function () {
-   \App\BookClub::find(5)->changeStatus(2,2 , 'Not Available');
+   dd(auth()->user()->givenBooks()->where('book_club_id', 5)->detach(2));//->delete();
 });
 
 // Route::get('/api/books', 'BookController@apiBooks');
@@ -84,7 +84,7 @@ Route::put('bookclubs/{bookClubId}/books/{bookId}/status/update',
                 [ 'as' => 'bookclubs.books.status.update',
                 'uses' => 'BookClubController@bookStatusUpdate']);
 
-Route::put('bookclubs/{bookClubId}/books/{bookId}/received',
+Route::get('bookclubs/{bookClubId}/books/{bookId}/users/{ownerId}/received',
                 [ 'as' => 'bookclubs.books.received',
                 'uses' => 'BookClubController@bookReceived']);
 

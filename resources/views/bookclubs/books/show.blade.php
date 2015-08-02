@@ -14,7 +14,7 @@
           <span class="pull-right">
             @if($owner->id == auth()->user()->id)
               @if($owner->isBorrowed($bookclub->id, $book->id))
-                <a href="{{ route('bookclubs.books.received', [$bookclub->id, $book->id]) }}" class=''>
+                <a href="{{ route('bookclubs.books.received', [$bookclub->id, $book->id, $owner->id]) }}" class=''>
                   Received Back
                 </a>
               @else

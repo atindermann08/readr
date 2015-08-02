@@ -324,24 +324,13 @@ class BookClubController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function bookReceived($bookClubId, $bookId)
+    public function bookReceived($bookClubId, $bookId, $ownerId)
     {
-        // $request = \App\RequestBookClubBook::with('requestee')->findOrFail($requestId);
-        // $request->requestee->borrowBook($request->book_club_id, $request->book->id, $request->owner->id);
-        // //fire event send mail;
-        // //generate Notification later extract and make use of events
-        // \App\Notification::where('request_id', $request->id)->first()->delete();
-        // $notification = $request->requestee->notifications()->create([
-        //     'text' => 'Your request for ' . $request->book->title . ' from BookClub ' . $request->bookclub->name . ' was accepted.',
-        //     'url' => route('notifications.destroy', 1),
-        //     'is_read' => false
-        //   ]);
-        // $notification->url = route('notifications.destroy', $notification->id);
-        // $notification->save();
-        // $request->delete();
-        //
-        // flash('Request Accepted succesfully.');
-        // return redirect()->back();
+      $bookclub = \App\BookClub::findOrFail($bookClubId);
+      $bookclub->changeStatus($bookId, $ownerId, 'Available');
+      auth()->user()->givenBooks()->where('book_club_id', $bookClubId)->detach($bookId);
+      flash('Book Received succesfully.');
+      return redirect()->back();
     }
 
 
