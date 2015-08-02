@@ -40,9 +40,9 @@ $factory->define(App\Book::class, function ($faker) {
     return [
         'title' => $faker->name,
         'description' => $faker->paragraph,
-        'publisher_id' => rand(1,4),
-        'category_id' => rand(1,4),
-        'language_id' => rand(1,4),
+        'publisher_id' => rand(1,3),
+        'category_id' => rand(1,3),
+        'language_id' => rand(1,3),
         'release_date' => \Carbon\Carbon::now(),
     ];
 });

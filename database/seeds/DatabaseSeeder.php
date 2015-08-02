@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
         Language::truncate();
         // $this->call(UserTableSeeder::class);
 
-        factory(User::class, 5)->create();
+        // factory(User::class, 5)->create();
+        $this->call(UserTableSeeder::class);
         factory(Book::class, 14)->create();
         factory(BookClub::class, 6)->create();
         factory(Category::class, 3)->create();
