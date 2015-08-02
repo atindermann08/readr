@@ -255,10 +255,14 @@ class BookController extends Controller
     {
         $mybooks = auth()->user()->books;
         $books = \App\Book::all()->lists('title', 'title');
+        $borrowed_books = auth()->user()->borrowedBooks()->get();
+        $given_books = auth()->user()->givenBooks()->get();
+        // dd($borrowed_books) ;
+        // dd($given_books);
         //$books = array_except($books, $mybooks->lists('id'));
         return view('mylibrary')
                 ->with(compact('books'))
-                ->with(compact('mybooks'));
+                ->with(compact('mybooks', 'borrowed_books', 'given_books'));
     }
     public function apiBooks()
     {
