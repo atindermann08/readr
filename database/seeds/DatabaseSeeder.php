@@ -36,6 +36,14 @@ class DatabaseSeeder extends Seeder
         factory(Publisher::class, 3)->create();
         factory(Language::class, 3)->create();
 
+        DB::table('book_statuses')->insert([
+          'name' => 'Available',
+          ]);
+
+        DB::table('book_statuses')->insert([
+          'name' => 'Not Available',
+          ]);
+
         Model::reguard();
     }
 }
