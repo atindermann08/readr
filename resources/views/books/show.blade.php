@@ -8,9 +8,11 @@
     @foreach($bookclubs as $bookclub)
       <li class="list-group-item well">
           <span class="pull-right">
-            <a href="{{ route('bookclubs.books.remove', [$bookclub->id, $book->id]) }}" class='btn'>
-              Remove from BookClub
-            </a>
+            @unless(auth()->user()->isBorrowed($bookclub->id, $book->id))
+              <a href="{{ route('bookclubs.books.remove', [$bookclub->id, $book->id]) }}" class='btn'>
+                Remove from BookClub
+              </a>
+            @endunless
           </span>
           <span class="pull-right">
             @if(auth()->user()->isBorrowed($bookclub->id, $book->id))

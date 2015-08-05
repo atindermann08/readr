@@ -42,7 +42,7 @@ class BookClub extends Model
   }
   public function changeStatus($bookId, $ownerId, $status)
   {
-    $statusId = \App\BookStatus::where('name', $status)->first()->id;
+    $statusId = \App\BookStatus::where('name', $status)->firstOrCreate()->id;
     \DB::table('book_book_club')
           ->where('book_club_id', $this->id)
           ->where('book_id', $bookId)
