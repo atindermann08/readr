@@ -65,12 +65,17 @@
                   <li><a href="{{ $notification->url }}">{{ $notification->text }} </a></li>
                 @endforeach
               @else
-                <li><a>No Unread Notifications<span></a>
+                <li><a>No Unread Notifications<span></a></li>
               @endif
             </ul>
           </li>
-          <li><a>Welcome, {{ucfirst(\Auth::user()->name)}}</a></li>
-          <li><a href="{{url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a></li>
+          <li class="dropdown">
+            <a href='' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {{ucfirst(\Auth::user()->name)}}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a></li>
+            </ul>
+          </li>
+
         @else
           <li class="{{ Active::pattern('auth/login')}}"><a href="{{url('auth/login')}}"><i class="fa fa-sign-out fa-fw"></i>Sign In</a></li>
           <li class="{{ Active::pattern('auth/register')}}"><a href="{{url('auth/register')}}"><i class="fa fa-user fa-fw"></i>Register</a></li>
