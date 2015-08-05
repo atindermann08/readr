@@ -5999,6 +5999,9 @@ button.close {
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px; }
 
+.notifications {
+  background-color: #DAEDCC; }
+
 body {
   padding: 80px; }
 
@@ -6042,7 +6045,7 @@ body {
   background-color: #fafbf8; }
 
 .notifications-active {
-  color: chocolate; }
+  color: #4F8A22; }
 
 .form-signin {
   max-width: 330px;
