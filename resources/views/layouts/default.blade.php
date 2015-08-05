@@ -27,5 +27,6 @@
   {!! Html::script('assets/vendor/js/bootstrap.min.js') !!}
   {!! Html::script('assets/vendor/js/select2.min.js') !!}
   {!! Html::script('assets/js/app.js') !!}
+  @include('partials._google_analytics')
 </body>
 </html>
