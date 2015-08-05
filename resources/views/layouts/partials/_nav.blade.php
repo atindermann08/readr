@@ -16,19 +16,21 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+
+         {{--
         <li class="dropdown">
          <a href="{{route('books.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
            <i class=' fa fa-book fa-fw'></i>Books
            <span class="caret"></span>
         </a>
          <ul class="dropdown-menu">
-          {{--
            <li><a href="{{route('books.create')}} ">Add Book</a></li>
            <li role="separator" class="divider"></li>
            <li><a href="{{route('books.index')}}">List</a></li>
            --}}
-           <li><a href="{{route('mylibrary')}}">My Library</a></li>
-         </ul>
+
+           <li><a href="{{route('mylibrary')}}"><i class=' fa fa-book fa-fw'></i>My Library</a></li>
+         {{-- </ul> --}}
        </li>
        <li class="dropdown">
          <a href="{{route('bookclubs.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
