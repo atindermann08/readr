@@ -55,9 +55,9 @@
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
           <li class="dropdown">
-            <a href="" class="dropdown-toggle notifications" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class='fa fa-bell fa-fw @if(count($notifications)) notifications-active @endif'></i>
-              <span class="notifications-count">{{ $notifications->count() }}</span>
+            <a href="" class="dropdown-toggle @unless($notifications->count() == 0)  notifications @endunless" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class='fa fa-bell fa-fw @unless($notifications->count() == 0) notifications-active @endunless'></i>
+              <span class="notifications-count">@unless($notifications->count() == 0) {{ $notifications->count() }} @endunless</span>
             </a>
             <ul class="dropdown-menu">
               @if(count($notifications))
