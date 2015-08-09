@@ -68,6 +68,10 @@ class AuthController extends Controller
     public function postRegister(Request $request)
     {
         //return \Redirect::back()->with('message','register function hijacked');
+
+        //temporarily for infosys users only.
+        $request['email'] = $request->input('email').'@infosys.com';
+
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {

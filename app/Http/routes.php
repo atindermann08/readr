@@ -1,7 +1,9 @@
 <?php
 
 
-Route::get('/', function () {    return view('welcome');});
+Route::get('/', function () {
+  flash('testing');
+  return view('welcome');});
 Route::get('/home', function () {    return view('welcome');});
 
 Route::get('/test', function () {
