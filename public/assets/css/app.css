@@ -5994,6 +5994,13 @@ button.close {
 #top-search-bar {
   width: 380px; }
 
+.alert {
+  z-index: 100;
+  position: fixed;
+  width: 60%;
+  margin-bottom: 20px;
+  margin-left: 10%; }
+
 .search-bar-btn {
   margin-left: -10px;
   border-bottom-left-radius: 0px;

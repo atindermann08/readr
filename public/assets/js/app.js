@@ -1,4 +1,6 @@
-$('div.alert').not('.alert-important').delay(3000).slideUp(300);
+$('div.alert').hide();
+$('div.alert').delay(300).fadeIn(400);
+$('div.alert').not('.alert-important').delay(3000).slideUp(500);
 
 $(".single-select").select2();
 $(".book-title-select").select2({
