@@ -29,10 +29,10 @@
            <li><a href="{{route('books.index')}}">List</a></li>
            --}}
 
-           <li><a href="{{route('mylibrary')}}"><i class=' fa fa-book fa-fw'></i>My Library</a></li>
+           <li class="{{ Active::pattern('mylibrary')}}"><a href="{{route('mylibrary')}}"><i class=' fa fa-book fa-fw'></i>My Library</a></li>
          {{-- </ul> --}}
        </li>
-       <li class="dropdown">
+       <li class="dropdown {{ Active::pattern('bookclubs*')}}">
          <a href="{{route('bookclubs.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
            <i class=' fa fa-group fa-fw'></i>Book Clubs
            <span class="caret"></span>
