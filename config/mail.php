@@ -121,4 +121,7 @@ return [
 
     'pretend' => false,
 
+
+    'admin_email' => env('ADMIN_EMAIL', 'team@livrogo.com'),
+
 ];

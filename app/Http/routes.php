@@ -2,7 +2,7 @@
 
 
 Route::get('/', function () {
-  // flash('testing');
+  // flash(\Config::get('mail.admin_email'));
   return view('welcome');});
 Route::get('/home', function () {    return view('welcome');});
 

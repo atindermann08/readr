@@ -40,6 +40,9 @@ class FeedbackController extends Controller
       \Mail::send('emails.feedback', $data, function($message) use ($request) {
                   $message->to($request->input('email'), $request->input('name'))->subject('Thanks for feedback!');
             });
+      \Mail::send('emails.feedback', $data, function($message) use ($request) {
+                  $message->to(\Config::get('mail.admin_email'), $request->input('name'))->subject('Someone left feedback on liverogo! check out');
+            });
       flash('Thanks for your valuable feedback.');
       return \Redirect::back();
     }
