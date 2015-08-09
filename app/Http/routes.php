@@ -2,7 +2,7 @@
 
 
 Route::get('/', function () {
-  flash('testing');
+  // flash('testing');
   return view('welcome');});
 Route::get('/home', function () {    return view('welcome');});
 
