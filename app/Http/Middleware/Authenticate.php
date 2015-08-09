@@ -42,7 +42,7 @@ class Authenticate
             }
         }
         if (!\Auth::user()->active) {
-            flash('Please activate your account to proceed.');
+            flash('Please activate your account to proceed.(If you did not receive activation email. please leave feedback)');
             return redirect()->guest('home');
         }
 
