@@ -1,14 +1,10 @@
 <?php
 
 
-Route::get('/', function () {
-  // flash(\Config::get('mail.admin_email'));
-  return view('welcome');});
-Route::get('/home', function () {    return view('welcome');});
+Route::get('/',  'PageController@welcome');
+Route::get('/home', 'PageController@welcome');
 
-Route::get('/test', function () {
-   dd(auth()->user()->givenBooks()->where('book_club_id', 5)->detach(2));//->delete();
-});
+
 
 // Route::get('/api/books', 'BookController@apiBooks');
 // Route::get('/api/books/q', 'BookController@searchBooks');
