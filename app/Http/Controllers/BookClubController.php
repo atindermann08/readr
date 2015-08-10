@@ -184,6 +184,18 @@ class BookClubController extends Controller
             ]);
           $notification->save();
 
+          $data = array(
+                      'name' =>  $bookclub->admin->name,
+                      'requesteeName' => auth()->user()->name,
+                      'bookClubName' => $bookclub->name,
+                      );
+
+          \Mail::send('emails.bookclubs.joinrequest.received', $data, function($message) use ( $bookclub) {
+                      $message->to($bookclub->admin->email, $bookclub->admin->name)
+                              ->subject('Hi ' . $bookclub->admin->name . ', ' . auth()->user()->name . 'wants to join ' . $bookclub->name . ' BookClub.');
+                });
+
+
           flash('Request sent for joining BookClub.');
           return \Redirect::back();
         }
@@ -213,6 +225,17 @@ class BookClubController extends Controller
               'is_read' => false
             ]);
           $notification->save();
+
+          $data = array(
+                      'name' =>  $owner->name,
+                      'requesteeName' => auth()->user()->name,
+                      'bookName' => $book->name,
+                      'bookClubName' => $bookclub->name,
+                      );
+
+          \Mail::send('emails.bookclubs.bookrequest.received', $data, function($message) use ($owner, $book, $bookclub) {
+                      $message->to($owner->email, $owner->name)->subject('Hi '. $owner->name . ', ' . auth()->user()->name . ' wants to borrow ' . $book->name . ' in ' . $bookclub->name . ' BookClub.');
+                });
 
           flash('Request sent for Book.');
           return \Redirect::back();
@@ -259,6 +282,18 @@ class BookClubController extends Controller
         $notification->url = route('notifications.destroy', $notification->id);
         $notification->save();
         $request->delete();
+
+
+        $data = array(
+                    'name' => $request->requestee->name,
+                    'bookClubName' => $request->bookclub->name,
+                    'bookClubId' => $request->bookclub->id,
+                    );
+
+        \Mail::send('emails.bookclubs.joinrequest.accepted', $data, function($message) use ($request) {
+                    $message->to($request->requestee->email, $request->requestee->name)
+                            ->subject('Hi ' . $request->requestee->name . ' Your BookClub Joining request Accepted!');
+              });
 
         flash('Request Accepted succesfully.');
         return redirect()->back();
@@ -311,8 +346,22 @@ class BookClubController extends Controller
           ]);
         $notification->url = route('notifications.destroy', $notification->id);
         $notification->save();
-        $request->delete();
+
         $book = $request->bookclub->changeStatus($request->book->id, $request->owner->id, 'Not Available');
+
+
+        $data = array(
+                    'name' => $request->requestee->name,
+                    'bookName' => $request->book->name,
+                    'ownerName' => auth()->user()->name,
+                    );
+
+        \Mail::send('emails.bookclubs.bookrequest.accepted', $data, function($message) use ($request) {
+                    $message->to($request->requestee->email, $request->requestee->name)
+                            ->subject('Hi ' . $request->requestee->name . ' Your request for ' . $request->book->name . ' is accepted!');
+              });
+
+        $request->delete();
         flash('Request Accepted succesfully.');
         return redirect()->back();
     }

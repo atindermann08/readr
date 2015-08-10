@@ -12,9 +12,9 @@ class RequestBookClub extends Model
       return $this->belongsTo('\App\User', 'user_id');
     }
 
-    // public function owner(){
-    //   return $this->belongsTo('\App\User', 'owner_id');
-    // }
+    public function owner(){
+      return $this->belongsTo('\App\User');
+    }
 
     public function bookclub(){
       return $this->belongsTo('\App\BookClub', 'book_club_id');
