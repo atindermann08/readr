@@ -41,18 +41,18 @@
   <div class="media-right">
     @if(auth()->check())
       <a href="{{ route('books.edit', $book->id) }}" class='btn'>
-          <i class='fa fa-edit'></i>
+          <i class='fa fa-edit btn btn-default'> Edit</i>
       </a>
       @if($page == 'books')
         @if(auth()->user()->ownBook($book->id))
           <a href="{{ route('books.removefromlibrary',  $book->id) }}" class='btn'>
-              <i class='fa fa-trash'></i>
+              <i class='fa fa-trash btn btn-default'> Remove</i>
           </a>
         @endif
       @else
         @if(auth()->user()->ownBookClubBook($bookclub->id, $book->id))
           <a href="{{ route('bookclubs.books.remove', [$bookclub->id, $book->id]) }}" class='btn'>
-              <i class='fa fa-trash'></i>
+              <i class='fa fa-trash  btn btn-default'> Remove</i>
           </a>
         @endif
       @endif
