@@ -238,9 +238,16 @@ class BookController extends Controller
 
     public function removefromlibrary($bookId)
     {
+        //remove from bookclubs
+        \DB::table('book_book_club')
+              ->where('book_id', $bookId)
+              ->where('owner_id', auth()->user()->id)
+              ->delete();
+
+        //remove from library
           auth()->user()->books()->detach($bookId);
 
-          flash('Book removed from library.');
+          flash('Book removed from library and from al book clubs');
           return \Redirect::back();
     }
 
