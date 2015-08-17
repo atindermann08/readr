@@ -14,4 +14,15 @@ class BookStatus extends Model
   public function book(){
       return $this->hasMany('\App\Book');
   }
+
+	public static function available()
+	{
+		return self::firstOrCreate(['name' => 'Available']);
+	}
+
+	public static function availableId()
+	{
+		return self::available()->id;
+	}
+
 }

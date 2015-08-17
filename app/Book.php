@@ -82,6 +82,9 @@ class Book extends Model
 		$status = \App\BookStatus::find($status_id);
 		return $status;
 	}
+
+
+
 	// public function statusInClub($bookId, $clubId)
 	// {
 	// 	return $this->status($bookId, 'App\BookClub', $clubId);

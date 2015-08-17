@@ -75,7 +75,7 @@ class BookController extends Controller
       // $bookclubs = $request->get('bookclubs');
       // $bookIds = [];
 
-      $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+      $status_id = \App\BookStatus::availableId();
       if(count($titles)){
         foreach ($titles as $title) {
           $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
@@ -229,7 +229,7 @@ class BookController extends Controller
 
     public function addtolibrary($bookId)
     {
-          $status_id = \App\BookStatus::where('name','=','Available')->first()->id;
+          $status_id = \App\BookStatus::availableId();
           auth()->user()->books()->attach($bookId,['status_id'=>$status_id]);
 
           flash('Book added to library.');

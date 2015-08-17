@@ -51,6 +51,21 @@ class BookClub extends Model
 
     return true;
   }
+
+
+
+	public function setAvailabe($bookId, $ownerId)
+	{
+		return $this->changeStatus($bookId, $ownerId, 'Available');
+	}
+
+	public function setUnavailabe($bookId, $ownerId)
+	{
+		return $this->changeStatus($bookId, $ownerId, 'Unavailable');
+	}
+
+
+
   public function isMember($user = null)
   {
       if(!$user) $user = auth()->user();

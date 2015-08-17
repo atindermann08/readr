@@ -45,7 +45,7 @@
       </a>
       @if($page == 'books')
         @if(auth()->user()->ownBook($book->id))
-          <a href="" class='btn' data-toggle="modal" data-target="#confirmationModal">
+          <a href="" class='btn' data-toggle="modal" data-target="#confirmationModal{{$book->id}}">
               <i class='fa fa-trash btn btn-default'> Remove</i>
           </a>
         @endif
@@ -63,15 +63,15 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModel">
+<div class="modal fade" id="confirmationModal{{$book->id}}" tabindex="-1" role="dialog" aria-labelledby="confirmationModel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Confim</h4>
+        <h4 class="modal-title" id="myModalLabel">Are your sure?</h4>
       </div>
       <div class="modal-body">
-        Removing a Book from your library will also remove it from all your bookclubs. Click remove to proceed.
+        Removing a {{ $book->title }} from your library will also remove it from all your bookclubs. Click remove to proceed.
       </div>
       <div class="modal-footer">
         <a type="button" href="{{ route('books.removefromlibrary',  $book->id) }}" class="btn btn-danger">Remove</a>

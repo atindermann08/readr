@@ -56,7 +56,7 @@ class BookClubController extends Controller
       //$bookclub->books()->attach($request->input('books'),['status_id' => $status_id]);
 
       $titles = $request->input('books');
-      $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+      $status_id = \App\BookStatus::availableId();
       if($titles){
         foreach ($titles as $title) {
           $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
@@ -119,7 +119,7 @@ class BookClubController extends Controller
 
 
         $titles = $request->input('books');
-        $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+        $status_id = \App\BookStatus::availableId();
         if($titles){
           foreach ($titles as $title) {
             $book = \App\Book::firstOrCreate(['title' => ucfirst($title)]);
@@ -374,7 +374,7 @@ class BookClubController extends Controller
         $notification->url = route('notifications.destroy', $notification->id);
         $notification->save();
 
-        $book = $request->bookclub->changeStatus($request->book->id, $request->owner->id, 'Not Available');
+        $book = $request->bookclub->setUnavailabe($request->book->id, $request->owner->id);
 
 
         $data = array(
@@ -403,7 +403,7 @@ class BookClubController extends Controller
     public function bookReceived($bookClubId, $bookId, $ownerId)
     {
       $bookclub = \App\BookClub::findOrFail($bookClubId);
-      $bookclub->changeStatus($bookId, $ownerId, 'Available');
+      $bookclub->setAvailabe($bookId, $ownerId);
       auth()->user()->givenBooks()->where('book_club_id', $bookClubId)->detach($bookId);
       flash('Book Received succesfully.');
       return redirect()->back();
@@ -455,11 +455,11 @@ class BookClubController extends Controller
       $user = auth()->user();
       if(!$user->isMember($bookClubId))
       {
-        flash()->warning('Please join club first nad then add books. ');
+        flash()->warning('Please join club first and then add books. ');
         return redirect()->back();
       }
         $bookclub = \App\BookClub::findOrFail($bookClubId);
-        $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
+        $status_id = \App\BookStatus::availableId();
 
         $bookIds = $request->input('bookIds');
         // dd($request->all());
