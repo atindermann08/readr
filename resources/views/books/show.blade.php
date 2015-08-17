@@ -1,6 +1,9 @@
 @extends('layouts.default')
 
 @section('content')
+<div class="page-header">
+  <h3>{{ $book->title }} Details</h3>
+</div>
   @include('partials._showbook', ['page' => 'books'])
   <hr/>
   <h4>Book Clubs</h4>

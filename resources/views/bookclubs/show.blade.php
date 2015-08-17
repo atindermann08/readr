@@ -1,6 +1,9 @@
 @extends('layouts.default')
 
 @section('content')
+<div class="page-header">
+    <h3>{{ $bookclub->name }} Details </h3>
+</div>
     @include('partials._showbookclub')
       <hr/>
       @if(auth()->check() && (auth()->user()->isMember($bookclub->id)))

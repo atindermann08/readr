@@ -2,6 +2,9 @@
 
 @section('content')
 
+<div class="page-header">
+  <h3>{{ $bookclub->name }} <i class='fa fa-angle-right '></i>  {{ $book->title }} </h3>
+</div>
 @include('partials._showbookclub')
   <hr/>
   @include('partials._showbook', ['page' => 'bookclub'])

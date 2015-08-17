@@ -2,10 +2,12 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
 //@import "../bootstrap/stylesheets/bootstrap";
-
-#top-search-bar{
-  width:380px;
+nav,footer{
+  opacity:.9;
 }
+// #top-search-bar{
+//   width:380px;
+// }
 .alert{
   z-index: 100;
   position: fixed;
@@ -19,37 +21,29 @@
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
 }
-.notifications{
-  background-color: #DAEDCC;
-}
 
 body{
-  padding: 80px;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  color: #5a5a5a;
 }
+
+
 .img-round{
   border-radius: 900px;
   // color:cadetblue;
   // background-color: aliceblue;
 
 }
-.book-default-pic{
-  background-color: #efefef;
-  color:#ddd;
-  padding-top: 17px;
-  height:110px;
-  width:110px;
-  padding-left: 23px;
-  margin-bottom: 30px;
-}
-#jumbotron{
-margin-top: -130px;
-padding-top: 130px;
-margin-left: -500px;
-padding-left: 560px;
-margin-right: -600px;
-padding-right: 660px;
-padding-bottom: 30px;
-}
+// #jumbotron{
+// margin-top: -130px;
+// padding-top: 130px;
+// margin-left: -500px;
+// padding-left: 560px;
+// margin-right: -600px;
+// padding-right: 660px;
+// padding-bottom: 30px;
+// }
 .footer {
     position: fixed;
     bottom: 0px;
@@ -68,96 +62,76 @@ padding-bottom: 30px;
 
 .book-view{
   padding: 20px;
-background-color: #fafbf8;
+  background-color: #fafbf8;
 }
 
-.notifications-active
-{
-  color: #4F8A22;
+
+.carousel{
+  margin-top: -50px;
+  margin-bottom: 50px;
+  background-color: #222;
+  // margin-bottom: -80px;
+  .carousel-inner>.item{
+    .carousel-caption{
+      padding-top: 5px;
+      color:#fff;
+      font-size: 1.6em;
+      font-weight: bold;
+      text-shadow:  0px 1px 10px rgba(0, 0, 0, 0.3);
+      h1{
+        font-size:2em;
+        font-weight: bold;
+      }
+      blockquote{
+        align-content: left;
+        border-left: none;
+        // font-size: 1.3em;
+        small{
+          color:#fff;
+        }
+      }
+      p>.btn{
+        font-weight: bold;
+      }
+    }
+    img{
+      overflow: hidden;
+      opacity: 0.7;
+      min-height: 545px;
+      width: 100%;
+      min-width: 1200px;
+    }
+  }
 }
 
+.usage{
+  text-align: center;
+  // margin-bottom: 80px;
+  .usage-pic{
+    background-color: #5a5a5a;
+    color:#ddd;
+    padding-top: 9%;
+    height:150px;
+    width:150px;
+  }
+}
+.book-default-pic{
+  text-align: center;
+  background-color: #efefef;
+  color:#ddd;
+  padding-top: 15%;
+  // padding-top: 17px;
+  height:110px;
+  width:110px;
+  // padding-left: 23px;
+  // margin-bottom: 30px;
+}
 // .alert{
 //   margin-left: 160px;
 //   width: 800px;
 //   position: absolute;
 //   margin-top: -80px;
 //   z-index: 2000;}
-
-
-
-//signin form temporary
-.form-signin
-{
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.form-signin .form-signin-heading, .form-signin .checkbox
-{
-  margin-bottom: 10px;
-}
-.form-signin .checkbox
-{
-  font-weight: normal;
-}
-.form-signin .form-control
-{
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.form-signin .form-control:focus
-{
-  z-index: 2;
-}
-.form-signin input[type="text"]
-{
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.form-signin input[type="password"]
-{
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.account-wall
-{
-  margin-top: 20px;
-  padding: 40px 0px 20px 0px;
-  background-color: #f7f7f7;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
-.login-title
-{
-  color: #555;
-  font-size: 18px;
-  font-weight: 400;
-  display: block;
-}
-.profile-img
-{
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
-.need-help
-{
-  margin-top: 10px;
-}
-.new-account
-{
-  display: block;
-  margin-top: 10px;
-}
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */

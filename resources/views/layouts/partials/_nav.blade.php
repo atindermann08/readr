@@ -1,7 +1,4 @@
-
-
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -13,24 +10,11 @@
       <a class="navbar-brand" href="{{ url('/') }}">Livrogo</a>
     </div>
 
+  <div class="container">
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-
-         {{--
-        <li class="dropdown">
-         <a href="{{route('books.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-           <i class=' fa fa-book fa-fw'></i>Books
-           <span class="caret"></span>
-        </a>
-         <ul class="dropdown-menu">
-           <li><a href="{{route('books.create')}} ">Add Book</a></li>
-           <li role="separator" class="divider"></li>
-           <li><a href="{{route('books.index')}}">List</a></li>
-           --}}
-
            <li class="{{ Active::pattern('mylibrary')}}"><a href="{{route('mylibrary')}}"><i class=' fa fa-book fa-fw'></i>My Library</a></li>
-         {{-- </ul> --}}
        </li>
        <li class="dropdown {{ Active::pattern('bookclubs*')}}">
          <a href="{{route('bookclubs.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -54,9 +38,9 @@
       --}}
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
-          <li class="dropdown">
-            <a href="" class="dropdown-toggle @unless($notifications->count() == 0)  notifications @endunless" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class='fa fa-bell fa-fw @unless($notifications->count() == 0) notifications-active @endunless'></i>
+          <li class="dropdown @unless($notifications->count() == 0)  active @endunless">
+            <a href="" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class='fa fa-bell fa-fw'></i>
               <span class="notifications-count">@unless($notifications->count() == 0) {{ $notifications->count() }} @endunless</span>
             </a>
             <ul class="dropdown-menu">
