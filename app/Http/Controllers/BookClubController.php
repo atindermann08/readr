@@ -452,6 +452,12 @@ class BookClubController extends Controller
      */
     public function storeBook($bookClubId, Request $request)
     {
+      $user = auth()->user();
+      if(!$user->isMember($bookClubId))
+      {
+        flash()->warning('Please join club first nad then add books. ');
+        return redirect()->back();
+      }
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         $status_id = \App\BookStatus::firstOrCreate(['name' => 'Available'])->id;
 
@@ -459,13 +465,20 @@ class BookClubController extends Controller
         // dd($request->all());
         foreach($bookIds as $bookId)
         {
-          \DB::table('book_book_club')
-                ->where('book_club_id', $bookClubId)
-                ->where('book_id', $bookId)
-                ->where('owner_id', auth()->user()->id)
-                ->delete();
+          if($user->ownBook($bookId))
+          {
+            \DB::table('book_book_club')
+                  ->where('book_club_id', $bookClubId)
+                  ->where('book_id', $bookId)
+                  ->where('owner_id', auth()->user()->id)
+                  ->delete();
 
-          $bookclub->books()->attach($bookId, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
+            $bookclub->books()->attach($bookId, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
+          }
+          else {
+            flash()->warning('All books added except those which are not in your library. ');
+          }
+
         }
         flash('Books added successfully.');
         return redirect()->back();
