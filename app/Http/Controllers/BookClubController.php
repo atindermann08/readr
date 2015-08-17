@@ -280,6 +280,11 @@ class BookClubController extends Controller
     public function acceptJoinRequest($requestId)
     {
         $request = \App\RequestBookClub::with('requestee')->findOrFail($requestId);
+        if(!$request)
+            {
+              flash()->warning('Request already processed. ');
+              return redirect()->back();
+            }
         $request->requestee->joinClub($request->book_club_id);
         //fire event send mail;
         //generate Notification later extract and make use of events
@@ -318,6 +323,11 @@ class BookClubController extends Controller
     public function rejectJoinRequest($requestId)
     {
         $request = \App\RequestBookClub::findOrFail($requestId);
+        if(!$request)
+            {
+              flash()->warning('Request already processed. ');
+              return redirect()->back();
+            }
         \App\Notification::where('request_id', $requestId)->first()->delete();
         $notification = $request->requestee->notifications()->create([
             'text' => 'Your request to join '.$request->bookclub->name.' was rejected or canceled.',
@@ -344,7 +354,14 @@ class BookClubController extends Controller
      */
     public function acceptBookRequest($requestId)
     {
-        $request = \App\RequestBookClubBook::with('requestee')->findOrFail($requestId);
+      $request = \App\RequestBookClubBook::with('requestee', 'book', 'owner','bookclub')->find($requestId);
+        if(!$request)
+        {
+          flash()->warning('Request already processed. ');
+          return redirect()->back();
+        }
+
+
         $request->requestee->borrowBook($request->book_club_id, $request->book->id, $request->owner->id);
         //fire event send mail;
         //generate Notification later extract and make use of events
@@ -403,6 +420,11 @@ class BookClubController extends Controller
     public function rejectBookRequest($requestId)
     {
         $request = \App\RequestBookClubBook::findOrFail($requestId);
+        if(!$request)
+            {
+              flash()->warning('Request already processed. ');
+              return redirect()->back();
+            }
         \App\Notification::where('request_id', $requestId)->first()->delete();
         $notification = $request->requestee->notifications()->create([
             'text' => 'Your request for ' . $request->book->title . ' from BookClub ' . $request->bookclub->name . ' was rejected or canceled.',
