@@ -5997,9 +5997,16 @@ nav, footer {
 .alert {
   z-index: 100;
   position: fixed;
-  width: 60%;
+  min-width: 20%;
   margin-bottom: 20px;
-  margin-left: 10%; }
+  margin-left: 5%;
+  bottom: 35px;
+  left: 5px; }
+
+.alert-info {
+  background-color: #333;
+  border-color: #444;
+  color: #fff; }
 
 .search-bar-btn {
   margin-left: -10px;

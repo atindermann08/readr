@@ -447,6 +447,13 @@ class BookClubController extends Controller
      */
     public function removeBook($bookClubId, $bookId, Request $request)
     {
+      //check if book is shared
+      $book = \App\Book::findOrFail($bookId);
+      if($book->isSharedInClub($bookClubId)){
+        flash()->error('Book is shared with someone. It cannot be removed from bookclub until received back.');
+        return \Redirect::back();
+      }
+
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         \DB::table('book_book_club')
               ->where('book_club_id', $bookClubId)
