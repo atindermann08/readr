@@ -17,13 +17,14 @@
       @endif
     </h3>
     <small>
+      @if($book->authors()->count())
       by:
+
         @forelse($book->authors as $key => $author)
             @unless($key == 0) , @endunless
             {{$author->name}}
-        @empty
-          Not Available
-        @endforelse
+        @endforeach
+      @endif
     </small>
     <p>Description: {{$book->description or 'Not Available'}}</p>
     <small>@if(isset($book->language->name)) Language: {{$book->language->name }}, @endif</small>
