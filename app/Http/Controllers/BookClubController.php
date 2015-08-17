@@ -168,7 +168,11 @@ class BookClubController extends Controller
     {
       //check for open and closed club and if closed create request to be approved by admin
         // auth()->user()->joinClub($bookClubId);
-
+        if(auth()->user()->isMember($bookClubId))
+        {
+          flash()->warning('You are already member of this bookclub. ');
+          return \Redirect::back();
+        }
         $bookclub = \App\BookClub::findOrFail($bookClubId);
         if($bookclub->is_closed)
         {
@@ -210,8 +214,14 @@ class BookClubController extends Controller
 
     public function requestbook($bookClubId, $bookId, $userId)
     {
+      $book = \App\Book::findOrFail($bookId);
+      if($book->isShared($userId))
+      {
+        flash()->warning('Can\'t send book request. Book is already shared. ');
+        return redirect()->back();
+      }
         $bookclub = \App\BookClub::findOrFail($bookClubId);
-        $book = \App\Book::findOrFail($bookId);
+
         if($bookclub->isMember())
         {
           $request = auth()->user()->sendBookRequest($bookClubId, $bookId, $userId);

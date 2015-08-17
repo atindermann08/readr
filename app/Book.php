@@ -145,10 +145,18 @@ class Book extends Model
 		return false;
 	}
 
-	public function isShared()
+	public function isShared($userId = null, $bookClubId = null)
 	{
-		$user = auth()->user();
-		if($user->givenBooks()->where('book_id', $this->id)->get()->count())
+		if(!$userId)
+		{
+			$userId = auth()->user()->id;
+		}
+		$sharedBooks = \App\User::findOrFail($userId)->givenBooks();
+		if($bookClubId)
+		{
+			$sharedBooks = $sharedBooks->where('book_club_id', $bookClubId);
+		}
+		if($sharedBooks->where('book_id', $this->id)->get()->count())
   		  return true;
     return false;
 	}
