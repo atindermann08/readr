@@ -236,9 +236,16 @@ class BookController extends Controller
           return \Redirect::back();
     }
 
-    public function removefromlibrary($bookId)
+    public function removeFromLibrary($bookId)
     {
-        //remove from bookclubs
+      //check if book is shared
+      $book = \App\Book::findOrFail($bookId);
+      if($book->isShared()){
+        flash()->error('Book is shared with someone. It cannot be removed from library until received back.');
+        return \Redirect::back();
+      }
+
+      //if not remove from bookclubs
         \DB::table('book_book_club')
               ->where('book_id', $bookId)
               ->where('owner_id', auth()->user()->id)
@@ -247,8 +254,9 @@ class BookController extends Controller
         //remove from library
           auth()->user()->books()->detach($bookId);
 
-          flash('Book removed from library and from al book clubs');
-          return \Redirect::back();
+        flash('Book removed from library and from al book clubs');
+        //if yes return with error
+        return \Redirect::back();
     }
 
 
