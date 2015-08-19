@@ -11,15 +11,10 @@
             @foreach ($chunk as $bookclub)
               <div class="col-md-6">
                   @include('partials._showbookclub')
-                  {{--@unless(true)
-                    <p>{!! link_to_route('bookclubs.Joinrequest','join', $bookclub->id, ['class'=>'btn btn-primary']) !!}</p>
-                  @else
-                    <p class=''>Request Pending</p>
-                  @endunless--}}
-                  <hr>
               </div>
             @endforeach
         </div>
+        <hr>
         @endforeach
       @endif
 @stop()

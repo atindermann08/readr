@@ -4,3 +4,7 @@
 Homestead.yaml
 .env
 /storage
+.tags
+.tags1
+/public/assets/img
+/public/assets/image
