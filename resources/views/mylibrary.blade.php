@@ -19,7 +19,7 @@
       {!! Form::close() !!}
     </div>
     <hr/>
-    @if($books->count() == 0)
+    @if($mybooks->count() == 0)
       No Books Available at the moment.
     @else
       @foreach ($mybooks->chunk(2) as $chunk)
@@ -37,33 +37,41 @@
       <div class="row">
         <div class="col-md-6">
           <h3>Borrowed Books</h3>
-          <ul class="list-group">
-            @foreach($borrowed_books as $book)
-              <li class="list-group-item">
-                <a href='{{ route("books.show", [$book->id])}}'>
-                  {{ $book->title }}
-                </a> Borrowed from {{ \App\User::find($book->pivot->owner_id)->name }} in BookClub
-                <a href="{{ route('bookclubs.books.show', [ $book->pivot->book_club_id, $book->id]) }}">
-                  {{ \App\BookClub::find($book->pivot->book_club_id)->name }}
-                </a>
-              </li>
-            @endforeach
-          </ul>
+          @if($borrowed_books->count() == 0)
+            No Books Shared yet.
+          @else
+            <ul class="list-group">
+              @foreach($borrowed_books as $book)
+                <li class="list-group-item">
+                  <a href='{{ route("books.show", [$book->id])}}'>
+                    {{ $book->title }}
+                  </a> Borrowed from {{ \App\User::find($book->pivot->owner_id)->name }} in BookClub
+                  <a href="{{ route('bookclubs.books.show', [ $book->pivot->book_club_id, $book->id]) }}">
+                    {{ \App\BookClub::find($book->pivot->book_club_id)->name }}
+                  </a>
+                </li>
+              @endforeach
+            </ul>
+          @endif
         </div>
         <div class="col-md-6">
           <h3>Books Shared with others</h3>
-          <ul class="list-group">
-            @foreach($given_books as $book)
-              <li class="list-group-item">
-                <a href='{{ route("books.show", [$book->id])}}'>
-                  {{ $book->title }}
-                </a> Shared with {{ \App\User::find($book->pivot->user_id)->name }} in BookClub
-                <a href="{{ route('bookclubs.books.show', [ $book->pivot->book_club_id, $book->id]) }}">
-                  {{ \App\BookClub::find($book->pivot->book_club_id)->name }}
-                </a>
-              </li>
-            @endforeach
-          </ul>
+          @if($given_books->count() == 0)
+            No Books Borrowed yet.
+          @else
+            <ul class="list-group">
+              @foreach($given_books as $book)
+                <li class="list-group-item">
+                  <a href='{{ route("books.show", [$book->id])}}'>
+                    {{ $book->title }}
+                  </a> Shared with {{ \App\User::find($book->pivot->user_id)->name }} in BookClub
+                  <a href="{{ route('bookclubs.books.show', [ $book->pivot->book_club_id, $book->id]) }}">
+                    {{ \App\BookClub::find($book->pivot->book_club_id)->name }}
+                  </a>
+                </li>
+              @endforeach
+            </ul>
+          @endif
         </div>
       </div>
 @stop()
