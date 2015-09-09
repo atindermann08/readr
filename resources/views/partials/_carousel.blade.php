@@ -13,6 +13,8 @@
             <a class="btn btn-default btn-lg" href="{{ route('bookclubs.index') }}" role="button">Browse Book Clubs</a>
           @else
             <a class="btn btn-default btn-lg" href="{{ url('auth/register') }}" role="button">Sign Up</a>
+            <p><small>or</small></p>
+            <a class="btn btn-lg sign-in" href="{{ url('auth/login') }}" role="button">Sign In</a>
           @endif
       </div>
     </div>
