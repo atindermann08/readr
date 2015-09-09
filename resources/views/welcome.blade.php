@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.plain')
 
 @section('cover')
 @include('partials._carousel')

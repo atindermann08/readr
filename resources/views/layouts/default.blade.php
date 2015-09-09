@@ -15,8 +15,7 @@
 
     @include('flash::message')
     @include('layouts.partials._errors')
-    @yield('cover')
-    <div class="container">
+    <div class="container content">
       <div class="row">
         <div class="col-md-12">
             @yield('content')

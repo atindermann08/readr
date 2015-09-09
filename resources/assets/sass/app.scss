@@ -30,10 +30,12 @@ nav,footer{
 
 body{
   padding-top: 50px;
-  padding-bottom: 40px;
+  // padding-bottom: 40px;
   color: #5a5a5a;
 }
-
+.content{
+  min-height: 450px;
+}
 
 .img-round{
   border-radius: 900px;
@@ -51,18 +53,19 @@ body{
 // padding-bottom: 30px;
 // }
 .footer {
-    position: fixed;
+    // position: fixed;
     bottom: 0px;
     width: 100%;
-    background-color: #f1f1f1;
+    background-color: #111122;
     border-top-color: black;
     border-top-width: 4px;
-}
-.footer{
-  height:50px;
-  left: 0;
-  padding: 15px;
-  padding-left: 0;
+  // height:50px;
+    left: 0;
+    padding: 15px;
+    padding-left: 0;
+    a{
+      color:#aab;
+    }
 }
 
 
