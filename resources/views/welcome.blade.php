@@ -29,8 +29,11 @@
     <div class="row">
       <hr />
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">I think of life as a good book. The further you get into it, the more it begins to make sense.
+            <p><small class="text-muted lead">-- Harold Kushner</small>
+            </p>
+          </h2>
+
         </div>
         <div class="col-md-5">
           <img class="img img-responsive center-block" src="{{ asset('assets/img/books4.jpg') }}" alt="Generic placeholder image">
@@ -41,8 +44,9 @@
 
       <div class="row featurette">
         <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">There is a great deal of difference between an eager man who wants to read a book and the tired man who wants a book to read.
+          <p><small class="text-muted lead">-- Gilbert K. Chesterton</small></p>
+          </h2>
         </div>
         <div class="col-md-5 col-md-pull-7">
           <img class="img img-responsive center-block" src="{{ asset('assets/img/books5.jpg') }}" alt="Generic placeholder image">
@@ -53,8 +57,9 @@
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">A great book should leave you with many experiences, and slightly exhausted at the end. You live several lives while reading.
+          </h2>
+          <p><span class="text-muted lead">-- William Styron</span><p>
         </div>
         <div class="col-md-5">
           <img class="img img-responsive center-block" src="{{ asset('assets/img/books6.jpg') }}" alt="Generic placeholder image">

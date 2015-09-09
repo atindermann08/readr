@@ -92,7 +92,7 @@ Route::resource('categories','CategoryController',['except'=>'destroy']);
 Route::resource('languages','LanguageController',['except'=>'destroy']);
 Route::resource('bookstatuses','BookStatusController',['except'=>'destroy']);
 
-// Route::resource('profile','ProfileController',['except'=>'destroy']);
+Route::resource('profile','ProfileController',['only'=>['show','edit', 'update', 'index']]);
 // Route::resource('addresses','AddressController',['except'=>'destroy']);
 // Route::resource('areas','AreaController',['except'=>'destroy']);
 // Route::resource('cities','CityController',['except'=>'destroy']);

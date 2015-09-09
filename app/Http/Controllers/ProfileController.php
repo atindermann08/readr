@@ -9,34 +9,10 @@ use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
+        return view('profile.show');
     }
 
     /**
@@ -47,7 +23,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        // view('profile.show');
     }
 
     /**
@@ -72,14 +48,4 @@ class ProfileController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
