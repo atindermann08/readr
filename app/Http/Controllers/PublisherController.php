@@ -44,7 +44,7 @@ class PublisherController extends Controller
           $publisher = new \App\Publisher;
           $publisher->name = \Input::get('name');
           $publisher->save();
-          flash('Publisher added.')
+          flash('Publisher added.');
           return \Redirect::back();
         }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Http\Requests\PasswordUpdateRequest;
 
 class PasswordController extends Controller
 {
@@ -27,6 +28,26 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest', ['except' => ['getChange', 'postChange']]);
     }
+
+    public function getChange()
+    {
+      return view('auth.updatepassword');
+    }
+
+
+    public function postChange(PasswordUpdateRequest $request)
+    {
+      if(\Hash::check($request->input('current_password'), auth()->user()->password))
+      {
+        auth()->user()->password = crypt($request->input('new_password'));
+        auth()->user()->save();
+        flash()->success('Password updated successfully.');
+        return \Redirect::back();
+      }
+      flash()->error('Please try again with correct current password.');
+      return \Redirect::back();
+    }
+
 }

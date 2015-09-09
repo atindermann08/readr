@@ -66,7 +66,7 @@ class LanguageController extends Controller
        if($language){
            return view('languages.edit',['language' => $language]);
          }
-      flash()->error('Language does not exist.')
+      flash()->error('Language does not exist.');
        return \Redirect::back();
 
      }
