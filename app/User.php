@@ -233,6 +233,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       return $this->hasMany('\App\RequestBookClub');
     }
 
+
+    public function setProfileImage($image)
+    {
+      $img = \Image::make($image);
+
+      // resize image
+      $img->fit(600, 600);
+
+      // save image
+      $path = 'public/assets/images/profiles/' . $user->id . $user->name . '.jpg';
+      $img->save($path);
+      return $path;
+    }
+
+
     // public function bookStatusInClub($bookId, $bookClubId)
     // {
     //   $this->belongsToMany('\App\BookClub', 'book_book_club','book_id','book_club_id')

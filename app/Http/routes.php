@@ -4,6 +4,14 @@
 Route::get('/',  'PageController@welcome');
 Route::get('/home', 'PageController@welcome');
 
+Route::get('/d', function(){
+  $users = \App\User::all();
+  foreach($users as $user){
+    $profile = new \App\Profile;
+    $profile->save();
+    $user->profile()->save($profile);
+  }
+});
 
 
 // Route::get('/api/books', 'BookController@apiBooks');

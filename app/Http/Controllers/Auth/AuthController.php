@@ -89,6 +89,11 @@ class AuthController extends Controller
         $user->activation_code = $activation_code;
 
         if ($user->save()) {
+          /*create profile*/
+          $profile = new \App\Profile;
+          $profile->save();
+          $user->profile()->save($profile);
+
           $data = array(
                       'name' => $user->name,
                       'code' => $activation_code,
