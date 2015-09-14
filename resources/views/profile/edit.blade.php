@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h3 class='page-header'>Profile</small></h3>
-    <img src="{{ $profile->image or asset('assets/img/book.png') }}" alt="{{ $user->name }}" class='profile-img'>  </img>
+    <img src="{{ asset($profile->image) }}" alt="{{ $user->name }}" class='profile-img'>  </img>
     {!! Form::open(['method'=>'PUT', 'files' => 'true', 'route' => ['profile.update', $profile->id]]) !!}
       <div class="form-group">
         <div class="fileUpload btn btn-default">
