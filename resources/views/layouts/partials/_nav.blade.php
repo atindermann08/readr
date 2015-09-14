@@ -55,10 +55,15 @@
             </ul>
           </li>
           <li class="dropdown">
-            <a href='' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {{ucfirst(\Auth::user()->name)}}<span class="caret"></span></a>
+            <a href='' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <img src="{{ asset(auth()->user()->profile->thumb_image) }}" alt="{{ auth()->user()->name }}"
+              class='profile-thumb-image '></img>
+              &nbsp; Welcome, {{ucfirst(\Auth::user()->name)}}<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="{{url('profile')}}"><i class="fa fa-user fa-fw"></i>Profile</a></li>
+              <li role="separator" class="divider"></li>
               <li><a href="{{url('password/change')}}"><i class="fa fa-lock fa-fw"></i>Change Password</a></li>
+              <li role="separator" class="divider"></li>
               <li><a href="{{url('auth/logout')}}"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a></li>
             </ul>
           </li>
