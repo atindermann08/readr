@@ -77,11 +77,11 @@ class ProfileController extends Controller
       $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
       $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large.jpg');
         $img = \Image::make($path);
-        $img->fit(600, 600);
+        $img->fit(200, 200);
         $img->save($path);
 
         $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
-        $img->fit(150, 150);
+        $img->fit(35, 35);
         $img->save($thumb_path);
 
       // $path = $user->setProfileImage($image);
