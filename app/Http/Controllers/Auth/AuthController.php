@@ -102,7 +102,8 @@ class AuthController extends Controller
                       $message->to($user->email, $user->name)->subject('Please activate your account.');
                 });
           \Auth::login($user);
-          return view('auth.activate');
+          flash('Please check your email for activating your account(check spam folder just in case or contact us if you did not receive email).');
+          return redirect()->route('rules');
         }
         else {
           flash('Your account couldn\’t be created please try again');

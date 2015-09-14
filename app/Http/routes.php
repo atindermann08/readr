@@ -4,6 +4,7 @@
 Route::get('/',  'PageController@welcome');
 Route::get('/home', 'PageController@welcome');
 
+Route::get('/how', ['as' => 'rules', 'uses' => 'PageController@rules']);
 Route::get('/d', function(){
   // $users = \App\User::all();
   // foreach($users as $user){
