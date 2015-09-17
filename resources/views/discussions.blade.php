@@ -78,7 +78,7 @@
                       @else
                         <small>Be the first to like this.</small>
                       @endif
-                      <i>{{ $comment->created_at->diffForHumans() }}</i>
+                      <i><small>{{ $comment->created_at->diffForHumans() }}</small></i>
                     </small>
                   </div>
                 </div>
