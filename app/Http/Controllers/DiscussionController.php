@@ -21,7 +21,7 @@ class DiscussionController extends Controller
     public function index()
     {
       $statuses = Status::with('likes', 'comments.user', 'user.profile')->latest('updated_at')->get();
-      return view('discussions')->with(compact('statuses'));
+      return view('discussions.index')->with(compact('statuses'));
     }
 
     public function store(StatusSubmitRequest $request)

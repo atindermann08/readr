@@ -6011,10 +6011,10 @@ nav, footer {
   .status-post-form .status-post-area {
     border-width: 0;
     border-radius: 4px;
-    border-color: #bbb;
     resize: none;
     padding: 15px;
-    padding-bottom: 0; }
+    padding-bottom: 0;
+    overflow: hidden; }
     .status-post-form .status-post-area:focus {
       box-shadow: none; }
   .status-post-form .status-post-submit {
@@ -6083,6 +6083,9 @@ nav, footer {
   border-color: #eee;
   border-style: solid;
   border-width: 2px; }
+
+.status-profile-container {
+  padding: 20px; }
 
 .profile-img {
   height: 150px;
