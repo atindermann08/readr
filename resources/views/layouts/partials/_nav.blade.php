@@ -14,8 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-           <li class="{{ Active::pattern('mylibrary')}}"><a href="{{route('mylibrary')}}"><i class=' fa fa-book fa-fw'></i>My Library</a></li>
-       </li>
+       <li class="{{ Active::pattern('mylibrary')}}"><a href="{{route('mylibrary')}}"><i class=' fa fa-book fa-fw'></i>My Library</a></li>
        <li class="dropdown {{ Active::pattern('bookclubs*')}}">
          <a href="{{route('bookclubs.index')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
            <i class=' fa fa-group fa-fw'></i>Book Clubs
@@ -27,6 +26,8 @@
            <li><a href="{{route('bookclubs.index')}}">List</a></li>
          </ul>
        </li>
+       <li class="{{ Active::pattern('discussions')}}"><a href="{{route('discussions.index')}}">
+         <i class='fa fa-comments fa-fw'></i>Discussions</a></li>
       </ul>
       {{--
       <form class="navbar-form navbar-left" role="search">

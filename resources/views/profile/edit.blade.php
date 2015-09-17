@@ -4,7 +4,11 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h3 class='page-header'>Profile</small></h3>
+<<<<<<< HEAD
     <img src="{{ asset($profile->image) }}" alt="{{ $user->name }}" class='profile-img'>  </img>
+=======
+    <img src="{{ $profile->image }}" alt="{{ $user->name }}" class='profile-img'>  </img>
+>>>>>>> status post and view
     {!! Form::open(['method'=>'PUT', 'files' => 'true', 'route' => ['profile.update', $profile->id]]) !!}
       <div class="form-group">
         <div class="fileUpload btn btn-default">

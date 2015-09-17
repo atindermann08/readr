@@ -18,6 +18,7 @@ Route::get('/d', function(){
 // Route::get('/api/books', 'BookController@apiBooks');
 // Route::get('/api/books/q', 'BookController@searchBooks');
 
+Route::resource('discussions', 'DiscussionController');
 
 Route::get('/notifications',
                     [ 'as' => 'notifications',

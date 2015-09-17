@@ -64,6 +64,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       return $this->belongsToMany('\App\Book', 'borrowed_books', 'user_id')->withPivot('owner_id', 'book_club_id');
     }
 
+    public function statuses(){
+        return $this->hasMany('\App\Status');
+    }
+    public function comments(){
+        return $this->hasMany('\App\Comment');
+    }
+
+
+    public function getNameAttribute($value)
+    {
+      return ucfirst($value);
+    }
+
+
+
+
+
+
     // public function scopeAvailable($query)
     // {
     //     $statusId = \App\BookStatus::where('name', 'Available')->first()->id;

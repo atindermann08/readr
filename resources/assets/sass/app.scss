@@ -1,9 +1,79 @@
   //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// $navbar-default-bg:                #112 !default;
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+body{
+  padding-top: 50px;
+  // padding-bottom: 40px;
+  color: #5a5a5a;
+  background-color: #f9f9f9;
+}
 
 //@import "../bootstrap/stylesheets/bootstrap";
 nav,footer{
   opacity:.9;
+}
+.navbar{
+  background-color: #112;
+  // .active>a{
+  //   background-color: darken(#112,6.5%) !default;
+  // }
+}
+// .active > a {
+//     color: #FFF;
+//     background-color: #223;
+// }
+.status-post-form{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #bbb;
+    // padding: 0 0 38px 0px;
+    border-radius: 4px;
+    background-color: #fff;
+  .status-post-area{
+    border-width: 0;
+    // border-bottom-width: 1px;
+    border-radius: 4px;
+    border-color: #bbb;
+    // background-color: #f9f9f9;
+    resize: none;
+    padding: 15px;
+    font-size: 1.2em;
+    padding-bottom: 0;
+      &:focus{
+        box-shadow: none;
+      }
+    }
+  .status-post-submit{
+    border-style: solid;
+    border-color: #bbb;
+    border-width: 1px 0 0 0;
+    overflow: hidden;
+    margin-bottom: 0;
+    // border-color: #bbb;
+    // border-top-width: 1px;
+    .status-post-submit-btn{
+      margin: 5px;
+      // margin-top: 0;
+      margin-right: 20px;
+      background-color: #fefefe;
+      border-color: #aaa;
+      padding: 3px 15px;
+      &:hover{
+        background-color: darken(#fefefe, 6%);
+      }
+    }
+  }
+}
+
+.status{
+  background-color: #fff;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 1px;
+  padding: 15px;
 }
 // #top-search-bar{
 //   width:380px;
@@ -15,6 +85,17 @@ nav,footer{
   text-decoration: underline;
 
 }
+.status-profile-img{
+    height: 45px;
+    width: 45px;
+    border-radius: 1000px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: #eee;
+    border-style: solid;
+    border-width: 2px;
+}
 .profile-img{
   height: 150px;
   width: 150px;
@@ -23,6 +104,9 @@ nav,footer{
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-color: #eee;
+  border-style: solid;
+  border-width: 2px;
 }
 .profile-thumb-image{
   height:  22px;
@@ -71,11 +155,6 @@ nav,footer{
   border-top-left-radius: 0px;
 }
 
-body{
-  padding-top: 50px;
-  // padding-bottom: 40px;
-  color: #5a5a5a;
-}
 .content{
   min-height: 450px;
 }
