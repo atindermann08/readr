@@ -20,6 +20,14 @@ Route::get('/d', function(){
 
 Route::resource('discussions', 'DiscussionController');
 
+Route::post('discussions/status/{statusId}/comments', ['as' => 'discussions.comments.store', 'uses' => 'DiscussionController@storeComment']);
+
+Route::get('status/{statusId}/like', ['as' => 'status.like', 'uses' => 'DiscussionController@likeStatus']);
+Route::get('status/{statusId}/unlike', ['as' => 'status.unlike', 'uses' => 'DiscussionController@unlikeStatus']);
+
+Route::get('comment/{commentId}/like', ['as' => 'comments.like', 'uses' => 'DiscussionController@likeComment']);
+Route::get('comment/{commentId}/unlike', ['as' => 'comments.unlike', 'uses' => 'DiscussionController@unlikeComment']);
+
 Route::get('/notifications',
                     [ 'as' => 'notifications',
                       'uses' => 'UserController@showNotifications']);

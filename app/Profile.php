@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-<<<<<<< HEAD
 
   public function getImageAttribute($image)
   {
@@ -24,9 +23,6 @@ class Profile extends Model
       return $image;
   }
 
-=======
-  
->>>>>>> status post and view
   public function user(){
       return $this->belongsTo('\App\User');
   }

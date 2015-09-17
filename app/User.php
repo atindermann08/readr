@@ -67,7 +67,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function statuses(){
         return $this->hasMany('\App\Status');
     }
-    public function comments(){
+
+    public function likedComments()
+    {
+      return $this->morphedByMany('\App\Comment', 'subject', 'likes');
+    }
+    public function likedStatuses()
+    {
+      return $this->morphedByMany('\App\Status', 'subject', 'likes');
+    }
+
+    public function statusComments(){
         return $this->hasMany('\App\Comment');
     }
 

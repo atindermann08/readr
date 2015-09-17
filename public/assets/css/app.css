@@ -5991,14 +5991,98 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+body {
+  padding-top: 50px;
+  color: #5a5a5a;
+  background-color: #f9f9f9; }
+
 nav, footer {
   opacity: .9; }
+
+.navbar {
+  background-color: #112; }
+
+.status-post-form {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #bbb;
+  border-radius: 4px;
+  background-color: #fff; }
+  .status-post-form .status-post-area {
+    border-width: 0;
+    border-radius: 4px;
+    border-color: #bbb;
+    resize: none;
+    padding: 15px;
+    padding-bottom: 0; }
+    .status-post-form .status-post-area:focus {
+      box-shadow: none; }
+  .status-post-form .status-post-submit {
+    border-style: solid;
+    border-color: #bbb;
+    border-width: 1px 0 0 0;
+    overflow: hidden;
+    margin-bottom: 0; }
+    .status-post-form .status-post-submit .status-post-submit-btn {
+      margin: 5px;
+      margin-right: 20px;
+      background-color: #fefefe;
+      border-color: #aaa;
+      padding: 3px 15px; }
+      .status-post-form .status-post-submit .status-post-submit-btn:hover {
+        background-color: #efefef; }
+
+.status {
+  background-color: #fff;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 1px;
+  padding: 15px; }
+  .status .status-comment {
+    background-color: #f4f4ff;
+    padding: 10px 20px;
+    margin: 10px 0px;
+    overflow: hidden; }
+    .status .status-comment .comment-post-area {
+      border-width: 0;
+      border-radius: 4px;
+      border-color: #bbb;
+      resize: none;
+      padding: 10px 10px 0px 10px;
+      font-size: .9em; }
+      .status .status-comment .comment-post-area:focus {
+        box-shadow: none; }
+    .status .status-comment .comment-post-submit-btn {
+      margin: 5px;
+      margin-right: 20px;
+      background-color: #f4f4ff;
+      border-color: #aaa;
+      padding: 1px 15px;
+      font-size: .8em; }
+      .status .status-comment .comment-post-submit-btn:hover {
+        background-color: #efefef; }
 
 .sign-in {
   color: #fff;
   font-weight: bold;
   text-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
   text-decoration: underline; }
+
+.status-action {
+  padding-top: 8px;
+  border-top: solid 1px #eee;
+  margin-top: 8px; }
+
+.status-profile-img {
+  height: 45px;
+  width: 45px;
+  border-radius: 1000px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: #eee;
+  border-style: solid;
+  border-width: 2px; }
 
 .profile-img {
   height: 150px;
@@ -6007,7 +6091,10 @@ nav, footer {
   margin: 30px;
   display: block;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  border-color: #eee;
+  border-style: solid;
+  border-width: 2px; }
 
 .profile-thumb-image {
   height: 22px;
@@ -6054,10 +6141,6 @@ nav, footer {
   margin-left: -10px;
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px; }
-
-body {
-  padding-top: 50px;
-  color: #5a5a5a; }
 
 .content {
   min-height: 450px; }

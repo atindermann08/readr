@@ -40,7 +40,7 @@ nav,footer{
     // background-color: #f9f9f9;
     resize: none;
     padding: 15px;
-    font-size: 1.2em;
+    // font-size: 1.2em;
     padding-bottom: 0;
       &:focus{
         box-shadow: none;
@@ -74,6 +74,35 @@ nav,footer{
   border-style: solid;
   border-width: 1px;
   padding: 15px;
+  .status-comment{
+    background-color: #f4f4ff;
+    padding: 10px 20px;
+    margin: 10px 0px;
+    overflow: hidden;
+
+    .comment-post-area{
+      border-width: 0;
+      border-radius: 4px;
+      border-color: #bbb;
+      resize: none;
+      padding: 10px 10px 0px 10px;
+      font-size: .9em;
+        &:focus{
+          box-shadow: none;
+        }
+    }
+    .comment-post-submit-btn{
+      margin: 5px;
+      margin-right: 20px;
+      background-color: #f4f4ff;
+      border-color: #aaa;
+      padding: 1px 15px;
+      font-size: .8em;
+      &:hover{
+        background-color: darken(#fefefe, 6%);
+      }
+    }
+  }
 }
 // #top-search-bar{
 //   width:380px;
@@ -84,6 +113,11 @@ nav,footer{
   text-shadow:  0px 1px 10px rgba(0, 0, 0, 0.3);
   text-decoration: underline;
 
+}
+.status-action{
+  padding-top: 8px;
+border-top: solid 1px #eee;
+margin-top: 8px;
 }
 .status-profile-img{
     height: 45px;
