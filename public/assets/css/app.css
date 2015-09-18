@@ -6082,7 +6082,8 @@ nav, footer {
   margin-right: auto;
   border-color: #eee;
   border-style: solid;
-  border-width: 2px; }
+  border-width: 2px;
+  box-shadow: 2px 2px 7px rgba(122, 122, 122, 0.3); }
 
 .status-profile-container {
   padding: 20px; }
@@ -6097,13 +6098,15 @@ nav, footer {
   margin-right: auto;
   border-color: #eee;
   border-style: solid;
-  border-width: 2px; }
+  border-width: 2px;
+  box-shadow: 2px 2px 5px rgba(122, 122, 122, 0.5); }
 
 .profile-thumb-image {
   height: 22px;
   width: 22px;
   border-radius: 4px;
   padding: 0;
+  box-shadow: 2px 2px 5px rgba(122, 122, 122, 0.5);
   margin: 0; }
 
 .fileUpload {
