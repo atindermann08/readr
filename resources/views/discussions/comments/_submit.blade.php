@@ -10,7 +10,6 @@
                   [
                     'class' => 'form-control comment-post-area',
                     'id' => 'comment-box',
-                    'name' => 'comment-box',
                     'rows' => '1',
                     'placeholder' => 'Reply...',
                     'required' => 'required'
