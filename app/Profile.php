@@ -10,7 +10,7 @@ class Profile extends Model
   public function getImageAttribute($image)
   {
     if(!$image){
-      return 'assets/img/book.jpg';
+      return 'assets/profile-images/profile.svg';
     }
     return $image;
   }
@@ -18,7 +18,7 @@ class Profile extends Model
   public function getThumbImageAttribute($image)
   {
       if(!$image){
-        return 'assets/img/book.jpg';
+        return 'assets/profile-images/profile.svg';
       }
       return $image;
   }
