@@ -76,7 +76,13 @@ class ProfileController extends Controller
     {
       $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
       $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large.jpg');
-        $img = \Image::make($path);
+
+        try {
+             $img = \Image::make($path);
+        } catch (Exception $e) {
+            flash($path);
+            return Redirect::back()->withErrors('Error: ' . $e->getMessage());
+        }
         $img->fit(200, 200);
         $img->save($path);
 
