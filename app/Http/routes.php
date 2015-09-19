@@ -18,7 +18,7 @@ Route::get('/how', ['as' => 'rules', 'uses' => 'PageController@rules']);
 // Route::get('/api/books', 'BookController@apiBooks');
 // Route::get('/api/books/q', 'BookController@searchBooks');
 
-Route::resource('discussions', ['as' => 'discussions.index', 'uses' => 'DiscussionController@index']);
+Route::get('discussions', ['as' => 'discussions.index', 'uses' => 'DiscussionController@index']);
 Route::post('discussions/store', ['as' => 'discussions.store', 'uses' => 'DiscussionController@store']);
 Route::post('discussions/status/{statusId}/comments', ['as' => 'discussions.comments.store', 'uses' => 'DiscussionController@storeComment']);
 
