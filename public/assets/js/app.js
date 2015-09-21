@@ -3,8 +3,8 @@ $('div.alert').delay(300).fadeIn(400);
 $('div.alert').not('.alert-important').delay(3000).slideUp(500);
 
 // $('#confirmationModal').modal();
-document.getElementById("image").onchange = function () {
-    document.getElementById("uploadImageLbl").innerHTML = this.value;
+document.getElementById('image').onchange = function () {
+    document.getElementById('uploadImageLbl').innerHTML = this.value;
 };
 
 
@@ -34,41 +34,3 @@ $(".multi-select-authors").select2({
   tokenSeparators: [','],
   tags: true
 });
-//
-// function formatBook (book) {
-//   return book.title;
-// }
-//
-// function formatBookSelection (book) {
-//   return book.title;
-// }
-//
-// $(".book-title-remote").select2({
-//   placeholder: "Add Book",
-//   allowClear: true,
-//   tags: true,
-//   tokenSeparators: [','],
-//   ajax: {
-//     url: "/api/books/q",
-//     dataType: 'json',
-//     delay: 250,
-//     data: function (params) {
-//       return {
-//         //q: params.term, // search term
-//       };
-//     },
-//     processResults: function (data) {
-//       // parse the results into the format expected by Select2.
-//       // since we are using custom formatting functions we do not need to
-//       // alter the remote JSON data
-//       return {
-//         results: data
-//       };
-//     },
-//     cache: true
-//   },
-//   escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-//   minimumInputLength: 0,
-//   templateResult: formatBook, // omitted for brevity, see the source of this page
-//   templateSelection: formatBookSelection // omitted for brevity, see the source of this page
-// });
