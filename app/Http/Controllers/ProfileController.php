@@ -79,17 +79,14 @@ class ProfileController extends Controller
 
     private function setProfileImage($profile, ProfileUpdateRequest $request)
     {
-      $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
+      // $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
       $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large.jpg');
 
         try {
-            $img = \Image::make($image->getRealPath());//, auth()->user()->id . '_large.jpg');
-            // $file = Input::file('image');
-            // // ...
-            $filename = $image->getRealPath() . auth()->user()->id . '_large.jpg';
-            // Image::make($file->getRealPath());;
+            $img = \Image::make($image->getRealPath());
+            $path = $image->getRealPath() . auth()->user()->id . '_large.jpg';
             $img->fit(200, 200);
-            $img->save($filename);
+            $img->save($path);
         } catch (Exception $e) {
             flash($path);
             return Redirect::back()->withErrors('Error: ' . $e->getMessage());
