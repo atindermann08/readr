@@ -2,13 +2,6 @@ $('div.alert').hide();
 $('div.alert').delay(300).fadeIn(400);
 $('div.alert').not('.alert-important').delay(3000).slideUp(500);
 
-// $('#confirmationModal').modal();
-document.getElementById('image').onchange = function () {
-    document.getElementById('uploadImageLbl').innerHTML = this.value;
-};
-
-
-
 $(".single-select").select2();
 $(".book-title-select").select2({
   allowClear: true,
@@ -34,3 +27,7 @@ $(".multi-select-authors").select2({
   tokenSeparators: [','],
   tags: true
 });
+
+document.getElementById('image').onchange = function () {
+    document.getElementById('uploadImageLbl').innerHTML = this.value;
+};
