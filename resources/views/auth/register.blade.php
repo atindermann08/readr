@@ -14,16 +14,14 @@
       </div>
       <div class="form-group">
         {!! Form::label('email','Email') !!}
-        {{-- {!! Form::text('email',null,['class'=>'form-control']) !!} --}}
+        {!! Form::text('email',null,['class'=>'form-control', 'placeholder' => 'Email e.g "musk@teslamotors.com"']) !!}
+      {{--
         <div class="input-group">
           <input type="text" class="form-control" name='email' id='email' placeholder="Email Address" aria-describedby="basic-addon2">
           <span class="input-group-addon" id="basic-addon2">@infosys.com</span>
         </div>
+        --}}
       </div>
-      <!-- <div class="form-group">
-        {!! Form::label('mobile','Mobile') !!}
-        {!! Form::text('mobile',null,['class'=>'form-control']) !!}
-      </div> -->
       <div class="form-group">
         {!! Form::label('password','Password') !!}
         {!! Form::password('password',['class'=>'form-control', 'placeholder' => 'Password']) !!}
