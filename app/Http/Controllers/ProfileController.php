@@ -79,26 +79,25 @@ class ProfileController extends Controller
 
     private function setProfileImage($profile, ProfileUpdateRequest $request)
     {
-      $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
-      $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
-      $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large.jpg');
+      $tStamp = time();
+      $path = 'assets/profile-images/' . auth()->user()->id . '_large_' . $tStamp . '.jpg';
+      $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb_' . $tStamp . '.jpg';
+      $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large_' . $tStamp . '.jpg');
 
-        try {
-            $img = \Image::make($image->getRealPath());
-            // $path = $image->getRealPath() . auth()->user()->id . '_large.jpg';
-            $img->fit(200, 200);
-            $img->save($path);
-        } catch (Exception $e) {
-            flash($path);
-            return Redirect::back()->withErrors('Error: ' . $e->getMessage());
-        }
-        // $thumb_path = $image->getRealPath() . auth()->user()->id . '_thumb.jpg';
-        $img->fit(35, 35);
-        $img->save($thumb_path);
+      $img = \Image::make($image->getRealPath());
+      $img->fit(200, 200);
+      $img->save($path);
 
-      // $path = $user->setProfileImage($image);
-        // $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
-        // $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
+      $img->fit(35, 35);
+      $img->save($thumb_path);
+
+      if(\File::exists(public_path() . '/' . $profile->image)){
+          \File::delete(public_path() . '/' . $profile->image);
+      }
+
+      if(\File::exists(public_path() . '/' . $profile->thumb_image)){
+        \File::delete(public_path() . '/' . $profile->thumb_image);
+      }
       $profile->image = $path;
       $profile->thumb_image = $thumb_path;
       $profile->save();
