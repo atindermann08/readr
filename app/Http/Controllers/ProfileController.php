@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Image;
+use Input;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -11,6 +12,10 @@ use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -78,14 +83,17 @@ class ProfileController extends Controller
       $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large.jpg');
 
         try {
-             $img = \Image::make($path);
+            $img = \Image::make($image->getRealPath());//, auth()->user()->id . '_large.jpg');
+            // $file = Input::file('image');
+            // // ...
+            $filename = $image->getRealPath() . auth()->user()->id . '_large.jpg';
+            // Image::make($file->getRealPath());;
+            $img->fit(200, 200);
+            $img->save($filename);
         } catch (Exception $e) {
             flash($path);
             return Redirect::back()->withErrors('Error: ' . $e->getMessage());
         }
-        $img->fit(200, 200);
-        $img->save($path);
-
         $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
         $img->fit(35, 35);
         $img->save($thumb_path);
