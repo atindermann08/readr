@@ -97,8 +97,8 @@ class ProfileController extends Controller
         $img->save($thumb_path);
 
       // $path = $user->setProfileImage($image);
-      // $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
-      // $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
+        // $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
+        // $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
       $profile->image = $path;
       $profile->thumb_image = $thumb_path;
       $profile->save();
