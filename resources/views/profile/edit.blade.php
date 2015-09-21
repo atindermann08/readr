@@ -9,7 +9,7 @@
     {!! Form::open(['method'=>'PUT', 'files' => 'true', 'route' => ['profile.update', $profile->id]]) !!}
       <div class="form-group">
         <div class="fileUpload btn btn-default">
-            <span>Change Profile Image</span>
+            <span id="uploadImageLbl">Change Profile Image</span>
             <input name="image" id='image' type="file" class="change-profile-image" />
         </div>
       </div>
