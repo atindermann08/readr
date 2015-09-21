@@ -79,7 +79,7 @@ class ProfileController extends Controller
 
     private function setProfileImage($profile, ProfileUpdateRequest $request)
     {
-      // $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
+      $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
       $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large.jpg');
 
         try {
@@ -91,11 +91,13 @@ class ProfileController extends Controller
             flash($path);
             return Redirect::back()->withErrors('Error: ' . $e->getMessage());
         }
-        $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
+        $thumb_path = $image->getRealPath() . auth()->user()->id . '_thumb.jpg';
         $img->fit(35, 35);
         $img->save($thumb_path);
 
       // $path = $user->setProfileImage($image);
+      $path = 'assets/profile-images/' . auth()->user()->id . '_large.jpg';
+      $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb.jpg';
       $profile->image = $path;
       $profile->thumb_image = $thumb_path;
       $profile->save();
