@@ -37,6 +37,7 @@
         </div>
         <div class="form-group">
           {!! Form::label('image', 'Photo') !!}
+          <img src="{{ asset($book->image) }}" alt="book" class='img-preview pull-right'>  </img>
           {!! Form::file('image', ['class' => '']) !!}
         </div>
         <div class="form-group">

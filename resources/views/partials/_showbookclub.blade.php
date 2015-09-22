@@ -1,8 +1,7 @@
 <div class="media">
   <div class="media-left">
     <a href="{{route('bookclubs.show',$bookclub->id)}}">
-        <img src="{{ asset('assets/default/bookclub.svg') }}" alt="book" class='book-img'>  </img>
-
+        <img src="{{ asset($bookclub->image) }}" alt="book" class='book-img'>  </img>
     </a>
   </div>
   <div class="media-body">

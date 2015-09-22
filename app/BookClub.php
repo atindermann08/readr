@@ -13,6 +13,15 @@ class BookClub extends Model
 		'description' => 'required|min:10'
 	];
 
+
+  	public function getImageAttribute($image)
+  	{
+  		if(!$image){
+  			return 'assets/default/bookclub.svg';
+  		}
+  		return $image;
+  	}
+
   public function members(){
       return $this->belongsToMany('\App\User');
   }

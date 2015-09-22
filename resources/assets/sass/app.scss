@@ -220,7 +220,14 @@ margin-top: 8px;
   border-width: 2px;
   // box-shadow: 2px 2px 5px rgba(122,122,122, 0.5);
 }
-
+.img-preview{
+  width: 90px;
+  border-radius: 1000px;
+  border-width: 2px;
+  border-color: #777;
+  border-style: solid;
+  margin: 10px;
+}
 
 // #jumbotron{
 // margin-top: -130px;
