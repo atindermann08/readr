@@ -1,4 +1,4 @@
-<div class="media book-view @if($statuses->has('Available')) available @else not-available @endif">
+<div class="media book-view @if($statuses->has('Available')) available @elseif($statuses->has('Not Available')) not-available @endif">
   <div class="media-left">
     <a href="{{route('books.show',$book->id)}}">
         <img src="{{ asset($book->image) }}" alt="book" class='book-img'>  </img>
