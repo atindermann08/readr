@@ -27,7 +27,7 @@ class Book extends Model
 	public function getImageAttribute($image)
 	{
 		if(!$image){
-			return 'assets/default/book.svg';
+			return 'assets/images/default/book.svg';
 		}
 		return $image;
 	}

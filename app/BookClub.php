@@ -17,7 +17,7 @@ class BookClub extends Model
   	public function getImageAttribute($image)
   	{
   		if(!$image){
-  			return 'assets/default/bookclub.svg';
+  			return 'assets/images/default/bookclub.svg';
   		}
   		return $image;
   	}

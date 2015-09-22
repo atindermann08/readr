@@ -18,7 +18,7 @@ class Profile extends Model
   public function getThumbImageAttribute($image)
   {
       if(!$image){
-        return 'assets/profile-images/profile.svg';
+        return 'assets/images/default/profile.svg';
       }
       return $image;
   }
