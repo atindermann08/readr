@@ -6,7 +6,7 @@
     <h4>Add Book</h4>
     <hr/>
     {{-- @include('layouts.partials._errors') --}}
-      {!! Form::open(['route' => ['books.update',$book->id],'method' => 'PATCH']) !!}
+      {!! Form::open(['files' => 'true','route' => ['books.update',$book->id],'method' => 'PATCH']) !!}
         <div class="form-group">
           {!! Form::label('title', 'Title') !!}
           {!! Form::label('title', $book->title, ['class' => 'form-control']) !!}
@@ -35,12 +35,10 @@
           {!! Form::label('release_date', 'Release Date') !!}
           {!! Form::input('date', 'release_date', isset($book->release_date)?$book->release_date:null , ['class' => 'form-control','placeholder'=>'MM-DD-YYYY']) !!}
         </div>
-        {{--
         <div class="form-group">
           {!! Form::label('image', 'Photo') !!}
           {!! Form::file('image', ['class' => '']) !!}
         </div>
-        --}}
         <div class="form-group">
           {!! Form::submit('Add', ['class' => 'form-control btn btn-primary']) !!}
         </div>

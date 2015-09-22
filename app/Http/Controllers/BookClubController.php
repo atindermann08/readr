@@ -87,6 +87,9 @@ class BookClubController extends Controller
       $bookclub = \App\BookClub::findOrFail($id);
       $books = $user->books->lists('title', 'id');
       $show_route = 'bookclubs.books.show';
+
+      // dd($bookclub->books->first()->clubStatus($bookclub->id)->has('Not Available'));
+
       return view('bookclubs.show')
               ->with(compact('bookclub','user', 'books', 'show_route'));
     }

@@ -207,6 +207,21 @@ margin-top: 8px;
   // background-color: aliceblue;
 
 }
+.book-img{
+  // height: 150px;
+  width: 150px;
+  border-radius: 5px;
+  // margin: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: #75758e;
+  border-style: solid;
+  border-width: 2px;
+  // box-shadow: 2px 2px 5px rgba(122,122,122, 0.5);
+}
+
+
 // #jumbotron{
 // margin-top: -130px;
 // padding-top: 130px;
@@ -235,7 +250,18 @@ margin-top: 8px;
 
 .book-view{
   padding: 20px;
-  background-color: #fafbf8;
+  padding: 20px;
+  background-color: #FFF;
+  box-shadow: 1px 1px 2px rgba(200, 200, 225, 0.9);
+  border-radius: 12px;
+  border-style: solid;
+  border-width: 0px 0px 2px;
+}
+.not-available{
+  border-bottom: 2px solid #ff5555;
+}
+.available{
+  border-bottom: 2px solid #00d455;
 }
 
 

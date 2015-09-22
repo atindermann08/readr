@@ -1,7 +1,7 @@
-<div class="media book-view ">
+<div class="media book-view @if($statuses->has('Available')) available @else not-available @endif">
   <div class="media-left">
     <a href="{{route('books.show',$book->id)}}">
-        <i class='fa fa-leanpub fa-4x book-default-pic'></i>
+        <img src="{{ asset($book->image) }}" alt="book" class='book-img'>  </img>
     </a>
   </div>
   <div class="media-body">

@@ -80,9 +80,9 @@ class ProfileController extends Controller
     private function setProfileImage($profile, ProfileUpdateRequest $request)
     {
       $tStamp = time();
-      $path = 'assets/profile-images/' . auth()->user()->id . '_large_' . $tStamp . '.jpg';
-      $thumb_path = 'assets/profile-images/' . auth()->user()->id . '_thumb_' . $tStamp . '.jpg';
-      $image = $request->file('image')->move(public_path('assets/profile-images/'), auth()->user()->id . '_large_' . $tStamp . '.jpg');
+      $path = 'assets/images/profile/' . auth()->user()->id . '_large_' . $tStamp . '.jpg';
+      $thumb_path = 'assets/images/profile/' . auth()->user()->id . '_thumb_' . $tStamp . '.jpg';
+      $image = $request->file('image')->move(public_path('assets/images/profile/'), auth()->user()->id . '_org.jpg');
 
       $img = \Image::make($image->getRealPath());
       $img->fit(200, 200);

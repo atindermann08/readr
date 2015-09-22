@@ -24,6 +24,15 @@ class Book extends Model
 		$this->attributes['release_date'] = Carbon::parse($date);
 	}
 
+	public function getImageAttribute($image)
+	{
+		if(!$image){
+			return 'assets/default/book.svg';
+		}
+		return $image;
+	}
+
+
   /*
   * Relationships
   */

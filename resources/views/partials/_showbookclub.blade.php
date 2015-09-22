@@ -1,7 +1,8 @@
 <div class="media">
   <div class="media-left">
     <a href="{{route('bookclubs.show',$bookclub->id)}}">
-        <i class='fa fa-group fa-4x  book-default-pic img-round'></i>
+        <img src="{{ asset('assets/default/bookclub.svg') }}" alt="book" class='book-img'>  </img>
+
     </a>
   </div>
   <div class="media-body">
@@ -14,7 +15,7 @@
     @if(auth()->check())
       @if(auth()->user()->isClubAdmin($bookclub->id))
         <a href="{{ route('bookclubs.edit', $bookclub->id) }}" class='btn pull-right'>
-          <i class='fa fa-edit'></i>
+          <i class='fa fa-edit btn btn-default'>Edit</i>
         </a><br><br>
       @endif
       <p class='pull-right'>

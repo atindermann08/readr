@@ -213,6 +213,10 @@ class BookController extends Controller
               // $book->authors()->attach($authorIds);
             }
 
+            if($request->hasFile('image')){
+              $this->setBookImage($book, $request);
+            }
+
             flash('Book updated.');
             return \Redirect::back();
         //   }
@@ -226,6 +230,32 @@ class BookController extends Controller
         // return \Redirect::back();
     }
 
+
+    private function setBookImage($book, Request $request)
+    {
+      $tStamp = time();
+      $path = 'assets/images/book/' . $book->id . '_large_' . $tStamp . '.jpg';
+      // $thumb_path = 'assets/profile-images/' . $book->id . '_thumb_' . $tStamp . '.jpg';
+      $image = $request->file('image')->move(public_path('assets/images/book/'), $book->id . '_org.jpg');
+
+      $img = \Image::make($image->getRealPath());
+      $img->fit(200);
+      $img->save($path);
+
+      // $img->fit(35, 35);
+      // $img->save($thumb_path);
+
+      if(\File::exists(public_path() . '/' . $book->image)){
+          \File::delete(public_path() . '/' . $book->image);
+      }
+
+      // if(\File::exists(public_path() . '/' . $profile->thumb_image)){
+      //   \File::delete(public_path() . '/' . $profile->thumb_image);
+      // }
+      $book->image = $path;
+      // $profile->thumb_image = $thumb_path;
+      $book->save();
+    }
 
     public function addtolibrary($bookId)
     {
