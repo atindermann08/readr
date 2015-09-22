@@ -6179,6 +6179,7 @@ nav, footer {
   border-top-color: black;
   border-top-width: 4px;
   left: 0;
+  margin-top: 30px;
   padding: 15px;
   padding-left: 0; }
   .footer a {
