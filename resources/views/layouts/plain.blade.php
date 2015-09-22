@@ -3,10 +3,7 @@
 <head>
   <title>Livrogo</title>
 
-  {!! Html::style('assets/css/app.css') !!}
-  {!! Html::style('assets/vendor/css/font-awesome.min.css') !!}
-  {!! Html::style('assets/vendor/css/select2.min.css') !!}
-
+  @include('layouts.partials._styles')
 </head>
 <body>
     @section('nav')
@@ -18,10 +15,6 @@
     @yield('cover')
 
   @include('layouts.partials._footer')
-  {!! Html::script('assets/vendor/js/jquery.min.js') !!}
-  {!! Html::script('assets/vendor/js/bootstrap.min.js') !!}
-  {!! Html::script('assets/vendor/js/select2.min.js') !!}
-  {!! Html::script('assets/js/app.js') !!}
-  <!-- @include('partials._google_analytics') -->
+  @include('layouts.partials._scripts')
 </body>
 </html>

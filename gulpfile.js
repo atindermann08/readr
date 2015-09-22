@@ -29,5 +29,6 @@ elixir(function(mix) {
       .copy(
           'public/assets/*',
           '../public_html/assets/'
-        );
+        )
+      .version(['assets/css/app.css','assets/js/app.js']);
 });
