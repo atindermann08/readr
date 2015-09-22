@@ -71,6 +71,11 @@ class BookClubController extends Controller
           $bookclub->books()->attach($book->id, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
         }
       }
+
+      if($request->hasFile('image')){
+        $this->setBookclubImage($bookclub, $request);
+      }
+
       flash('Book Club Created.');
       return \Redirect::back();
     }
@@ -137,8 +142,36 @@ class BookClubController extends Controller
             $bookclub->books()->attach($book->id, ['status_id' => $status_id, 'owner_id' => auth()->user()->id]);
           }
         }
+
+        if($request->hasFile('image')){
+          $this->setBookclubImage($bookclub, $request);
+        }
+
         flash('Book Club updated.');
         return \Redirect::back();
+    }
+
+
+    public function setBookclubImage($bookclub, Request $request)
+    {
+      $tStamp = time();
+      $path = 'assets/images/bookclub/' . $bookclub->id . '_large_' . $tStamp . '.jpg';
+      // $thumb_path = 'assets/profile-images/' . $book->id . '_thumb_' . $tStamp . '.jpg';
+      $image = $request->file('image')->move(public_path('assets/images/bookclub/'), $bookclub->id . '_org.jpg');
+
+      $img = \Image::make($image->getRealPath());
+      $img->fit(200);
+      $img->save($path);
+
+      // $img->fit(35, 35);
+      // $img->save($thumb_path);
+
+      if(\File::exists(public_path() . '/' . $bookclub->image)){
+          \File::delete(public_path() . '/' . $bookclub->image);
+      }
+
+      $bookclub->image = $path;
+      $bookclub->save();
     }
 
 
